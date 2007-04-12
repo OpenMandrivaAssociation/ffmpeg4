@@ -1,0 +1,274 @@
+%define name	ffmpeg
+%define version	0.4.9
+%define svn 7407
+%define pre	pre1.%svn
+%define rel	10
+%define release %mkrel 3.%pre.%rel
+%define major	51
+%define amrver 540
+
+%define libname %mklibname %name %major
+%define libnamedev %mklibname %name %major -d
+%define avfmajor 51
+%define avflibname %mklibname avformats %avfmajor
+%define avumajor 49
+%define avulibname %mklibname avutil %avumajor
+%define swsmajor 0
+%define swslibname %mklibname swscaler %swsmajor
+
+%define build_swscaler 0
+%define build_plf 0
+%{?_with_plf: %{expand: %%global build_plf 1}}
+%if %build_plf
+%define distsuffix plf
+%endif
+
+Name: 	 	%{name}
+Version: 	%{version}
+Release: 	%{release}
+Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
+Source0: 	%{name}-%{svn}.tar.bz2
+Source1:	http://www.3gpp.org/ftp/Specs/latest/Rel-5/26_series/26104-%{amrver}.zip
+Patch1:		ffmpeg-ffplay-uses-xlib.patch
+Patch2:		ffmpeg-7407-fixdefine.patch
+License: 	GPL
+Group: 	 	Video
+BuildRoot: 	%{_tmppath}/%{name}-buildroot
+BuildRequires:  imlib2-devel
+BuildRequires:  tetex-texi2html
+BuildRequires:	SDL-devel
+BuildRequires:	libnut-devel
+URL:		http://ffmpeg.sourceforge.net
+%if %build_plf
+BuildRequires: libfaac-devel libfaad2-devel xvid-devel 
+BuildRequires: x264-devel >= 0.54
+BuildRequires: liblame-devel
+%endif
+
+%description
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+%if %build_plf
+This package is in PLF as it violates several patents.
+%endif
+
+%package -n %{libname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+Provides:       libffmpeg = %{version}-%{release}
+
+%description -n %{libname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg if you want to encode multimedia streams.
+
+%package -n %{avflibname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+
+%description -n %{avflibname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg if you want to encode multimedia streams.
+
+%package -n %{avulibname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+
+%description -n %{avulibname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg if you want to encode multimedia streams.
+
+%package -n %{swslibname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+Requires:	%{avulibname} = %{version}
+
+%description -n %{swslibname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg if you want to encode multimedia streams.
+
+%package -n %{libnamedev}
+Group:          Development/C
+Summary:        Header files for the ffmpeg codec library
+Requires:       %{libname} = %{version}
+Requires:       %{avflibname} = %{version}
+Requires:       %{avulibname} = %{version}
+%if %build_swscaler
+Requires:       %{swslibname} = %{version}
+%endif
+Requires:	libnut-devel
+Provides:       libffmpeg-devel = %{version}-%{release}
+Provides:	ffmpeg-devel = %{version}-%{release}
+
+%description -n %{libnamedev}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg-devel if you want to compile apps with ffmpeg support.
+
+%package -n %{libname}-static-devel
+Group:          Development/C
+Summary:        Static library for the ffmpeg codec library
+Requires:       %{libname}-devel = %{version}
+Provides:       libffmpeg-static-devel = %{version}-%{release}
+
+%description -n %{libname}-static-devel
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg-devel if you want to compile apps with ffmpeg support.
+
+%prep
+
+%setup -q -n %{name} -a 1
+%patch1 -p1 -b .ffplay-uses-xlib
+%patch2 -p1 -b .fixdefine
+%if %build_plf
+unzip -qq 26104-%{amrver}_ANSI_C_source_code.zip
+mv c-code libavcodec/amr_float
+%endif
+
+#don't call ldconfig on install
+find -name Makefile | xargs perl -pi -e 's/ldconfig \|\| true//'
+find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
+
+%build
+export CFLAGS="%optflags"
+./configure --prefix=%_prefix \
+	--enable-shared \
+	--libdir=%{_libdir} \
+	--enable-a52 \
+	--enable-pp \
+	--enable-gpl \
+	--enable-pthreads \
+	--enable-libnut \
+	--enable-x11grab \
+%if %build_plf
+	--enable-mp3lame \
+	--enable-faad \
+	--enable-faac \
+	--enable-x264 \
+	--enable-xvid \
+	--enable-amr_nb
+%endif
+
+%make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+%makeinstall_std SRC_PATH=`pwd`
+mkdir -p %buildroot%_mandir/
+mv %buildroot%_prefix/man/* %buildroot%_mandir/
+%if %_lib != lib
+mv %buildroot%_prefix/lib/* %buildroot%_libdir/
+%endif
+
+# compat symlink
+install -d %buildroot/%_libdir/libavcodec
+pushd %buildroot/%_libdir/libavcodec && ln -sf ../libavcodec.a && popd
+install -d %buildroot/%_libdir/libavformat
+pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
+
+# fix doc containing CVS info.
+rm -rf doc/CVS
+
+# some apps need this header to build
+install -m 644 libavcodec/mpegaudio.h %buildroot/%_includedir/%name
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
+%post -n %{avflibname} -p /sbin/ldconfig
+%postun -n %{avflibname} -p /sbin/ldconfig
+%post -n %{avulibname} -p /sbin/ldconfig
+%postun -n %{avulibname} -p /sbin/ldconfig
+%post -n %{swslibname} -p /sbin/ldconfig
+%postun -n %{swslibname} -p /sbin/ldconfig
+
+
+%files
+%defattr(-,root,root)
+%doc Changelog INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
+%{_bindir}/*
+%_libdir/vhook/*
+%_mandir/man1/*
+
+%files -n %{libname}
+%defattr(-,root,root)
+%{_libdir}/libavcodec.so.%{major}*
+%{_libdir}/libpostproc.so.%{major}*
+
+%files -n %{avflibname}
+%defattr(-,root,root)
+%{_libdir}/libavformat.so.%{avfmajor}*
+
+%files -n %{avulibname}
+%defattr(-,root,root)
+%{_libdir}/libavutil.so.%{avumajor}*
+
+%if %build_swscaler
+%files -n %{swslibname}
+%defattr(-,root,root)
+%{_libdir}/libswscale.so.0
+%{_libdir}/libswscale.so.%{swsmajor}*
+%endif
+
+%files -n %{libnamedev}
+%defattr(-,root,root)
+%{_includedir}/%{name}
+%{_includedir}/postproc/
+%{_libdir}/libavcodec.so
+%{_libdir}/libavformat.so
+%{_libdir}/libavutil.so
+%{_libdir}/libpostproc.so
+%if %build_swscaler
+%{_libdir}/libswscale.so
+%endif
+%_libdir/pkgconfig/*.pc
+
+%files -n %{libname}-static-devel
+%defattr(-,root,root)
+%{_libdir}/*.a
+%{_libdir}/libavformat/*a
+%{_libdir}/libavcodec/*a
+
+
