@@ -1,11 +1,10 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 7407
+%define svn 8994
 %define pre	pre1.%svn
-%define rel	10
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
-%define amrver 540
 
 %define libname %mklibname %name %major
 %define libnamedev %mklibname %name %major -d
@@ -28,9 +27,10 @@ Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	%{name}-%{svn}.tar.bz2
-Source1:	http://www.3gpp.org/ftp/Specs/latest/Rel-5/26_series/26104-%{amrver}.zip
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
-Patch2:		ffmpeg-7407-fixdefine.patch
+# gw add experimental Dirac support, drop this if it doesn't apply anymore
+# http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch.tgz
+Patch3:	ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch
 License: 	GPL
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
@@ -39,8 +39,11 @@ BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libnut-devel
 URL:		http://ffmpeg.sourceforge.net
+BuildRequires: libdirac-devel >= 0.7.0
+BuildRequires: liba52dec-devel
 %if %build_plf
 BuildRequires: libfaac-devel libfaad2-devel xvid-devel 
+BuildRequires: libamrnb-devel
 BuildRequires: x264-devel >= 0.54
 BuildRequires: liblame-devel
 %endif
@@ -156,13 +159,9 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 
-%setup -q -n %{name} -a 1
+%setup -q -n %{name}
 %patch1 -p1 -b .ffplay-uses-xlib
-%patch2 -p1 -b .fixdefine
-%if %build_plf
-unzip -qq 26104-%{amrver}_ANSI_C_source_code.zip
-mv c-code libavcodec/amr_float
-%endif
+%patch3 -p1 -b .dirac
 
 #don't call ldconfig on install
 find -name Makefile | xargs perl -pi -e 's/ldconfig \|\| true//'
@@ -173,20 +172,22 @@ export CFLAGS="%optflags"
 ./configure --prefix=%_prefix \
 	--enable-shared \
 	--libdir=%{_libdir} \
-	--enable-a52 \
+	--enable-liba52 \
 	--enable-pp \
 	--enable-gpl \
 	--enable-pthreads \
 	--enable-libnut \
 	--enable-x11grab \
+	--enable-dirac \
 %if %build_plf
-	--enable-mp3lame \
-	--enable-faad \
-	--enable-faac \
+	--enable-libmp3lame \
+	--enable-libfaad \
+	--enable-libfaac \
 	--enable-x264 \
 	--enable-xvid \
-	--enable-amr_nb
+	--enable-libamr_nb
 %endif
+
 
 %make
 
