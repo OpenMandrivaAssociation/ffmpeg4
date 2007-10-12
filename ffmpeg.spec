@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 8994
+%define svn 10713
 %define pre	pre1.%svn
-%define rel	2
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -27,10 +27,12 @@ Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	%{name}-%{svn}.tar.bz2
+# gw without this, build fails with undefined symbol refill2, but only on x86_64
+Patch: ffmpeg-10713-cabac-build-fix.patch
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
 # gw add experimental Dirac support, drop this if it doesn't apply anymore
 # http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch.tgz
-Patch3:	ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch
+Patch3:	ffmpegsvn_trunk_revision_10713-dirac-0.8.x.patch
 License: 	GPL
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
@@ -39,11 +41,12 @@ BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libnut-devel
 URL:		http://ffmpeg.sourceforge.net
-BuildRequires: libdirac-devel >= 0.7.0
+BuildRequires: libdirac-devel >= 0.8.0
 BuildRequires: liba52dec-devel
 %if %build_plf
 BuildRequires: libfaac-devel libfaad2-devel xvid-devel 
 BuildRequires: libamrnb-devel
+BuildRequires: libamrwb-devel
 BuildRequires: x264-devel >= 0.54
 BuildRequires: liblame-devel
 %endif
@@ -160,6 +163,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %prep
 
 %setup -q -n %{name}
+%patch -p0
 %patch1 -p1 -b .ffplay-uses-xlib
 %patch3 -p1 -b .dirac
 
@@ -195,8 +199,6 @@ export CFLAGS="%optflags"
 rm -rf $RPM_BUILD_ROOT
 
 %makeinstall_std SRC_PATH=`pwd`
-mkdir -p %buildroot%_mandir/
-mv %buildroot%_prefix/man/* %buildroot%_mandir/
 %if %_lib != lib
 mv %buildroot%_prefix/lib/* %buildroot%_libdir/
 %endif
