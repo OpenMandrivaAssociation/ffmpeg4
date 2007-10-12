@@ -187,9 +187,9 @@ export CFLAGS="%optflags"
 	--enable-libmp3lame \
 	--enable-libfaad \
 	--enable-libfaac \
-	--enable-x264 \
-	--enable-xvid \
-	--enable-libamr_nb
+	--enable-libx264 \
+	--enable-libxvid \
+	--enable-libamr_nb --enable-libamr_wb
 %endif
 
 
