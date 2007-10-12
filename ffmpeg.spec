@@ -7,7 +7,9 @@
 %define major	51
 
 %define libname %mklibname %name %major
-%define libnamedev %mklibname %name %major -d
+%define develname %mklibname %name -d
+%define staticname %mklibname %name -s -d
+
 %define avfmajor 51
 %define avflibname %mklibname avformats %avfmajor
 %define avumajor 49
@@ -121,7 +123,7 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
-%package -n %{libnamedev}
+%package -n %develname
 Group:          Development/C
 Summary:        Header files for the ffmpeg codec library
 Requires:       %{libname} = %{version}
@@ -133,8 +135,9 @@ Requires:       %{swslibname} = %{version}
 Requires:	libnut-devel
 Provides:       libffmpeg-devel = %{version}-%{release}
 Provides:	ffmpeg-devel = %{version}-%{release}
+Obsoletes: %mklibname -d %name 51
 
-%description -n %{libnamedev}
+%description -n %develname
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
 and a generic audio and video file converter.
 
@@ -144,13 +147,14 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
-%package -n %{libname}-static-devel
+%package -n %staticname
 Group:          Development/C
 Summary:        Static library for the ffmpeg codec library
-Requires:       %{libname}-devel = %{version}
+Requires:       %develname = %{version}
 Provides:       libffmpeg-static-devel = %{version}-%{release}
+Obsoletes: %mklibname -s -d %name 51
 
-%description -n %{libname}-static-devel
+%description -n %staticname
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
 and a generic audio and video file converter.
 
@@ -255,7 +259,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libswscale.so.%{swsmajor}*
 %endif
 
-%files -n %{libnamedev}
+%files -n %develname
 %defattr(-,root,root)
 %{_includedir}/%{name}
 %{_includedir}/postproc/
@@ -268,7 +272,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %_libdir/pkgconfig/*.pc
 
-%files -n %{libname}-static-devel
+%files -n %staticname
 %defattr(-,root,root)
 %{_libdir}/*.a
 %{_libdir}/libavformat/*a
