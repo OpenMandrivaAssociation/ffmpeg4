@@ -2,7 +2,7 @@
 %define version	0.4.9
 %define svn 10713
 %define pre	pre1.%svn
-%define rel	1
+%define rel	2
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -33,6 +33,7 @@ Source0: 	%{name}-%{svn}.tar.bz2
 Patch: ffmpeg-10713-cabac-build-fix.patch
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
 # gw add experimental Dirac support, drop this if it doesn't apply anymore
+# gw this patch was updated to generate a correct pkgconfig file
 # http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch.tgz
 Patch3:	ffmpegsvn_trunk_revision_10713-dirac-0.8.x.patch
 License: 	GPL
