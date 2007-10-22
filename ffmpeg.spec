@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 10713
+%define svn 10833
 %define pre	pre1.%svn
-%define rel	2
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -29,8 +29,6 @@ Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	%{name}-%{svn}.tar.bz2
-# gw without this, build fails with undefined symbol refill2, but only on x86_64
-Patch: ffmpeg-10713-cabac-build-fix.patch
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
 # gw add experimental Dirac support, drop this if it doesn't apply anymore
 # gw this patch was updated to generate a correct pkgconfig file
@@ -168,7 +166,6 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %prep
 
 %setup -q -n %{name}
-%patch -p0
 %patch1 -p1 -b .ffplay-uses-xlib
 %patch3 -p1 -b .dirac
 
