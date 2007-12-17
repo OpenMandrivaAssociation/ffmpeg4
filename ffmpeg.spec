@@ -36,7 +36,6 @@ Patch1:		ffmpeg-ffplay-uses-xlib.patch
 Patch3:	ffmpegsvn_trunk_revision_10713-dirac-0.8.x.patch
 License: 	GPL
 Group: 	 	Video
-BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:  imlib2-devel
 BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
