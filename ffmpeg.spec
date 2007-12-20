@@ -173,7 +173,7 @@ find -name Makefile | xargs perl -pi -e 's/ldconfig \|\| true//'
 find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
 %build
-export CFLAGS="%optflags"
+export CFLAGS="%optflags -FPIC"
 ./configure --prefix=%_prefix \
 	--enable-shared \
 	--libdir=%{_libdir} \
