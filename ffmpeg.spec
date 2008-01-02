@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 10833
+%define svn 11372
 %define pre	pre1.%svn
-%define rel	2
+%define rel	3
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -10,7 +10,7 @@
 %define develname %mklibname %name -d
 %define staticname %mklibname %name -s -d
 
-%define avfmajor 51
+%define avfmajor 52
 %define avflibname %mklibname avformats %avfmajor
 %define avumajor 49
 %define avulibname %mklibname avutil %avumajor
@@ -33,7 +33,7 @@ Patch1:		ffmpeg-ffplay-uses-xlib.patch
 # gw add experimental Dirac support, drop this if it doesn't apply anymore
 # gw this patch was updated to generate a correct pkgconfig file
 # http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch.tgz
-Patch3:	ffmpegsvn_trunk_revision_10713-dirac-0.8.x.patch
+Patch3:	ffmpegsvn_trunk_revision_11372-dirac-0.8.x.patch
 License: 	GPL
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
@@ -245,6 +245,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %{avflibname}
 %defattr(-,root,root)
 %{_libdir}/libavformat.so.%{avfmajor}*
+%{_libdir}/libavdevice.so.%{avfmajor}*
 
 %files -n %{avulibname}
 %defattr(-,root,root)
@@ -262,6 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/%{name}
 %{_includedir}/postproc/
 %{_libdir}/libavcodec.so
+%{_libdir}/libavdevice.so
 %{_libdir}/libavformat.so
 %{_libdir}/libavutil.so
 %{_libdir}/libpostproc.so
