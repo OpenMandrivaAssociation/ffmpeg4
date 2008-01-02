@@ -110,7 +110,7 @@ Install libffmpeg if you want to encode multimedia streams.
 %package -n %{swslibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
-Requires:	%{avulibname} = %{version}
+Requires:	%{avulibname} = %{version}-%release
 
 %description -n %{swslibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
@@ -125,11 +125,11 @@ Install libffmpeg if you want to encode multimedia streams.
 %package -n %develname
 Group:          Development/C
 Summary:        Header files for the ffmpeg codec library
-Requires:       %{libname} = %{version}
-Requires:       %{avflibname} = %{version}
-Requires:       %{avulibname} = %{version}
+Requires:       %{libname} = %{version}-%release
+Requires:       %{avflibname} = %{version}-%release
+Requires:       %{avulibname} = %{version}-%release
 %if %build_swscaler
-Requires:       %{swslibname} = %{version}
+Requires:       %{swslibname} = %{version}-%release
 %endif
 Requires:	libnut-devel
 Provides:       libffmpeg-devel = %{version}-%{release}
@@ -149,7 +149,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %package -n %staticname
 Group:          Development/C
 Summary:        Static library for the ffmpeg codec library
-Requires:       %develname = %{version}
+Requires:       %develname = %{version}-%release
 Provides:       libffmpeg-static-devel = %{version}-%{release}
 Obsoletes: %mklibname -s -d %name 51
 
