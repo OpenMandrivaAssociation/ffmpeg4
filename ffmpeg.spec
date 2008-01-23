@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 11552
+%define svn 11599
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
@@ -31,9 +31,11 @@ Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	%{name}-%{svn}.tar.bz2
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
 # gw add experimental Dirac support, drop this if it doesn't apply anymore
-# gw this patch was updated to generate a correct pkgconfig file
-# http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_8950-dirac-0.7.x.patch.tgz
-Patch3:	ffmpegsvn_trunk_revision_11372-dirac-0.8.x.patch
+# http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_11592-dirac-0.9.x.patch.tgz
+Patch3:	ffmpegsvn_trunk_revision_11592-dirac-0.9.x.patch
+# fix generated pkgconfig files, see
+# http://sourceforge.net/tracker/index.php?func=detail&aid=1877990&group_id=102564&atid=632200
+Patch4: ffmpeg-dirac2.patch
 License: 	GPL
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
@@ -42,7 +44,7 @@ BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libnut-devel
 URL:		http://ffmpeg.sourceforge.net
-BuildRequires: libdirac-devel >= 0.8.0
+BuildRequires: libdirac-devel >= 0.9.0
 BuildRequires: liba52dec-devel
 %if %build_plf
 BuildRequires: libfaac-devel libfaad2-devel xvid-devel 
@@ -168,6 +170,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %setup -q -n %{name}
 %patch1 -p1 -b .ffplay-uses-xlib
 %patch3 -p1 -b .dirac
+%patch4 -p1 -b .dirac2
 
 #don't call ldconfig on install
 find -name Makefile | xargs perl -pi -e 's/ldconfig \|\| true//'
