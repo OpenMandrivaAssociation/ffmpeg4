@@ -2,7 +2,7 @@
 %define version	0.4.9
 %define svn 11599
 %define pre	pre1.%svn
-%define rel	1
+%define rel	2
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -43,6 +43,8 @@ BuildRequires:  imlib2-devel
 BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libnut-devel
+BuildRequires:	libtheora-devel
+BuildRequires:	libvorbis-devel
 URL:		http://ffmpeg.sourceforge.net
 BuildRequires: libdirac-devel >= 0.9.0
 BuildRequires: liba52dec-devel
@@ -186,6 +188,8 @@ export CFLAGS="%optflags -FPIC"
 	--enable-gpl \
 	--enable-pthreads \
 	--enable-libnut \
+	--enable-libtheora \
+	--enable-libvorbis \
 	--enable-x11grab \
 	--enable-dirac \
 %if %build_plf
