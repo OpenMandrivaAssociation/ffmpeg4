@@ -183,6 +183,7 @@ export CFLAGS="%optflags -FPIC"
 ./configure --prefix=%_prefix \
 	--enable-shared \
 	--libdir=%{_libdir} \
+	--shlibdir=%{_libdir} \
 	--enable-liba52 \
 	--enable-pp \
 	--enable-gpl \
@@ -208,9 +209,6 @@ export CFLAGS="%optflags -FPIC"
 rm -rf $RPM_BUILD_ROOT
 
 %makeinstall_std SRC_PATH=`pwd`
-%if %_lib != lib
-mv %buildroot%_prefix/lib/* %buildroot%_libdir/
-%endif
 
 # compat symlink
 install -d %buildroot/%_libdir/libavcodec
