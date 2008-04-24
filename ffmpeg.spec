@@ -2,7 +2,7 @@
 %define version	0.4.9
 %define svn 12933
 %define pre	pre1.%svn
-%define rel	1
+%define rel	2
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -216,7 +216,7 @@ pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 rm -rf doc/CVS
 
 # some apps need this header to build
-install -m 644 libavcodec/mpegaudio.h %buildroot/%_includedir/%name
+install -m 644 libavcodec/mpegaudio.h %buildroot/%_includedir/libavcodec/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -261,7 +261,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n %develname
 %defattr(-,root,root)
-%{_includedir}/%{name}
 %{_includedir}/libavcodec
 %{_includedir}/libavdevice
 %{_includedir}/libavformat
