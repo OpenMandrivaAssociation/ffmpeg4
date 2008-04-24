@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 11599
+%define svn 12933
 %define pre	pre1.%svn
-%define rel	2
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -23,20 +23,16 @@
 %if %build_plf
 %define distsuffix plf
 %endif
-
+%define build_amr	0
+%{?_with_amr: %{expand: %%global build_amr 1}}
+%{?_without_amr: %{expand: %%global build_amr 0}}
 Name: 	 	%{name}
 Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	%{name}-%{svn}.tar.bz2
+Source0: 	%{name}-r%{svn}.tar.bz2
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
-# gw add experimental Dirac support, drop this if it doesn't apply anymore
-# http://downloads.sourceforge.net/dirac/ffmpegsvn_trunk_revision_11592-dirac-0.9.x.patch.tgz
-Patch3:	ffmpegsvn_trunk_revision_11592-dirac-0.9.x.patch
-# fix generated pkgconfig files, see
-# http://sourceforge.net/tracker/index.php?func=detail&aid=1877990&group_id=102564&atid=632200
-Patch4: ffmpeg-dirac2.patch
-License: 	GPL
+License: 	GPLv2+
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:  imlib2-devel
@@ -46,14 +42,15 @@ BuildRequires:	libnut-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
 URL:		http://ffmpeg.sourceforge.net
-BuildRequires: libdirac-devel >= 0.9.0
 BuildRequires: liba52dec-devel
 %if %build_plf
 BuildRequires: libfaac-devel libfaad2-devel xvid-devel 
-BuildRequires: libamrnb-devel
-BuildRequires: libamrwb-devel
 BuildRequires: x264-devel >= 0.54
 BuildRequires: liblame-devel
+%endif
+%if %build_amr
+BuildRequires: libamrnb-devel
+BuildRequires: libamrwb-devel
 %endif
 
 %description
@@ -171,8 +168,6 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %setup -q -n %{name}
 %patch1 -p1 -b .ffplay-uses-xlib
-%patch3 -p1 -b .dirac
-%patch4 -p1 -b .dirac2
 
 #don't call ldconfig on install
 find -name Makefile | xargs perl -pi -e 's/ldconfig \|\| true//'
@@ -185,20 +180,21 @@ export CFLAGS="%optflags -FPIC"
 	--libdir=%{_libdir} \
 	--shlibdir=%{_libdir} \
 	--enable-liba52 \
-	--enable-pp \
+	--enable-postproc \
 	--enable-gpl \
 	--enable-pthreads \
 	--enable-libnut \
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-x11grab \
-	--enable-dirac \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libfaad \
 	--enable-libfaac \
 	--enable-libx264 \
 	--enable-libxvid \
+%endif
+%if %build_amr
 	--enable-libamr_nb --enable-libamr_wb
 %endif
 
@@ -266,7 +262,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %develname
 %defattr(-,root,root)
 %{_includedir}/%{name}
-%{_includedir}/postproc/
+%{_includedir}/libavcodec
+%{_includedir}/libavdevice
+%{_includedir}/libavformat
+%{_includedir}/libavutil
+%{_includedir}/libpostproc
 %{_libdir}/libavcodec.so
 %{_libdir}/libavdevice.so
 %{_libdir}/libavformat.so
