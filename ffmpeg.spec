@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 12933
+%define svn 12949
 %define pre	pre1.%svn
-%define rel	2
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -17,7 +17,7 @@
 %define swsmajor 0
 %define swslibname %mklibname swscaler %swsmajor
 
-%define build_swscaler 0
+%define build_swscaler 1
 %define build_plf 0
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
@@ -187,6 +187,9 @@ export CFLAGS="%optflags -FPIC"
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-x11grab \
+%if %build_swscaler
+	--enable-swscale \
+%endif
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libfaad \
@@ -273,8 +276,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpostproc.so
 %if %build_swscaler
 %{_libdir}/libswscale.so
+%{_includedir}/libswscale
+%_libdir/pkgconfig/libswscale.pc
 %endif
-%_libdir/pkgconfig/*.pc
+%_libdir/pkgconfig/libavcodec.pc
+%_libdir/pkgconfig/libavdevice.pc
+%_libdir/pkgconfig/libavformat.pc
+%_libdir/pkgconfig/libavutil.pc
+%_libdir/pkgconfig/libpostproc.pc
+
 
 %files -n %staticname
 %defattr(-,root,root)
