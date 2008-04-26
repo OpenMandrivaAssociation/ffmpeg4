@@ -179,6 +179,7 @@ export CFLAGS="%optflags -FPIC"
 	--enable-shared \
 	--libdir=%{_libdir} \
 	--shlibdir=%{_libdir} \
+	--incdir=%{_includedir} \
 	--enable-liba52 \
 	--enable-postproc \
 	--enable-gpl \
