@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 12949
+%define svn 13155
 %define pre	pre1.%svn
-%define rel	2
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -31,6 +31,8 @@ Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	%{name}-r%{svn}.tar.bz2
+#gw WARNING: reenabling libavcodec's deprecated image resampler
+Patch:		ffmpeg-reenable-imgresample.patch
 Patch1:		ffmpeg-ffplay-uses-xlib.patch
 License: 	GPLv2+
 Group: 	 	Video
@@ -167,6 +169,9 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %prep
 
 %setup -q -n %{name}
+%if %build_swscaler
+%patch -p1
+%endif
 %patch1 -p1 -b .ffplay-uses-xlib
 
 #don't call ldconfig on install
