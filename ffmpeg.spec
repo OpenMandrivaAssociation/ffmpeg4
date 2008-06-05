@@ -2,7 +2,7 @@
 %define version	0.4.9
 %define svn 13155
 %define pre	pre1.%svn
-%define rel	1
+%define rel	2
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -32,6 +32,9 @@ Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	%{name}-r%{svn}.tar.bz2
 #gw WARNING: reenabling libavcodec's deprecated image resampler
+#anssi discussion and debian patch:
+# http://permalink.gmane.org/gmane.comp.video.ffmpeg.devel/69238
+# http://svn.debian.org/wsvn/pkg-multimedia/unstable/ffmpeg/debian/patches/015_reenable-img_convert.diff?op=file&rev=1234
 Patch:		ffmpeg-reenable-imgresample.patch
 License: 	GPLv2+
 Group: 	 	Video
