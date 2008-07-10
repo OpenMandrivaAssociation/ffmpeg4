@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 13155
+%define svn 14158
 %define pre	pre1.%svn
-%define rel	2
+%define rel	1
 %define release %mkrel 3.%pre.%rel
 %define major	51
 
@@ -172,7 +172,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %setup -q -n %{name}
 %if %build_swscaler
-%patch -p1
+%patch -p1 -b .reenable-imgresample
 %endif
 
 #don't call ldconfig on install
@@ -226,7 +226,7 @@ pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 rm -rf doc/CVS
 
 # some apps need this header to build
-install -m 644 libavcodec/mpegaudio.h %buildroot/%_includedir/libavcodec/
+install -m 644 libavcodec/{bitstream.h,dsputil.h,mpegaudio.h} %buildroot/%_includedir/libavcodec/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
