@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 14158
+%define svn 14161
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
@@ -226,7 +226,8 @@ pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 rm -rf doc/CVS
 
 # some apps need this header to build
-install -m 644 libavcodec/{bitstream.h,dsputil.h,mpegaudio.h} %buildroot/%_includedir/libavcodec/
+# gw: it was only lve which needs this
+#install -m 644 libavcodec/{bitstream.h,dsputil.h,mpegaudio.h} %buildroot/%_includedir/libavcodec/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
