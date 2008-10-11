@@ -1,10 +1,10 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 14161
+%define svn 15593
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
-%define major	51
+%define major	52
 
 %define libname %mklibname %name %major
 %define develname %mklibname %name -d
@@ -12,6 +12,9 @@
 
 %define avfmajor 52
 %define avflibname %mklibname avformats %avfmajor
+%define postprocmajor 51
+%define postproclibname %mklibname postproc %postprocmajor
+
 %define avumajor 49
 %define avulibname %mklibname avutil %avumajor
 %define swsmajor 0
@@ -42,13 +45,11 @@ BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:  imlib2-devel
 BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
-BuildRequires:	libnut-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
 URL:		http://ffmpeg.sourceforge.net
-BuildRequires: liba52dec-devel
 %if %build_plf
-BuildRequires: libfaac-devel libfaad2-devel xvid-devel 
+BuildRequires: libfaac-devel libfaad2-devel
 BuildRequires: x264-devel >= 0.54
 BuildRequires: liblame-devel
 %endif
@@ -83,6 +84,21 @@ several file formats based on DCT/motion compensation encoding. Sound is
 compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
+
+%package -n %{postproclibname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+
+%description -n %{postproclibname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg if you want to encode multimedia streams.
+
 
 %package -n %{avflibname}
 Group:          System/Libraries
@@ -133,10 +149,10 @@ Summary:        Header files for the ffmpeg codec library
 Requires:       %{libname} = %{version}-%release
 Requires:       %{avflibname} = %{version}-%release
 Requires:       %{avulibname} = %{version}-%release
+Requires:       %{postproclibname} = %{version}-%release
 %if %build_swscaler
 Requires:       %{swslibname} = %{version}-%release
 %endif
-Requires:	libnut-devel
 Provides:       libffmpeg-devel = %{version}-%{release}
 Provides:	ffmpeg-devel = %{version}-%{release}
 Obsoletes: %mklibname -d %name 51
@@ -175,9 +191,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %patch -p1 -b .reenable-imgresample
 %endif
 
-#don't call ldconfig on install
-find -name Makefile | xargs perl -pi -e 's/ldconfig \|\| true//'
-find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
+#find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
 %build
 export CFLAGS="%optflags -FPIC"
@@ -186,11 +200,9 @@ export CFLAGS="%optflags -FPIC"
 	--libdir=%{_libdir} \
 	--shlibdir=%{_libdir} \
 	--incdir=%{_includedir} \
-	--enable-liba52 \
 	--enable-postproc \
 	--enable-gpl \
 	--enable-pthreads \
-	--enable-libnut \
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-x11grab \
@@ -202,7 +214,6 @@ export CFLAGS="%optflags -FPIC"
 	--enable-libfaad \
 	--enable-libfaac \
 	--enable-libx264 \
-	--enable-libxvid \
 %endif
 %if %build_amr
 	--enable-libamr_nb --enable-libamr_wb
@@ -268,7 +279,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/libavcodec.so.%{major}*
-%{_libdir}/libpostproc.so.%{major}*
+
+%files -n %postproclibname
+%defattr(-,root,root)
+%{_libdir}/libpostproc.so.%{postprocmajor}*
 
 %files -n %{avflibname}
 %defattr(-,root,root)
@@ -282,7 +296,6 @@ rm -rf $RPM_BUILD_ROOT
 %if %build_swscaler
 %files -n %{swslibname}
 %defattr(-,root,root)
-%{_libdir}/libswscale.so.0
 %{_libdir}/libswscale.so.%{swsmajor}*
 %endif
 
