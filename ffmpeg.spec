@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 15593
+%define svn 15595
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
@@ -88,6 +88,7 @@ Install libffmpeg if you want to encode multimedia streams.
 %package -n %{postproclibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
+Conflicts: %mklibname ffmpeg 51
 
 %description -n %{postproclibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
