@@ -50,7 +50,7 @@ BuildRequires:	libvorbis-devel
 URL:		http://ffmpeg.sourceforge.net
 %if %build_plf
 BuildRequires: libfaac-devel libfaad2-devel
-BuildRequires: x264-devel >= 0.54
+BuildRequires: x264-devel >= 0.65
 BuildRequires: liblame-devel
 %endif
 %if %build_amr
