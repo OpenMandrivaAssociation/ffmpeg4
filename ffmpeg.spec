@@ -37,7 +37,7 @@ Source0: 	%{name}-r%{svn}.tar.bz2
 #gw WARNING: reenabling libavcodec's deprecated image resampler
 #anssi discussion and debian patch:
 # http://permalink.gmane.org/gmane.comp.video.ffmpeg.devel/69238
-# http://svn.debian.org/wsvn/pkg-multimedia/unstable/ffmpeg/debian/patches/015_reenable-img_convert.diff?op=file&rev=1234
+# http://svn.debian.org/wsvn/pkg-multimedia/unstable/ffmpeg-debian/debian/patches/015_reenable-img_convert.diff?op=file
 Patch:		ffmpeg-reenable-imgresample.patch
 License: 	GPLv2+
 Group: 	 	Video
@@ -233,13 +233,6 @@ install -d %buildroot/%_libdir/libavcodec
 pushd %buildroot/%_libdir/libavcodec && ln -sf ../libavcodec.a && popd
 install -d %buildroot/%_libdir/libavformat
 pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
-
-# fix doc containing CVS info.
-rm -rf doc/CVS
-
-# some apps need this header to build
-# gw: it was only lve which needs this
-#install -m 644 libavcodec/{bitstream.h,dsputil.h,mpegaudio.h} %buildroot/%_includedir/libavcodec/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
