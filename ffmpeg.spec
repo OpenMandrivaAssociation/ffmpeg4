@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 15595
+%define svn 15623
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
@@ -57,6 +57,7 @@ BuildRequires: liblame-devel
 BuildRequires: libamrnb-devel
 BuildRequires: libamrwb-devel
 %endif
+Requires:	%postproclibname = %version-%release
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
