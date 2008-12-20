@@ -2,7 +2,7 @@
 %define version	0.4.9
 %define svn 15623
 %define pre	pre1.%svn
-%define rel	1
+%define rel	2
 %define release %mkrel 3.%pre.%rel
 %define major	52
 
@@ -38,7 +38,8 @@ Source0: 	%{name}-r%{svn}.tar.bz2
 #anssi discussion and debian patch:
 # http://permalink.gmane.org/gmane.comp.video.ffmpeg.devel/69238
 # http://svn.debian.org/wsvn/pkg-multimedia/unstable/ffmpeg-debian/debian/patches/015_reenable-img_convert.diff?op=file
-Patch:		ffmpeg-reenable-imgresample.patch
+Patch0:		ffmpeg-reenable-imgresample.patch
+Patch1:		ffmpeg-linkage_fix.diff
 License: 	GPLv2+
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
@@ -189,14 +190,19 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %prep
 
 %setup -q -n %{name}
+
 %if %build_swscaler
-%patch -p1 -b .reenable-imgresample
+%patch0 -p1 -b .reenable-imgresample
 %endif
+
+%patch1 -p0 -b .linkage_fix
 
 #find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
 %build
 export CFLAGS="%optflags -FPIC"
+export LDFLAGS="%{ldflags}"
+
 ./configure --prefix=%_prefix \
 	--enable-shared \
 	--libdir=%{_libdir} \
