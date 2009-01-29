@@ -228,8 +228,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libamr_nb --enable-libamr_wb
 %endif
 
-
-%make
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
