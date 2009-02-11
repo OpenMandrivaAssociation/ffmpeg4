@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 16849
+%define svn 17149
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
@@ -40,7 +40,6 @@ Source0: 	%{name}-r%{svn}.tar.bz2
 # http://svn.debian.org/wsvn/pkg-multimedia/unstable/ffmpeg-debian/debian/patches/015_reenable-img_convert.diff?op=file
 Patch0:		ffmpeg-reenable-imgresample.patch
 Patch1:		ffmpeg-linkage_fix.diff
-Patch2:		ffmpeg-fix-format-strings.patch
 License: 	GPLv2+
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
@@ -196,7 +195,6 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %patch0 -p1 -b .reenable-imgresample
 %endif
 %patch1 -p0 -b .linkage_fix
-%patch2
 
 #find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
