@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.4.9
-%define svn 17149
+%define svn 17730
 %define pre	pre1.%svn
 %define rel	1
 %define release %mkrel 3.%pre.%rel
