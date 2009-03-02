@@ -223,7 +223,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libx264 \
 %endif
 %if %build_amr
-	--enable-libamr_nb --enable-libamr_wb
+	--enable-nonfree --enable-libamr_nb --enable-libamr_wb
 %endif
 
 make
