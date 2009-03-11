@@ -1,9 +1,9 @@
 %define name	ffmpeg
-%define version	0.4.9
+%define version	0.5
 %define svn 17730
-%define pre	pre1.%svn
+%define pre	0.%svn
 %define rel	1
-%define release %mkrel 3.%pre.%rel
+%define release %mkrel %rel
 %define major	52
 
 %define libname %mklibname %name %major
@@ -33,7 +33,7 @@ Name: 	 	%{name}
 Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	%{name}-r%{svn}.tar.bz2
+Source0: 	%{name}-%{version}.tar.bz2
 #gw WARNING: reenabling libavcodec's deprecated image resampler
 #anssi discussion and debian patch:
 # http://permalink.gmane.org/gmane.comp.video.ffmpeg.devel/69238
@@ -189,7 +189,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 
-%setup -q -n %{name}
+%setup -q -n %{name}-%version
 
 %if %build_swscaler
 %patch0 -p1 -b .reenable-imgresample
