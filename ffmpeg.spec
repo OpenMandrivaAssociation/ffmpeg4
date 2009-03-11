@@ -33,7 +33,7 @@ Name: 	 	%{name}
 Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	%{name}-%{version}.tar.bz2
+Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 #gw WARNING: reenabling libavcodec's deprecated image resampler
 #anssi discussion and debian patch:
 # http://permalink.gmane.org/gmane.comp.video.ffmpeg.devel/69238
