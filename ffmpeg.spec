@@ -2,7 +2,7 @@
 %define version	0.5
 %define svn 17730
 %define pre	0.%svn
-%define rel	1
+%define rel	2
 %define release %mkrel %rel
 %define major	52
 
