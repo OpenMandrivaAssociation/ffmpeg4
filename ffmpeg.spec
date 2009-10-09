@@ -48,7 +48,7 @@ BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
-URL:		http://ffmpeg.sourceforge.net
+URL:		http://ffmpeg.org/
 %if %build_plf
 BuildRequires: libfaac-devel libfaad2-devel
 BuildRequires: x264-devel >= 0.65
