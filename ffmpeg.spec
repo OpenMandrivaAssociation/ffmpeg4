@@ -1,8 +1,8 @@
 %define name	ffmpeg
-%define version	0.5
-%define svn 17730
-%define pre	0.%svn
-%define rel	2
+%define version	0.6
+%define svn 20469
+%define prerel	%svn
+%define rel	0.%prerel.1
 %define release %mkrel %rel
 %define major	52
 
@@ -15,7 +15,7 @@
 %define postprocmajor 51
 %define postproclibname %mklibname postproc %postprocmajor
 
-%define avumajor 49
+%define avumajor 50
 %define avulibname %mklibname avutil %avumajor
 %define swsmajor 0
 %define swslibname %mklibname swscaler %swsmajor
@@ -26,37 +26,37 @@
 %if %build_plf
 %define distsuffix plf
 %endif
-%define build_amr	0
-%{?_with_amr: %{expand: %%global build_amr 1}}
-%{?_without_amr: %{expand: %%global build_amr 0}}
+%define build_faac	0
+%{?_with_faac: %{expand: %%global build_faac 1}}
+%{?_without_faac: %{expand: %%global build_faac 0}}
 Name: 	 	%{name}
 Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-#gw WARNING: reenabling libavcodec's deprecated image resampler
-#anssi discussion and debian patch:
-# http://permalink.gmane.org/gmane.comp.video.ffmpeg.devel/69238
-# http://svn.debian.org/wsvn/pkg-multimedia/unstable/ffmpeg-debian/debian/patches/015_reenable-img_convert.diff?op=file
-Patch0:		ffmpeg-reenable-imgresample.patch
+Source0: 	http://ffmpeg.org/releases/%{name}-r%{svn}.tar.xz
 Patch1:		ffmpeg-linkage_fix.diff
+Patch2:		ffmpeg-fix-opencore-check.patch
+%if %build_plf
+License: 	GPLv3+
+%else
 License: 	GPLv2+
+%endif
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:  imlib2-devel
 BuildRequires:  tetex-texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
+BuildRequires:	libjack-devel
 URL:		http://ffmpeg.org/
 %if %build_plf
-BuildRequires: libfaac-devel libfaad2-devel
-BuildRequires: x264-devel >= 0.65
+BuildRequires: libfaad2-devel
+BuildRequires: x264-devel >= 0.78
 BuildRequires: liblame-devel
+BuildRequires: opencore-amr-devel
 %endif
-%if %build_amr
-BuildRequires: libamrnb-devel
-BuildRequires: libamrwb-devel
+%if %build_faac
+BuildRequires: libfaac-devel
 %endif
 Requires:	%postproclibname = %version-%release
 
@@ -189,12 +189,12 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 
-%setup -q -n %{name}-%version
+%setup -q -n %{name}
 
 %if %build_swscaler
-%patch0 -p1 -b .reenable-imgresample
 %endif
 %patch1 -p0 -b .linkage_fix
+%patch2
 
 #find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
@@ -213,17 +213,15 @@ export LDFLAGS="%{ldflags}"
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-x11grab \
-%if %build_swscaler
-	--enable-swscale \
-%endif
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libfaad \
-	--enable-libfaac \
-	--enable-libx264 \
+	--enable-libopencore-amrnb \
+	--enable-libopencore-amrwb \
+	--enable-version3 \
 %endif
-%if %build_amr
-	--enable-nonfree --enable-libamr_nb --enable-libamr_wb
+%if %build_faac
+	--enable-nonfree --enable-libfaac 
 %endif
 
 make
@@ -272,7 +270,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc Changelog INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
 %{_bindir}/*
-%_libdir/vhook/*
 %_mandir/man1/*
 %_datadir/ffmpeg
 
