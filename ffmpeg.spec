@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.6
-%define svn 20469
+%define svn 20785
 %define prerel	%svn
 %define rel	0.%prerel.1
 %define release %mkrel %rel
@@ -51,7 +51,7 @@ BuildRequires:	libjack-devel
 URL:		http://ffmpeg.org/
 %if %build_plf
 BuildRequires: libfaad2-devel
-BuildRequires: x264-devel >= 0.78
+BuildRequires: x264-devel >= 0.79
 BuildRequires: liblame-devel
 BuildRequires: opencore-amr-devel
 %endif
@@ -220,8 +220,11 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencore-amrwb \
 	--enable-version3 \
 %endif
+%if %build_plf
+        --enable-libx264 \
+%endif
 %if %build_faac
-	--enable-nonfree --enable-libfaac 
+	--enable-nonfree --enable-libfaac
 %endif
 
 make
