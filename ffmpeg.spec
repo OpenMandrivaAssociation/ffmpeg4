@@ -59,6 +59,12 @@ BuildRequires: opencore-amr-devel
 BuildRequires: libfaac-devel
 %endif
 Requires:	%postproclibname = %version-%release
+Requires:	%libname = %version-%release
+Requires:	%avflibname = %version-%release
+Requires:	%avulibname = %version-%release
+%if %build_swscaler
+Requires:       %{swslibname} = %{version}-%release
+%endif
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
