@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.6
-%define svn 20785
+%define svn 21005
 %define prerel	%svn
 %define rel	0.%prerel.1
 %define release %mkrel %rel
@@ -236,7 +236,7 @@ export LDFLAGS="%{ldflags}"
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %makeinstall_std SRC_PATH=`pwd`
 
@@ -247,7 +247,7 @@ install -d %buildroot/%_libdir/libavformat
 pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
