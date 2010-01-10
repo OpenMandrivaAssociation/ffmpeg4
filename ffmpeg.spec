@@ -48,6 +48,9 @@ BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libjack-devel
+%if %{mdkversion} >= 200900
+BuildRequires:	vdpau-devel
+%endif
 URL:		http://ffmpeg.org/
 %if %build_plf
 BuildRequires: libfaad2-devel
