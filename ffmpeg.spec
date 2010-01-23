@@ -54,7 +54,7 @@ BuildRequires:	vdpau-devel
 URL:		http://ffmpeg.org/
 %if %build_plf
 BuildRequires: libfaad2-devel
-BuildRequires: x264-devel >= 0.79
+BuildRequires: x264-devel >= 0.83
 BuildRequires: liblame-devel
 BuildRequires: opencore-amr-devel
 %endif
