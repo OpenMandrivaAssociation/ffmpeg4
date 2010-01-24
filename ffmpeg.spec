@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 21383
 %define prerel	%svn
-%define rel	0.%prerel.1
+%define rel	0.%prerel.2
 %define release %mkrel %rel
 %define major	52
 
@@ -48,6 +48,8 @@ BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libjack-devel
+BuildRequires:	libdc1394-devel
+BuildRequires:	libschroedinger-devel
 %if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
 %endif
@@ -222,15 +224,16 @@ export LDFLAGS="%{ldflags}"
 	--enable-libtheora \
 	--enable-libvorbis \
 	--enable-x11grab \
+	--enable-runtime-cpudetect \
+	--enable-libdc1394 \
+	--enable-libschroedinger \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libfaad \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
 	--enable-version3 \
-%endif
-%if %build_plf
-        --enable-libx264 \
+	--enable-libx264 \
 %endif
 %if %build_faac
 	--enable-nonfree --enable-libfaac
