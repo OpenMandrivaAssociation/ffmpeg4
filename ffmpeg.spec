@@ -1,6 +1,6 @@
 %define name	ffmpeg
 %define version	0.6
-%define svn 21383
+%define svn 22960
 %define prerel	%svn
 %define rel	0.%prerel.2
 %define release %mkrel %rel
@@ -35,7 +35,6 @@ Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-r%{svn}.tar.xz
 Patch1:		ffmpeg-linkage_fix.diff
-Patch2:		ffmpeg-fix-opencore-check.patch
 %if %build_plf
 License: 	GPLv3+
 %else
@@ -205,7 +204,6 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %if %build_swscaler
 %endif
 %patch1 -p0 -b .linkage_fix
-%patch2
 
 #find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
