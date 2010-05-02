@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 22960
 %define prerel	%svn
-%define rel	0.%prerel.2
+%define rel	0.%prerel.3
 %define release %mkrel %rel
 %define major	52
 
@@ -35,6 +35,9 @@ Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-r%{svn}.tar.xz
 Patch1:		ffmpeg-linkage_fix.diff
+# (Anssi) fix a regression causing wrong fourcc selection for VP6F remuxing
+# (ok'd by upstream)
+Patch2:		ffmpeg-move-vp6f-up.patch
 %if %build_plf
 License: 	GPLv3+
 %else
@@ -204,6 +207,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %if %build_swscaler
 %endif
 %patch1 -p0 -b .linkage_fix
+%patch2 -p1
 
 #find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
