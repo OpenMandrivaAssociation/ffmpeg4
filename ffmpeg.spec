@@ -220,6 +220,7 @@ export LDFLAGS="%{ldflags}"
 	--libdir=%{_libdir} \
 	--shlibdir=%{_libdir} \
 	--incdir=%{_includedir} \
+	--disable-stripping \
 	--enable-postproc \
 	--enable-gpl \
 	--enable-pthreads \
