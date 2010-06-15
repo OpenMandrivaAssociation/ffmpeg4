@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 22960
 %define prerel	%svn
-%define release %mkrel -c %prerel 4
+%define release %mkrel -c %prerel 5
 %define major	52
 
 %define libname %mklibname %name %major
@@ -224,7 +224,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-gpl \
 	--enable-pthreads \
 	--enable-libtheora \
-	--enable-libvorbis \
+	--enable-libvorbis --disable-encoder=vorbis \
 	--enable-x11grab \
 	--enable-runtime-cpudetect \
 	--enable-libdc1394 \
@@ -236,6 +236,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencore-amrwb \
 	--enable-version3 \
 	--enable-libx264 \
+%else
+	--disable-decoder=aac --disable-encoder=aac \
 %endif
 %if %build_faac
 	--enable-nonfree --enable-libfaac
