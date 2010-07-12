@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 22960
 %define prerel	0
-%define release %mkrel 1
+%define release %mkrel 2
 %define major	52
 
 %define libname %mklibname %name %major
@@ -51,6 +51,9 @@ BuildRequires:	libschroedinger-devel
 BuildRequires:	libvpx-devel
 %if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
+%endif
+%if %{mdkversion} >= 200910
+BuildRequires:	libva-devel
 %endif
 URL:		http://ffmpeg.org/
 %if %build_plf
