@@ -1,8 +1,8 @@
 %define name	ffmpeg
 %define version	0.6
 %define svn 22960
-%define prerel	%svn
-%define release %mkrel -c %prerel 5
+%define prerel	0
+%define release %mkrel 1
 %define major	52
 
 %define libname %mklibname %name %major
@@ -32,11 +32,8 @@ Name: 	 	%{name}
 Version: 	%{version}
 Release: 	%{release}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	http://ffmpeg.org/releases/%{name}-r%{svn}.tar.xz
+Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
 Patch1:		ffmpeg-linkage_fix.diff
-# (Anssi) fix a regression causing wrong fourcc selection for VP6F remuxing
-# (ok'd by upstream)
-Patch2:		ffmpeg-move-vp6f-up.patch
 %if %build_plf
 License: 	GPLv3+
 %else
@@ -51,6 +48,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	libjack-devel
 BuildRequires:	libdc1394-devel
 BuildRequires:	libschroedinger-devel
+BuildRequires:	libvpx-devel
 %if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
 %endif
@@ -201,12 +199,11 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 
-%setup -q -n %{name}
+%setup -q -n %{name}-%version
 
 %if %build_swscaler
 %endif
 %patch1 -p0 -b .linkage_fix
-%patch2 -p1
 
 #find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
 
@@ -225,6 +222,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-pthreads \
 	--enable-libtheora \
 	--enable-libvorbis --disable-encoder=vorbis \
+	--enable-libvpx \
 	--enable-x11grab \
 	--enable-runtime-cpudetect \
 	--enable-libdc1394 \
