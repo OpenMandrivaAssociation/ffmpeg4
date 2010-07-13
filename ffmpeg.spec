@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 22960
 %define prerel	0
-%define release %mkrel 2
+%define release %mkrel 3
 %define major	52
 
 %define libname %mklibname %name %major
