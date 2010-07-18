@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 22960
 %define prerel	0
-%define release %mkrel 3
+%define release %mkrel 4
 %define major	52
 
 %define libname %mklibname %name %major
@@ -49,6 +49,9 @@ BuildRequires:	libjack-devel
 BuildRequires:	libdc1394-devel
 BuildRequires:	libschroedinger-devel
 BuildRequires:	libvpx-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	libpng-devel
+BuildRequires:	bzip2-devel
 %if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
 %endif
