@@ -2,7 +2,7 @@
 %define version	0.6
 %define svn 22960
 %define prerel	0
-%define release %mkrel 4
+%define release %mkrel 5
 %define major	52
 
 %define libname %mklibname %name %major
@@ -52,6 +52,7 @@ BuildRequires:	libvpx-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	bzip2-devel
+BuildRequires:	rtmp-devel
 %if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
 %endif
@@ -233,6 +234,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-runtime-cpudetect \
 	--enable-libdc1394 \
 	--enable-libschroedinger \
+	--enable-librtmp \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libfaad \
