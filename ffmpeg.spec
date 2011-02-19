@@ -24,13 +24,17 @@
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
+%if %mdvver >= 201100
+# make EVR of plf build higher than regular to allow update, needed with rpm5 mkrel
+%define extrarelsuffix plf
+%endif
 %endif
 %define build_faac	0
 %{?_with_faac: %{expand: %%global build_faac 1}}
 %{?_without_faac: %{expand: %%global build_faac 0}}
 Name: 	 	%{name}
 Version: 	%{version}
-Release: 	%{release}
+Release: 	%{release}%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
 Patch1:		ffmpeg-linkage_fix.diff
