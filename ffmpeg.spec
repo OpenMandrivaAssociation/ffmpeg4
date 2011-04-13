@@ -45,7 +45,7 @@ License: 	GPLv2+
 %endif
 Group: 	 	Video
 BuildRoot: 	%{_tmppath}/%{name}-buildroot
-BuildRequires:  tetex-texi2html
+BuildRequires:  texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
