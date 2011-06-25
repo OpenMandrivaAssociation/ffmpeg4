@@ -1,5 +1,5 @@
 %define name	ffmpeg
-%define version	0.6.3
+%define version	0.7.1
 %define svn 22960
 %define prerel	0
 %define release %mkrel 1
@@ -19,6 +19,9 @@
 %define swsmajor 0
 %define swslibname %mklibname swscaler %swsmajor
 
+%define filtermajor 1
+%define filterlibname %mklibname avfilter %filtermajor
+
 %define build_swscaler 1
 %define build_plf 0
 %{?_with_plf: %{expand: %%global build_plf 1}}
@@ -37,7 +40,6 @@ Version: 	%{version}
 Release: 	%{release}%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
-Patch1:		ffmpeg-linkage_fix.diff
 %if %build_plf
 License: 	GPLv3+
 %else
@@ -167,6 +169,20 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
+%package -n %{filterlibname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+
+%description -n %{filterlibname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
+Install libffmpeg if you want to encode multimedia streams.
+
 %package -n %develname
 Group:          Development/C
 Summary:        Header files for the ffmpeg codec library
@@ -177,6 +193,7 @@ Requires:       %{postproclibname} = %{version}-%release
 %if %build_swscaler
 Requires:       %{swslibname} = %{version}-%release
 %endif
+Requires:	%{filterlibname} = %{version}-%release
 Provides:       libffmpeg-devel = %{version}-%{release}
 Provides:	ffmpeg-devel = %{version}-%{release}
 Obsoletes: %mklibname -d %name 51
@@ -212,13 +229,8 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %setup -q -n %{name}-%version
 
-%if %build_swscaler
-%endif
-%patch1 -p0 -b .linkage_fix
-
-#find -name Makefile | xargs perl -pi -e "s|\\\$\(prefix\)/lib|\\\$\(libdir\)|g"
-
 %build
+%define Werror_cflags %nil
 export CFLAGS="%optflags -FPIC"
 export LDFLAGS="%{ldflags}"
 
@@ -294,10 +306,9 @@ rm -rf %{buildroot}
 %postun -n %{swslibname} -p /sbin/ldconfig
 %endif
 
-
 %files
 %defattr(-,root,root)
-%doc Changelog INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
+%doc INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
 %{_bindir}/*
 %_mandir/man1/*
 %_datadir/ffmpeg
@@ -325,6 +336,10 @@ rm -rf %{buildroot}
 %{_libdir}/libswscale.so.%{swsmajor}*
 %endif
 
+%files -n %{filterlibname}
+%defattr(-,root,root)
+%{_libdir}/libavfilter.so.%{filtermajor}*
+
 %files -n %develname
 %defattr(-,root,root)
 %{_includedir}/libavcodec
@@ -332,11 +347,13 @@ rm -rf %{buildroot}
 %{_includedir}/libavformat
 %{_includedir}/libavutil
 %{_includedir}/libpostproc
+%{_includedir}/libavfilter
 %{_libdir}/libavcodec.so
 %{_libdir}/libavdevice.so
 %{_libdir}/libavformat.so
 %{_libdir}/libavutil.so
 %{_libdir}/libpostproc.so
+%{_libdir}/libavfilter.so
 %if %build_swscaler
 %{_libdir}/libswscale.so
 %{_includedir}/libswscale
@@ -347,12 +364,10 @@ rm -rf %{buildroot}
 %_libdir/pkgconfig/libavformat.pc
 %_libdir/pkgconfig/libavutil.pc
 %_libdir/pkgconfig/libpostproc.pc
-
+%_libdir/pkgconfig/libavfilter.pc
 
 %files -n %staticname
 %defattr(-,root,root)
 %{_libdir}/*.a
 %{_libdir}/libavformat/*a
 %{_libdir}/libavcodec/*a
-
-
