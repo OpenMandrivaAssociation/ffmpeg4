@@ -59,6 +59,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	bzip2-devel
 BuildRequires:	rtmp-devel
+BuildRequires:	yasm
 %if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
 %endif
