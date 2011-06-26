@@ -2,7 +2,7 @@
 %define version	0.7.1
 %define svn 22960
 %define prerel	0
-%define release %mkrel 1
+%define release %mkrel 2
 %define major	52
 
 %define libname %mklibname %name %major
@@ -68,7 +68,6 @@ BuildRequires:	libva-devel
 %endif
 URL:		http://ffmpeg.org/
 %if %build_plf
-BuildRequires: libfaad2-devel
 BuildRequires: x264-devel >= 0.83
 BuildRequires: liblame-devel
 BuildRequires: opencore-amr-devel
@@ -254,7 +253,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-librtmp \
 %if %build_plf
 	--enable-libmp3lame \
-	--enable-libfaad \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
 	--enable-version3 \
