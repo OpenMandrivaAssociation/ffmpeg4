@@ -68,7 +68,7 @@ BuildRequires:	libva-devel
 %endif
 URL:		http://ffmpeg.org/
 %if %build_plf
-BuildRequires: x264-devel >= 0.83
+BuildRequires: x264-devel >= 0.115
 BuildRequires: liblame-devel
 BuildRequires: opencore-amr-devel
 %endif
