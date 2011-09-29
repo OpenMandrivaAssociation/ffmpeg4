@@ -1,25 +1,25 @@
 %define name	ffmpeg
-%define version	0.7.5
+%define version	0.8.4
 %define svn 22960
 %define prerel	0
 %define release %mkrel 1
-%define major	52
+%define major	53
 
 %define libname %mklibname %name %major
 %define develname %mklibname %name -d
 %define staticname %mklibname %name -s -d
 
-%define avfmajor 52
+%define avfmajor 53
 %define avflibname %mklibname avformats %avfmajor
 %define postprocmajor 51
 %define postproclibname %mklibname postproc %postprocmajor
 
-%define avumajor 50
+%define avumajor 51
 %define avulibname %mklibname avutil %avumajor
-%define swsmajor 0
+%define swsmajor 2
 %define swslibname %mklibname swscaler %swsmajor
 
-%define filtermajor 1
+%define filtermajor 2
 %define filterlibname %mklibname avfilter %filtermajor
 
 %define build_swscaler 1
