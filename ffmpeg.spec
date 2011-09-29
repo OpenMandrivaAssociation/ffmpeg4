@@ -1,8 +1,8 @@
 %define name	ffmpeg
-%define version	0.7.1
+%define version	0.7.5
 %define svn 22960
 %define prerel	0
-%define release %mkrel 2
+%define release %mkrel 1
 %define major	52
 
 %define libname %mklibname %name %major
