@@ -35,8 +35,8 @@
 %define build_faac	0
 %{?_with_faac: %{expand: %%global build_faac 1}}
 %{?_without_faac: %{expand: %%global build_faac 0}}
-Name: 	 	%{name}
-Version: 	%{version}
+Name: 	 	ffmpeg
+Version: 	0.8.6
 Release: 	%{release}%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
@@ -46,7 +46,6 @@ License: 	GPLv3+
 License: 	GPLv2+
 %endif
 Group: 	 	Video
-BuildRoot: 	%{_tmppath}/%{name}-buildroot
 BuildRequires:  texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
@@ -267,8 +266,6 @@ export LDFLAGS="%{ldflags}"
 %make
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std SRC_PATH=`pwd`
 
 # compat symlink
@@ -277,70 +274,34 @@ pushd %buildroot/%_libdir/libavcodec && ln -sf ../libavcodec.a && popd
 install -d %buildroot/%_libdir/libavformat
 pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%post -n %{avflibname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{avflibname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%post -n %{avulibname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{avulibname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%post -n %{swslibname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{swslibname} -p /sbin/ldconfig
-%endif
-
 %files
-%defattr(-,root,root)
 %doc INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
 %{_bindir}/*
 %_mandir/man1/*
 %_datadir/ffmpeg
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/libavcodec.so.%{major}*
 
 %files -n %postproclibname
-%defattr(-,root,root)
 %{_libdir}/libpostproc.so.%{postprocmajor}*
 
 %files -n %{avflibname}
-%defattr(-,root,root)
 %{_libdir}/libavformat.so.%{avfmajor}*
 %{_libdir}/libavdevice.so.%{avfmajor}*
 
 %files -n %{avulibname}
-%defattr(-,root,root)
 %{_libdir}/libavutil.so.%{avumajor}*
 
 %if %build_swscaler
 %files -n %{swslibname}
-%defattr(-,root,root)
 %{_libdir}/libswscale.so.%{swsmajor}*
 %endif
 
 %files -n %{filterlibname}
-%defattr(-,root,root)
 %{_libdir}/libavfilter.so.%{filtermajor}*
 
-%files -n %develname
-%defattr(-,root,root)
+%files -n %{develname}
 %{_includedir}/libavcodec
 %{_includedir}/libavdevice
 %{_includedir}/libavformat
@@ -365,8 +326,7 @@ rm -rf %{buildroot}
 %_libdir/pkgconfig/libpostproc.pc
 %_libdir/pkgconfig/libavfilter.pc
 
-%files -n %staticname
-%defattr(-,root,root)
+%files -n %{staticname}
 %{_libdir}/*.a
 %{_libdir}/libavformat/*a
 %{_libdir}/libavcodec/*a
