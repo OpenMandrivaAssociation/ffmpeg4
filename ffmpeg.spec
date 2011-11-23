@@ -36,7 +36,7 @@
 %{?_with_faac: %{expand: %%global build_faac 1}}
 %{?_without_faac: %{expand: %%global build_faac 0}}
 Name: 	 	ffmpeg
-Version: 	0.8.6
+Version: 	%version
 Release: 	%{release}%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
