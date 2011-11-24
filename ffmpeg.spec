@@ -77,6 +77,7 @@ BuildRequires: libfaac-devel
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	libnut-devel
+BuildRequires:	gsm-devel
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
@@ -211,7 +212,7 @@ Provides:       libffmpeg-static-devel = %{version}-%{release}
 Obsoletes: %mklibname -s -d %name 51
 
 %description -n %staticname
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -249,6 +250,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libspeex \
 	--enable-libfreetype \
 	--enable-libnut \
+	--enable-libgsm \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
