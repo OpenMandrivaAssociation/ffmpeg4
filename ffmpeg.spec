@@ -80,9 +80,10 @@ BuildRequires:	libnut-devel
 BuildRequires:	gsm-devel
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(opencv)
+BuildRequires:	openjpeg-devel
 
 %description
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -255,6 +256,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libgsm \
 	--enable-libcelt \
 	--enable-libopencv \
+	--enable-libopenjpeg \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
