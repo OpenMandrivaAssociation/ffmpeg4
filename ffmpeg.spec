@@ -74,6 +74,7 @@ BuildRequires: opencore-amr-devel
 %if %build_faac
 BuildRequires: libfaac-devel
 %endif
+BuildRequires:	pkgconfig(speex)
 Requires:	%postproclibname = %version-%release
 Requires:	%libname = %version-%release
 Requires:	%avflibname = %version-%release
@@ -250,6 +251,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libdc1394 \
 	--enable-libschroedinger \
 	--enable-librtmp \
+	--enable-libspeex \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
