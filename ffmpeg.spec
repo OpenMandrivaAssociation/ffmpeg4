@@ -2,7 +2,7 @@
 %define version	0.8.7
 %define svn 22960
 %define prerel	0
-%define release %mkrel 1
+%define release %mkrel 2
 %define major	53
 
 %define libname %mklibname %name %major
@@ -82,6 +82,7 @@ BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
+Buildrequires:	frei0r
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -259,6 +260,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencv \
 	--enable-libopenjpeg \
 	--enable-libxavs \
+	--enable-frei0r \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
