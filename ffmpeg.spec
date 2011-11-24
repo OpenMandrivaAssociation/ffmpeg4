@@ -337,5 +337,7 @@ pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 
 %files -n %{staticname}
 %{_libdir}/*.a
+%dir %{_libdir}/libavformat
 %{_libdir}/libavformat/*a
+%dir %{_libdir}/libavcodec
 %{_libdir}/libavcodec/*a
