@@ -78,6 +78,7 @@ BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	libnut-devel
 BuildRequires:	gsm-devel
+BuildRequires:	pkgconfig(celt)
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
@@ -251,6 +252,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libfreetype \
 	--enable-libnut \
 	--enable-libgsm \
+	--enable-libcelt \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
