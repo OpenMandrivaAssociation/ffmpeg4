@@ -81,6 +81,7 @@ BuildRequires:	gsm-devel
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	openjpeg-devel
+BuildRequires:	pkgconfig(xavs)
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -257,6 +258,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libcelt \
 	--enable-libopencv \
 	--enable-libopenjpeg \
+	--enable-libxavs \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
