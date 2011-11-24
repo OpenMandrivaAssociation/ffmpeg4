@@ -76,6 +76,7 @@ BuildRequires: libfaac-devel
 %endif
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	libnut-devel
 Requires:	%postproclibname = %version-%release
 Requires:	%libname = %version-%release
 Requires:	%avflibname = %version-%release
@@ -254,6 +255,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-librtmp \
 	--enable-libspeex \
 	--enable-libfreetype \
+	--enable-libnut \
 %if %build_plf
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
