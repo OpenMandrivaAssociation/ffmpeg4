@@ -77,13 +77,6 @@ BuildRequires: libfaac-devel
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	libnut-devel
-Requires:	%postproclibname = %version-%release
-Requires:	%libname = %version-%release
-Requires:	%avflibname = %version-%release
-Requires:	%avulibname = %version-%release
-%if %build_swscaler
-Requires:       %{swslibname} = %{version}-%release
-%endif
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
