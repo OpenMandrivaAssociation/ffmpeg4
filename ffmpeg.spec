@@ -99,7 +99,6 @@ This package is in PLF as it violates several patents.
 %package -n %{libname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
-Provides:       libffmpeg = %{version}-%{release}
 
 %description -n %{libname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
