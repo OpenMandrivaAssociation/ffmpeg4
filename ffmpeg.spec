@@ -33,9 +33,10 @@
 
 Name: 	 	ffmpeg
 Version: 	0.8.7
-Release: 	2%{?extrarelsuffix}
+Release: 	3%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
+Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
+Patch0:		ffmpeg-0.8.7-string-format-fix.patch
 %if %{build_plf}
 License: 	GPLv3+
 %else
@@ -217,9 +218,9 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -q
+%patch0 -p1 -b .str_fmt~
 
 %build
-%define Werror_cflags %{nil}
 export CFLAGS="%{optflags} -fPIC"
 export LDFLAGS="%{ldflags}"
 
