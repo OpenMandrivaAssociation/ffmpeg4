@@ -82,7 +82,7 @@ BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
-Buildrequires:	frei0r
+Buildrequires:	pkgconfig(frei0r)
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
