@@ -6,17 +6,17 @@
 %define staticname %mklibname %{name} -s -d
 
 %define avfmajor 53
-%define avflibname %mklibname avformats %avfmajor
+%define avflibname %mklibname avformats %{avfmajor}
 %define postprocmajor 51
-%define postproclibname %mklibname postproc %postprocmajor
+%define postproclibname %mklibname postproc %{postprocmajor}
 
 %define avumajor 51
-%define avulibname %mklibname avutil %avumajor
+%define avulibname %mklibname avutil %{avumajor}
 %define swsmajor 2
-%define swslibname %mklibname swscaler %swsmajor
+%define swslibname %mklibname swscaler %{swsmajor}
 
 %define filtermajor 2
-%define filterlibname %mklibname avfilter %filtermajor
+%define filterlibname %mklibname avfilter %{filtermajor}
 
 %define build_plf 0
 %{?_with_plf: %{expand: %%global build_plf 1}}
