@@ -28,7 +28,7 @@
 %endif
 %endif
 
-%bcond_without swscaler
+%bcond_without	swscaler
 %bcond_with	faac
 
 Name: 	 	ffmpeg
