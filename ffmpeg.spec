@@ -149,7 +149,6 @@ Install libffmpeg if you want to encode multimedia streams.
 %package -n	%{swslibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
-Requires:	%{avulibname} = %{EVRD}
 
 %description -n %{swslibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
