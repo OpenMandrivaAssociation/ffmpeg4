@@ -186,7 +186,6 @@ Requires:	%{postproclibname} = %{EVRD}
 Requires:	%{swslibname} = %{EVRD}
 %endif
 Requires:	%{filterlibname} = %{EVRD}
-Provides:	libffmpeg-devel = %{EVRD}
 Provides:	ffmpeg-devel = %{EVRD}
 Obsoletes:	%mklibname -d %{name} 51
 
@@ -204,7 +203,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 Group:		Development/C
 Summary:	Static library for the ffmpeg codec library
 Requires:	%{develname} = %{EVRD}
-Provides:	libffmpeg-static-devel = %{EVRD}
+Provides:	ffmpeg-static-devel = %{EVRD}
 Obsoletes:	%mklibname -s -d %{name} 51
 
 %description -n	%{staticname}
