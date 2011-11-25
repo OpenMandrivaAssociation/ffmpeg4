@@ -1,13 +1,9 @@
-%define name	ffmpeg
-%define version	0.8.7
 %define svn 22960
-%define prerel	0
-%define release %mkrel 2
 %define major	53
 
-%define libname %mklibname %name %major
-%define develname %mklibname %name -d
-%define staticname %mklibname %name -s -d
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
+%define staticname %mklibname %{name} -s -d
 
 %define avfmajor 53
 %define avflibname %mklibname avformats %avfmajor
@@ -22,7 +18,6 @@
 %define filtermajor 2
 %define filterlibname %mklibname avfilter %filtermajor
 
-%define build_swscaler 1
 %define build_plf 0
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
@@ -32,12 +27,13 @@
 %define extrarelsuffix plf
 %endif
 %endif
-%define build_faac	0
-%{?_with_faac: %{expand: %%global build_faac 1}}
-%{?_without_faac: %{expand: %%global build_faac 0}}
+
+%bcond_without swscaler
+%bcond_with	faac
+
 Name: 	 	ffmpeg
-Version: 	%version
-Release: 	%{release}%{?extrarelsuffix}
+Version: 	0.8.7
+Release: 	2%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
 %if %build_plf
@@ -45,8 +41,8 @@ License: 	GPLv3+
 %else
 License: 	GPLv2+
 %endif
-Group: 	 	Video
-BuildRequires:  texi2html
+Group:		Video
+BuildRequires:	texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
@@ -59,20 +55,16 @@ BuildRequires:	libpng-devel
 BuildRequires:	bzip2-devel
 BuildRequires:	rtmp-devel
 BuildRequires:	yasm
-%if %{mdkversion} >= 200900
 BuildRequires:	vdpau-devel
-%endif
-%if %{mdkversion} >= 200910
 BuildRequires:	libva-devel
-%endif
 URL:		http://ffmpeg.org/
 %if %build_plf
-BuildRequires: x264-devel >= 0.115
-BuildRequires: liblame-devel
-BuildRequires: opencore-amr-devel
+BuildRequires:	x264-devel >= 0.115
+BuildRequires:	liblame-devel
+BuildRequires:	opencore-amr-devel
 %endif
-%if %build_faac
-BuildRequires: libfaac-devel
+%if %{with faac}
+BuildRequires:	libfaac-devel
 %endif
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(freetype2)
@@ -96,11 +88,11 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 This package is in PLF as it violates several patents.
 %endif
 
-%package -n %{libname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
+%package -n	%{libname}
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
 
-%description -n %{libname}
+%description -n	%{libname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
 and a generic audio and video file converter.
 
@@ -110,12 +102,12 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
-%package -n %{postproclibname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
-Conflicts: %mklibname ffmpeg 51
+%package -n	%{postproclibname}
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
+Conflicts:	%mklibname ffmpeg 51
 
-%description -n %{postproclibname}
+%description -n	%{postproclibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
 and a generic audio and video file converter.
 
@@ -126,7 +118,7 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 
-%package -n %{avflibname}
+%package -n	%{avflibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
@@ -140,7 +132,7 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
-%package -n %{avulibname}
+%package -n	%{avulibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
@@ -154,10 +146,10 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
-%package -n %{swslibname}
+%package -n	%{swslibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
-Requires:	%{avulibname} = %{version}-%release
+Requires:	%{avulibname} = %{EVRD}
 
 %description -n %{swslibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
@@ -169,11 +161,11 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
-%package -n %{filterlibname}
+%package -n	%{filterlibname}
 Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
-%description -n %{filterlibname}
+%description -n	%{filterlibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
 and a generic audio and video file converter.
 
@@ -183,22 +175,22 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
-%package -n %develname
-Group:          Development/C
-Summary:        Header files for the ffmpeg codec library
-Requires:       %{libname} = %{version}-%release
-Requires:       %{avflibname} = %{version}-%release
-Requires:       %{avulibname} = %{version}-%release
-Requires:       %{postproclibname} = %{version}-%release
-%if %build_swscaler
-Requires:       %{swslibname} = %{version}-%release
+%package -n	%{develname}
+Group:		Development/C
+Summary:	Header files for the ffmpeg codec library
+Requires:	%{libname} = %{EVRD}
+Requires:	%{avflibname} = %{EVRD}
+Requires:	%{avulibname} = %{EVRD}
+Requires:	%{postproclibname} = %{EVRD}
+%if %{with swscaler}
+Requires:	%{swslibname} = %{EVRD}
 %endif
-Requires:	%{filterlibname} = %{version}-%release
-Provides:       libffmpeg-devel = %{version}-%{release}
-Provides:	ffmpeg-devel = %{version}-%{release}
-Obsoletes: %mklibname -d %name 51
+Requires:	%{filterlibname} = %{EVRD}
+Provides:	libffmpeg-devel = %{EVRD}
+Provides:	ffmpeg-devel = %{EVRD}
+Obsoletes:	%mklibname -d %{name} 51
 
-%description -n %develname
+%description -n	%{develname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
 and a generic audio and video file converter.
 
@@ -208,14 +200,14 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
-%package -n %staticname
-Group:          Development/C
-Summary:        Static library for the ffmpeg codec library
-Requires:       %develname = %{version}-%release
-Provides:       libffmpeg-static-devel = %{version}-%{release}
-Obsoletes: %mklibname -s -d %name 51
+%package -n	%{staticname}
+Group:		Development/C
+Summary:	Static library for the ffmpeg codec library
+Requires:	%{develname} = %{EVRD}
+Provides:	libffmpeg-static-devel = %{EVRD}
+Obsoletes:	%mklibname -s -d %{name} 51
 
-%description -n %staticname
+%description -n	%{staticname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
@@ -226,15 +218,14 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
-
-%setup -q -n %{name}-%version
+%setup -q
 
 %build
-%define Werror_cflags %nil
-export CFLAGS="%optflags -FPIC"
+%define Werror_cflags %{nil}
+export CFLAGS="%{optflags} -fPIC"
 export LDFLAGS="%{ldflags}"
 
-./configure --prefix=%_prefix \
+./configure --prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_libdir} \
 	--shlibdir=%{_libdir} \
@@ -260,7 +251,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopenjpeg \
 	--enable-libxavs \
 	--enable-frei0r \
-%if %build_plf
+%if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
@@ -269,7 +260,7 @@ export LDFLAGS="%{ldflags}"
 %else
 	--disable-decoder=aac --disable-encoder=aac \
 %endif
-%if %build_faac
+%if %{with faac}
 	--enable-nonfree --enable-libfaac
 %endif
 
@@ -279,21 +270,21 @@ export LDFLAGS="%{ldflags}"
 %makeinstall_std SRC_PATH=`pwd`
 
 # compat symlink
-install -d %buildroot/%_libdir/libavcodec
-pushd %buildroot/%_libdir/libavcodec && ln -sf ../libavcodec.a && popd
-install -d %buildroot/%_libdir/libavformat
-pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
+install -d %{buildroot}%{_libdir}/libavcodec
+pushd %{buildroot}%{_libdir}/libavcodec && ln -sf ../libavcodec.a && popd
+install -d %{buildroot}%{_libdir}/libavformat
+pushd %{buildroot}%{_libdir}/libavformat && ln -sf ../libavformat.a && popd
 
 %files
 %doc INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
 %{_bindir}/*
-%_mandir/man1/*
-%_datadir/ffmpeg
+%{_mandir}/man1/*
+%{_datadir}/ffmpeg
 
 %files -n %{libname}
 %{_libdir}/libavcodec.so.%{major}*
 
-%files -n %postproclibname
+%files -n %{postproclibname}
 %{_libdir}/libpostproc.so.%{postprocmajor}*
 
 %files -n %{avflibname}
@@ -303,7 +294,7 @@ pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 %files -n %{avulibname}
 %{_libdir}/libavutil.so.%{avumajor}*
 
-%if %build_swscaler
+%if %{with swscaler}
 %files -n %{swslibname}
 %{_libdir}/libswscale.so.%{swsmajor}*
 %endif
@@ -324,17 +315,17 @@ pushd %buildroot/%_libdir/libavformat && ln -sf ../libavformat.a && popd
 %{_libdir}/libavutil.so
 %{_libdir}/libpostproc.so
 %{_libdir}/libavfilter.so
-%if %build_swscaler
+%if %{with swscaler}
 %{_libdir}/libswscale.so
 %{_includedir}/libswscale
-%_libdir/pkgconfig/libswscale.pc
+%{_libdir}/pkgconfig/libswscale.pc
 %endif
-%_libdir/pkgconfig/libavcodec.pc
-%_libdir/pkgconfig/libavdevice.pc
-%_libdir/pkgconfig/libavformat.pc
-%_libdir/pkgconfig/libavutil.pc
-%_libdir/pkgconfig/libpostproc.pc
-%_libdir/pkgconfig/libavfilter.pc
+%{_libdir}/pkgconfig/libavcodec.pc
+%{_libdir}/pkgconfig/libavdevice.pc
+%{_libdir}/pkgconfig/libavformat.pc
+%{_libdir}/pkgconfig/libavutil.pc
+%{_libdir}/pkgconfig/libpostproc.pc
+%{_libdir}/pkgconfig/libavfilter.pc
 
 %files -n %{staticname}
 %{_libdir}/*.a
