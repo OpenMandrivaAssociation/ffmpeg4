@@ -267,12 +267,6 @@ export LDFLAGS="%{ldflags}"
 %install
 %makeinstall_std SRC_PATH=`pwd`
 
-# compat symlink
-install -d %{buildroot}%{_libdir}/libavcodec
-pushd %{buildroot}%{_libdir}/libavcodec && ln -sf ../libavcodec.a && popd
-install -d %{buildroot}%{_libdir}/libavformat
-pushd %{buildroot}%{_libdir}/libavformat && ln -sf ../libavformat.a && popd
-
 %files
 %doc INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
 %{_bindir}/*
@@ -327,7 +321,3 @@ pushd %{buildroot}%{_libdir}/libavformat && ln -sf ../libavformat.a && popd
 
 %files -n %{staticname}
 %{_libdir}/*.a
-%dir %{_libdir}/libavformat
-%{_libdir}/libavformat/*a
-%dir %{_libdir}/libavcodec
-%{_libdir}/libavcodec/*a
