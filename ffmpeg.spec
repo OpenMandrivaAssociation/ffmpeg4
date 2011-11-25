@@ -93,7 +93,7 @@ Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
 
 %description -n	%{libname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -108,7 +108,7 @@ Summary:	Shared library part of ffmpeg
 Conflicts:	%mklibname ffmpeg 51
 
 %description -n	%{postproclibname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -123,7 +123,7 @@ Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
 %description -n %{avflibname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -137,7 +137,7 @@ Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
 %description -n %{avulibname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -151,7 +151,7 @@ Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
 %description -n %{swslibname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -165,7 +165,7 @@ Group:          System/Libraries
 Summary:        Shared library part of ffmpeg
 
 %description -n	%{filterlibname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
@@ -189,7 +189,7 @@ Provides:	ffmpeg-devel = %{EVRD}
 Obsoletes:	%mklibname -d %{name} 51
 
 %description -n	%{develname}
-ffmpeg is a hyper fast realtime audio/video encoder, a streaming  server
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
 
 It can grab from a standard Video4Linux video source and convert it into
