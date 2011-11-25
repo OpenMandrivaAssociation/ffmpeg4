@@ -58,7 +58,7 @@ BuildRequires:	yasm
 BuildRequires:	vdpau-devel
 BuildRequires:	libva-devel
 URL:		http://ffmpeg.org/
-%if %build_plf
+%if %{build_plf}
 BuildRequires:	x264-devel >= 0.115
 BuildRequires:	liblame-devel
 BuildRequires:	opencore-amr-devel
