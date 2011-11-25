@@ -20,7 +20,7 @@
 
 %define build_plf 0
 %{?_with_plf: %{expand: %%global build_plf 1}}
-%if %build_plf
+%if %{build_plf}
 %define distsuffix plf
 %if %mdvver >= 201100
 # make EVR of plf build higher than regular to allow update, needed with rpm5 mkrel
@@ -36,7 +36,7 @@ Version: 	0.8.7
 Release: 	2%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%version.tar.bz2
-%if %build_plf
+%if %{build_plf}
 License: 	GPLv3+
 %else
 License: 	GPLv2+
@@ -84,7 +84,7 @@ It can grab from a standard Video4Linux video source and convert it into
 several file formats based on DCT/motion compensation encoding. Sound is
 compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
-%if %build_plf
+%if %{build_plf}
 This package is in PLF as it violates several patents.
 %endif
 
