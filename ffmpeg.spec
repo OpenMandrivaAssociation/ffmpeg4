@@ -18,6 +18,9 @@
 %define filtermajor 2
 %define filterlibname %mklibname avfilter %{filtermajor}
 
+%define swresamplemajor 0
+%define swresamplelibname %mklibname swresample %{swresamplemajor}
+
 %define build_plf 0
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %{build_plf}
@@ -32,8 +35,8 @@
 %bcond_with	faac
 
 Name: 	 	ffmpeg
-Version: 	0.8.7
-Release: 	3%{?extrarelsuffix}
+Version: 	0.9.1
+Release: 	1%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0:		ffmpeg-0.8.7-string-format-fix.patch
@@ -47,7 +50,7 @@ BuildRequires:	texi2html
 BuildRequires:	SDL-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
-BuildRequires:	libjack-devel
+BuildRequires:	pkgconfig(jack)
 BuildRequires:	libdc1394-devel
 BuildRequires:	libschroedinger-devel
 BuildRequires:	libvpx-devel
@@ -75,7 +78,9 @@ BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
+%if 0
 Buildrequires:	pkgconfig(frei0r)
+%endif
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -175,6 +180,18 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 Install libffmpeg if you want to encode multimedia streams.
 
+%package -n	%{swresamplelibname}
+Group:          System/Libraries
+Summary:        Shared library part of ffmpeg
+
+%description -n %{swresamplelibname}
+ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
+and a generic audio and video file converter.
+
+It can grab from a standard Video4Linux video source and convert it into
+several file formats based on DCT/motion compensation encoding. Sound is
+compressed in MPEG audio layer 2 or using an AC3 compatible stream.
+
 %package -n	%{develname}
 Group:		Development/C
 Summary:	Header files for the ffmpeg codec library
@@ -185,6 +202,7 @@ Requires:	%{postproclibname} = %{EVRD}
 %if %{with swscaler}
 Requires:	%{swslibname} = %{EVRD}
 %endif
+Requires:	%{swresamplelibname} = %{EVRD}
 Requires:	%{filterlibname} = %{EVRD}
 Provides:	ffmpeg-devel = %{EVRD}
 Obsoletes:	%mklibname -d %{name} 51
@@ -249,7 +267,9 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencv \
 	--enable-libopenjpeg \
 	--enable-libxavs \
+%if 0
 	--enable-frei0r \
+%endif
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
@@ -269,7 +289,7 @@ export LDFLAGS="%{ldflags}"
 %makeinstall_std SRC_PATH=`pwd`
 
 %files
-%doc INSTALL README doc/*.html doc/*.txt doc/TODO doc/*.conf
+%doc INSTALL README doc/*.html doc/*.txt doc/*.conf
 %{_bindir}/*
 %{_mandir}/man1/*
 %{_datadir}/ffmpeg
@@ -295,6 +315,9 @@ export LDFLAGS="%{ldflags}"
 %files -n %{filterlibname}
 %{_libdir}/libavfilter.so.%{filtermajor}*
 
+%files -n %{swresamplelibname}
+%{_libdir}/libswresample.so.%{swresamplemajor}*
+
 %files -n %{develname}
 %{_includedir}/libavcodec
 %{_includedir}/libavdevice
@@ -302,12 +325,14 @@ export LDFLAGS="%{ldflags}"
 %{_includedir}/libavutil
 %{_includedir}/libpostproc
 %{_includedir}/libavfilter
+%{_includedir}/libswresample
 %{_libdir}/libavcodec.so
 %{_libdir}/libavdevice.so
 %{_libdir}/libavformat.so
 %{_libdir}/libavutil.so
 %{_libdir}/libpostproc.so
 %{_libdir}/libavfilter.so
+%{_libdir}/libswresample.so
 %if %{with swscaler}
 %{_libdir}/libswscale.so
 %{_includedir}/libswscale
@@ -319,6 +344,7 @@ export LDFLAGS="%{ldflags}"
 %{_libdir}/pkgconfig/libavutil.pc
 %{_libdir}/pkgconfig/libpostproc.pc
 %{_libdir}/pkgconfig/libavfilter.pc
+%{_libdir}/pkgconfig/libswresample.pc
 
 %files -n %{staticname}
 %{_libdir}/*.a
