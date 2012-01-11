@@ -81,6 +81,7 @@ BuildRequires:	pkgconfig(opencv)
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(libmodplug)
+BuildRequires:	pkgconfig(libass)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
@@ -280,6 +281,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopenjpeg \
 	--enable-libxavs \
 	--enable-libmodplug \
+	--enable-libass \
 %if 0
 	--enable-frei0r \
 %endif
