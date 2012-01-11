@@ -83,6 +83,7 @@ BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libass)
 BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(libcdio)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
@@ -284,6 +285,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libmodplug \
 	--enable-libass \
 	--enable-gnutls \
+	--enable-libcdio \
 %if 0
 	--enable-frei0r \
 %endif
