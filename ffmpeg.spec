@@ -80,6 +80,7 @@ BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
+BuildRequires:	pkgconfig(libmodplug)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
@@ -278,6 +279,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencv \
 	--enable-libopenjpeg \
 	--enable-libxavs \
+	--enable-libmodplug \
 %if 0
 	--enable-frei0r \
 %endif
