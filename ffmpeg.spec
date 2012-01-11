@@ -33,13 +33,15 @@
 
 %bcond_without	swscaler
 %bcond_with	faac
+%bcond_without	dlopen
 
 Name: 	 	ffmpeg
 Version: 	0.9.1
-Release: 	1%{?extrarelsuffix}
+Release: 	2%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0:		ffmpeg-0.8.7-string-format-fix.patch
+Patch1:		ffmpeg-0.9.1-dlopen-faac-mp3lame-opencore-x264.patch
 %if %{build_plf}
 License: 	GPLv3+
 %else
@@ -80,6 +82,14 @@ BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
+%endif
+
+%if %{with dlopen}
+Suggests:	libfaac.so.0%{_ext}
+Suggests:	libx264.so.120%{_ext}
+Suggests:	libopencore-amrnb.so.0%{_ext}
+Suggests:	libopencore-amrwb.so.0%{_ext}
+Suggests:	libmp3lame.so.0%{_ext}
 %endif
 
 %description
@@ -237,6 +247,7 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 %prep
 %setup -q
 %patch0 -p1 -b .str_fmt~
+%patch1 -p1 -b .dlopen~
 
 %build
 export CFLAGS="%{optflags} -fPIC"
@@ -278,6 +289,15 @@ export LDFLAGS="%{ldflags}"
 	--enable-libx264 \
 %else
 	--disable-decoder=aac --disable-encoder=aac \
+%if %{with dlopen}
+	--enable-libmp3lame-dlopen \
+	--enable-libopencore-amrnb-dlopen \
+	--enable-libopencore-amrwb-dlopen \
+	--enable-libx264-dlopen \
+%if !%{with faac}
+	--enable-libfaac-dlopen \
+%endif
+%endif
 %endif
 %if %{with faac}
 	--enable-nonfree --enable-libfaac
