@@ -85,6 +85,7 @@ BuildRequires:	pkgconfig(libass)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libcdio)
 BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(dirac)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
@@ -288,6 +289,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-gnutls \
 	--enable-libcdio \
 	--enable-libpulse \
+	--enable-libdirac \
 %if 0
 	--enable-frei0r \
 %endif
