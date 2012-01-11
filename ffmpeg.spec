@@ -41,7 +41,7 @@ Release: 	2%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0:		ffmpeg-0.8.7-string-format-fix.patch
-Patch1:		ffmpeg-0.9.1-dlopen-faac-mp3lame-opencore-x264.patch
+Patch1:		ffmpeg-0.9.1-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 %if %{build_plf}
 License: 	GPLv3+
 %else
@@ -97,6 +97,7 @@ Suggests:	libx264.so.120%{_ext}
 Suggests:	libopencore-amrnb.so.0%{_ext}
 Suggests:	libopencore-amrwb.so.0%{_ext}
 Suggests:	libmp3lame.so.0%{_ext}
+Suggests:	libxvidcore.so.4%{_ext}
 %endif
 
 %description
@@ -308,6 +309,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencore-amrnb-dlopen \
 	--enable-libopencore-amrwb-dlopen \
 	--enable-libx264-dlopen \
+	--enable-libxvid-dlopen \
 %if !%{with faac}
 	--enable-libfaac-dlopen \
 %endif
