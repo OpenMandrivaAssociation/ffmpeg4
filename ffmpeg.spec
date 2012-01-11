@@ -82,6 +82,7 @@ BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libass)
+BuildRequires:	pkgconfig(gnutls)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
@@ -282,6 +283,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libxavs \
 	--enable-libmodplug \
 	--enable-libass \
+	--enable-gnutls \
 %if 0
 	--enable-frei0r \
 %endif
