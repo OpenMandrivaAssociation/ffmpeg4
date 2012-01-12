@@ -37,7 +37,7 @@
 
 Name: 	 	ffmpeg
 Version: 	0.9.1
-Release: 	2%{?extrarelsuffix}
+Release: 	3%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0:		ffmpeg-0.8.7-string-format-fix.patch
@@ -91,15 +91,6 @@ BuildRequires:	pkgconfig(libv4l2)
 Buildrequires:	pkgconfig(frei0r)
 %endif
 
-%if %{with dlopen}
-Suggests:	libfaac.so.0%{_ext}
-Suggests:	libx264.so.120%{_ext}
-Suggests:	libopencore-amrnb.so.0%{_ext}
-Suggests:	libopencore-amrwb.so.0%{_ext}
-Suggests:	libmp3lame.so.0%{_ext}
-Suggests:	libxvidcore.so.4%{_ext}
-%endif
-
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
@@ -115,6 +106,14 @@ This package is in PLF as it violates several patents.
 %package -n	%{libname}
 Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+%if %{with dlopen}
+Suggests:	libfaac.so.0%{_ext}
+Suggests:	libx264.so.120%{_ext}
+Suggests:	libopencore-amrnb.so.0%{_ext}
+Suggests:	libopencore-amrwb.so.0%{_ext}
+Suggests:	libmp3lame.so.0%{_ext}
+Suggests:	libxvidcore.so.4%{_ext}
+%endif
 
 %description -n	%{libname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
