@@ -37,7 +37,7 @@
 
 Name: 	 	ffmpeg
 Version: 	0.9.1
-Release: 	3%{?extrarelsuffix}
+Release: 	4%{?extrarelsuffix}
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch0:		ffmpeg-0.8.7-string-format-fix.patch
