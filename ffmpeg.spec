@@ -107,6 +107,11 @@ This package is in PLF as it violates several patents.
 Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
 %if %{with dlopen}
+%if "%{_lib}" == "lib64"
+%global	_ext	()(64bit)
+%else
+%global	_ext	%{nil}
+%endif
 Suggests:	libfaac.so.0%{_ext}
 Suggests:	libx264.so.120%{_ext}
 Suggests:	libopencore-amrnb.so.0%{_ext}
