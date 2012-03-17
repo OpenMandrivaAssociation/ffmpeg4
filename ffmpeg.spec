@@ -36,11 +36,10 @@
 %bcond_without	dlopen
 
 Name: 	 	ffmpeg
-Version: 	0.10
-Release: 	3
+Version: 	0.10.2
+Release: 	1
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch0:		ffmpeg-0.8.7-string-format-fix.patch
 Patch1:		ffmpeg-0.10-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 %if %{build_plf}
 License: 	GPLv3+
@@ -258,7 +257,6 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -q
-%patch0 -p1 -b .str_fmt~
 %patch1 -p1 -b .dlopen~
 
 %build
