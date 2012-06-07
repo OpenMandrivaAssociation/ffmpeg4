@@ -37,7 +37,7 @@
 
 Name: 	 	ffmpeg
 Version: 	0.10.3
-Release: 	1
+Release: 	2
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch1:		ffmpeg-0.10-dlopen-faac-mp3lame-opencore-x264-xvid.patch
