@@ -1,11 +1,11 @@
-%define svn 22960
-%define major	53
+%define svn %nil
+%define major	54
 
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 %define staticname %mklibname %{name} -s -d
 
-%define avfmajor 53
+%define avfmajor 54
 %define avflibname %mklibname avformats %{avfmajor}
 %define postprocmajor 52
 %define postproclibname %mklibname postproc %{postprocmajor}
@@ -36,11 +36,11 @@
 %bcond_without	dlopen
 
 Name: 	 	ffmpeg
-Version: 	0.10.3
+Version: 	0.11.1
 Release: 	2
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-0.10-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch1:		ffmpeg-0.11-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 %if %{build_plf}
 License: 	GPLv3+
 %else
@@ -84,7 +84,6 @@ BuildRequires:	pkgconfig(libass)
 BuildRequires:	pkgconfig(gnutls) >= 3.0
 BuildRequires:	pkgconfig(libcdio)
 BuildRequires:	pkgconfig(libpulse)
-BuildRequires:	pkgconfig(dirac)
 BuildRequires:	pkgconfig(libv4l2)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
@@ -293,7 +292,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-gnutls \
 	--enable-libcdio \
 	--enable-libpulse \
-	--enable-libdirac \
 	--enable-libv4l2 \
 %if 0
 	--enable-frei0r \
