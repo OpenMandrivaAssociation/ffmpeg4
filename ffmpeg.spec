@@ -36,8 +36,8 @@
 %bcond_without	dlopen
 
 Name: 	 	ffmpeg
-Version: 	0.11.1
-Release: 	4
+Version: 	0.11.2
+Release: 	1
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch1:		ffmpeg-0.11-dlopen-faac-mp3lame-opencore-x264-xvid.patch
