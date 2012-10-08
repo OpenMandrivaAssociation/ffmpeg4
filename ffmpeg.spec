@@ -15,7 +15,7 @@
 %define swsmajor 2
 %define swslibname %mklibname swscaler %{swsmajor}
 
-%define filtermajor 2
+%define filtermajor 3
 %define filterlibname %mklibname avfilter %{filtermajor}
 
 %define swresamplemajor 0
@@ -36,11 +36,11 @@
 %bcond_without	dlopen
 
 Name: 	 	ffmpeg
-Version: 	0.11.2
-Release: 	2
+Version: 	1.0
+Release: 	1
 Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-0.11-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch1:		ffmpeg-1.0-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 %if %{build_plf}
 License: 	GPLv3+
 %else
