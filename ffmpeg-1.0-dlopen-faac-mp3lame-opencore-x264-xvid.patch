@@ -81,9 +81,9 @@
 +enabled libmp3lame_dlopen && enable libmp3lame && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
  enabled libnut     && require  libnut libnut.h nut_demuxer_init -lnut
  enabled libopencore_amrnb  && require libopencore_amrnb opencore-amrnb/interf_dec.h Decoder_Interface_init -lopencore-amrnb
-+enabled libopencore_amrnb_dlopen && enable_libopencore_amrnb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
++enabled libopencore_amrnb_dlopen && enable libopencore_amrnb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
  enabled libopencore_amrwb  && require libopencore_amrwb opencore-amrwb/dec_if.h D_IF_init -lopencore-amrwb
-+enabled libopencore_amrwb_dlopen && enable_libopencore_amrwb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
++enabled libopencore_amrwb_dlopen && enable libopencore_amrwb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
  enabled libopencv  && require_pkg_config opencv opencv/cxcore.h cvCreateImageHeader
  enabled libopenjpeg && require libopenjpeg openjpeg.h opj_version -lopenjpeg
  enabled libopus    && require_pkg_config opus opus_multistream.h opus_multistream_decoder_create

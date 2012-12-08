@@ -21,34 +21,40 @@
 %define swresamplemajor 0
 %define swresamplelibname %mklibname swresample %{swresamplemajor}
 
+#####################
+# Hardcode PLF build
 %define build_plf 0
+#####################
+
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %{build_plf}
 %define distsuffix plf
-%if %mdvver >= 201100
 # make EVR of plf build higher than regular to allow update, needed with rpm5 mkrel
 %define extrarelsuffix plf
-%endif
+%bcond_with	dlopen
+%else
+%bcond_without	dlopen
 %endif
 
 %bcond_without	swscaler
 %bcond_with	faac
-%bcond_without	dlopen
 
-Name: 	 	ffmpeg
-Version: 	1.0
-Release: 	1
-Summary: 	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-Source0: 	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
+Name:		ffmpeg
+Version:	1.0.1
+Release:	2%{?extrarelsuffix}
+Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
+URL:		http://ffmpeg.org/
+Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch1:		ffmpeg-1.0-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch2:		ffmpeg-1.0.1-time.h.patch
 %if %{build_plf}
-License: 	GPLv3+
+License:	GPLv3+
 %else
-License: 	GPLv2+
+License:	GPLv2+
 %endif
 Group:		Video
 BuildRequires:	texi2html
-BuildRequires:	SDL-devel
+BuildRequires:	pkgconfig(sdl)
 BuildRequires:	libtheora-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig(jack)
@@ -56,17 +62,19 @@ BuildRequires:	libdc1394-devel
 BuildRequires:	libschroedinger-devel
 BuildRequires:	libvpx-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	libpng-devel
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	bzip2-devel
 BuildRequires:	rtmp-devel
 BuildRequires:	yasm
 BuildRequires:	vdpau-devel
 BuildRequires:	libva-devel
-URL:		http://ffmpeg.org/
 %if %{build_plf}
 BuildRequires:	x264-devel >= 0.118
 BuildRequires:	liblame-devel
 BuildRequires:	opencore-amr-devel
+BuildRequires:	libvo-aacenc-devel
+BuildRequires:	libvo-amrwbenc-devel
+BuildRequires:	xvid-devel
 %endif
 %if %{with faac}
 BuildRequires:	libfaac-devel
@@ -98,7 +106,7 @@ several file formats based on DCT/motion compensation encoding. Sound is
 compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 %if %{build_plf}
-This package is in PLF as it violates several patents.
+This package is in Restricted as it violates several patents.
 %endif
 
 %package -n	%{libname}
@@ -145,8 +153,8 @@ Install libffmpeg if you want to encode multimedia streams.
 
 
 %package -n	%{avflibname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
 
 %description -n %{avflibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -159,8 +167,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{avulibname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
 
 %description -n %{avulibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -173,8 +181,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{swslibname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
 
 %description -n %{swslibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -187,8 +195,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{filterlibname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
 
 %description -n	%{filterlibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -201,8 +209,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{swresamplelibname}
-Group:          System/Libraries
-Summary:        Shared library part of ffmpeg
+Group:		System/Libraries
+Summary:	Shared library part of ffmpeg
 
 %description -n %{swresamplelibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -256,10 +264,13 @@ Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -q
+%if %{with dlopen}
 %patch1 -p1 -b .dlopen~
+%endif
+%patch2 -p1 -b .timeh~
 
 %build
-export CFLAGS="%{optflags} -fPIC -I%_includedir/openjpeg-1.5/"
+export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
 export LDFLAGS="%{ldflags}"
 
 ./configure --prefix=%{_prefix} \
@@ -302,6 +313,9 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencore-amrwb \
 	--enable-version3 \
 	--enable-libx264 \
+	--enable-libvo-aacenc \
+	--enable-libvo-amrwbenc \
+	--enable-libxvid \
 %else
 	--disable-decoder=aac --disable-encoder=aac \
 %if %{with dlopen}
