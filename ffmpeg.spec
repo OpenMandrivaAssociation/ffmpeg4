@@ -39,38 +39,53 @@
 %bcond_without	swscaler
 %bcond_with	faac
 
+Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	1.0.1
 Release:	2%{?extrarelsuffix}
-Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
-URL:		http://ffmpeg.org/
-Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-1.0-dlopen-faac-mp3lame-opencore-x264-xvid.patch
-Patch2:		ffmpeg-1.0.1-time.h.patch
 %if %{build_plf}
 License:	GPLv3+
 %else
 License:	GPLv2+
 %endif
 Group:		Video
+URL:		http://ffmpeg.org/
+Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
+Patch1:		ffmpeg-1.0-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch2:		ffmpeg-1.0.1-time.h.patch
+
 BuildRequires:	texi2html
-BuildRequires:	pkgconfig(sdl)
-BuildRequires:	libtheora-devel
-BuildRequires:	libvorbis-devel
-BuildRequires:	pkgconfig(jack)
-BuildRequires:	libdc1394-devel
-BuildRequires:	libschroedinger-devel
-BuildRequires:	libvpx-devel
-BuildRequires:	jpeg-devel
-BuildRequires:	pkgconfig(libpng)
-BuildRequires:	bzip2-devel
-BuildRequires:	rtmp-devel
 BuildRequires:	yasm
-BuildRequires:	vdpau-devel
-BuildRequires:	libva-devel
+BuildRequires:	bzip2-devel
+BuildRequires:	gsm-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	libnut-devel
+BuildRequires:	pkgconfig(celt)
+BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(gnutls) >= 3.0
+BuildRequires:	pkgconfig(jack)
+BuildRequires:	pkgconfig(libass)
+BuildRequires:	pkgconfig(libcdio_paranoia)
+BuildRequires:	pkgconfig(libdc1394-2)
+BuildRequires:	pkgconfig(libmodplug)
+BuildRequires:	pkgconfig(libopenjpeg1)
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(librtmp)
+BuildRequires:	pkgconfig(libva)
+BuildRequires:	pkgconfig(libv4l2)
+BuildRequires:	pkgconfig(opencv)
+BuildRequires:	pkgconfig(speex)
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(schroedinger-1.0)
+BuildRequires:	pkgconfig(theora)
+BuildRequires:	pkgconfig(vdpau)
+BuildRequires:	pkgconfig(vorbis)
+BuildRequires:	pkgconfig(vpx)
+BuildRequires:	pkgconfig(xavs)
 %if %{build_plf}
 BuildRequires:	x264-devel >= 0.118
-BuildRequires:	liblame-devel
+BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
 BuildRequires:	libvo-aacenc-devel
 BuildRequires:	libvo-amrwbenc-devel
@@ -79,20 +94,6 @@ BuildRequires:	xvid-devel
 %if %{with faac}
 BuildRequires:	libfaac-devel
 %endif
-BuildRequires:	pkgconfig(speex)
-BuildRequires:	pkgconfig(freetype2)
-BuildRequires:	libnut-devel
-BuildRequires:	gsm-devel
-BuildRequires:	pkgconfig(celt)
-BuildRequires:	pkgconfig(opencv)
-BuildRequires:	openjpeg-devel
-BuildRequires:	pkgconfig(xavs)
-BuildRequires:	pkgconfig(libmodplug)
-BuildRequires:	pkgconfig(libass)
-BuildRequires:	pkgconfig(gnutls) >= 3.0
-BuildRequires:	pkgconfig(libcdio)
-BuildRequires:	pkgconfig(libpulse)
-BuildRequires:	pkgconfig(libv4l2)
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
@@ -137,8 +138,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{postproclibname}
-Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
 Conflicts:	%mklibname ffmpeg 51
 
 %description -n	%{postproclibname}
@@ -153,8 +154,8 @@ Install libffmpeg if you want to encode multimedia streams.
 
 
 %package -n	%{avflibname}
-Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
 
 %description -n %{avflibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -167,8 +168,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{avulibname}
-Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
 
 %description -n %{avulibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -181,8 +182,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{swslibname}
-Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
 
 %description -n %{swslibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -195,8 +196,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{filterlibname}
-Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
 
 %description -n	%{filterlibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -209,8 +210,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg if you want to encode multimedia streams.
 
 %package -n	%{swresamplelibname}
-Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
 
 %description -n %{swresamplelibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -221,8 +222,8 @@ several file formats based on DCT/motion compensation encoding. Sound is
 compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
 %package -n	%{develname}
-Group:		Development/C
 Summary:	Header files for the ffmpeg codec library
+Group:		Development/C
 Requires:	%{libname} = %{EVRD}
 Requires:	%{avflibname} = %{EVRD}
 Requires:	%{avulibname} = %{EVRD}
@@ -246,8 +247,8 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 Install libffmpeg-devel if you want to compile apps with ffmpeg support.
 
 %package -n	%{staticname}
-Group:		Development/C
 Summary:	Static library for the ffmpeg codec library
+Group:		Development/C
 Requires:	%{develname} = %{EVRD}
 Provides:	ffmpeg-static-devel = %{EVRD}
 Obsoletes:	%mklibname -s -d %{name} 51
@@ -283,7 +284,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-gpl \
 	--enable-pthreads \
 	--enable-libtheora \
-	--enable-libvorbis --disable-encoder=vorbis \
+	--enable-libvorbis \
+	--disable-encoder=vorbis \
 	--enable-libvpx \
 	--enable-x11grab \
 	--enable-runtime-cpudetect \
@@ -317,7 +319,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
-	--disable-decoder=aac --disable-encoder=aac \
+	--disable-decoder=aac \
+	--disable-encoder=aac \
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
 	--enable-libopencore-amrnb-dlopen \
@@ -330,7 +333,8 @@ export LDFLAGS="%{ldflags}"
 %endif
 %endif
 %if %{with faac}
-	--enable-nonfree --enable-libfaac
+	--enable-nonfree \
+	--enable-libfaac
 %endif
 
 %make
@@ -398,3 +402,4 @@ export LDFLAGS="%{ldflags}"
 
 %files -n %{staticname}
 %{_libdir}/*.a
+
