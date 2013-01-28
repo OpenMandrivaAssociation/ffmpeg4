@@ -1,2 +1,4 @@
+removed_sources:
+  ffmpeg-1.0.1.tar.bz2: 007465d01dcd4cae973285f89f5c6c500602a3ec
 sources:
-  "ffmpeg-1.0.1.tar.bz2": 007465d01dcd4cae973285f89f5c6c500602a3ec
+  ffmpeg-1.1.tar.bz2: a006d8833dd7a03dd5b7823671995640322177fe

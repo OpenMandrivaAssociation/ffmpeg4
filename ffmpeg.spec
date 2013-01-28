@@ -10,7 +10,7 @@
 %define postprocmajor 52
 %define postproclibname %mklibname postproc %{postprocmajor}
 
-%define avumajor 51
+%define avumajor 52
 %define avulibname %mklibname avutil %{avumajor}
 %define swsmajor 2
 %define swslibname %mklibname swscaler %{swsmajor}
@@ -41,8 +41,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	1.0.1
-Release:	2%{?extrarelsuffix}
+Version:	1.1
+Release:	1%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
