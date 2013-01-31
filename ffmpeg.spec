@@ -114,17 +114,13 @@ This package is in Restricted as it violates several patents.
 Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
 %if %{with dlopen}
-%if "%{_lib}" == "lib64"
-%global	_ext	()(64bit)
-%else
-%global	_ext	%{nil}
 %endif
-Suggests:	libfaac.so.0%{_ext}
-Suggests:	libx264.so.124%{_ext}
-Suggests:	libopencore-amrnb.so.0%{_ext}
-Suggests:	libopencore-amrwb.so.0%{_ext}
-Suggests:	libmp3lame.so.0%{_ext}
-Suggests:	libxvidcore.so.4%{_ext}
+Suggests:	libfaac.so.0%{_arch_tag_suffix}
+Suggests:	libx264.so.124%{_arch_tag_suffix}
+Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
+Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
+Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
+Suggests:	libxvidcore.so.4%{_arch_tag_suffix}
 %endif
 
 %description -n	%{libname}
