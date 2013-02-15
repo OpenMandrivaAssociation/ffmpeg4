@@ -59,7 +59,7 @@ BuildRequires:	yasm
 BuildRequires:	bzip2-devel
 BuildRequires:	gsm-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	nut-devel
+BuildRequires:	libnut-devel
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls) >= 3.0
