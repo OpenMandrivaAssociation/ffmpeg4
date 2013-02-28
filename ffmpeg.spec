@@ -1,5 +1,5 @@
 %define svn %nil
-%define major	54
+%define major 54
 
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -31,18 +31,18 @@
 %define distsuffix plf
 # make EVR of plf build higher than regular to allow update, needed with rpm5 mkrel
 %define extrarelsuffix plf
-%bcond_with	dlopen
+%bcond_with dlopen
 %else
-%bcond_without	dlopen
+%bcond_without dlopen
 %endif
 
-%bcond_without	swscaler
-%bcond_with	faac
+%bcond_without swscaler
+%bcond_with faac
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	1.1
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -165,6 +165,7 @@ Install libffmpeg if you want to encode multimedia streams.
 %package -n	%{avulibname}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
+Obsoletes:	%{mklibname avutil 51} < 1.1
 
 %description -n %{avulibname}
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
