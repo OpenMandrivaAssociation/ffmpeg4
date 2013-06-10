@@ -35,8 +35,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	1.1
-Release:	3%{?extrarelsuffix}
+Version:	1.2.1
+Release:	1%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -91,6 +91,13 @@ BuildRequires:	libfaac-devel
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
+
+%track
+prog %name = {
+	url = http://ffmpeg.org/download.html
+	version = %version
+	regex = "(__VER__) was released on"
+}
 
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
@@ -207,6 +214,9 @@ This package contains the static libraries for %{name}.
 %patch1 -p1 -b .dlopen~
 %endif
 %patch2 -p1 -b .timeh~
+
+# The debuginfo generator doesn't like non-world readable files
+find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
 
 %build
 export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
