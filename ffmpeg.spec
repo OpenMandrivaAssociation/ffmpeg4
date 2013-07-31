@@ -30,8 +30,10 @@
 %bcond_without dlopen
 %endif
 
-%bcond_without swscaler
 %bcond_with faac
+# bootstrap
+%bcond_with	opencv
+%bcond_without swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
@@ -68,7 +70,9 @@ BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(librtmp)
 BuildRequires:	pkgconfig(libva)
 BuildRequires:	pkgconfig(libv4l2)
+%if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
+%endif
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(schroedinger-1.0)
@@ -246,7 +250,9 @@ export LDFLAGS="%{ldflags}"
 	--enable-libnut \
 	--enable-libgsm \
 	--enable-libcelt \
+%if %{with opencv}
 	--enable-libopencv \
+%endif
 	--enable-libopenjpeg \
 	--enable-libxavs \
 	--enable-libmodplug \
