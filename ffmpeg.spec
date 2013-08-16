@@ -32,13 +32,13 @@
 
 %bcond_with faac
 # bootstrap
-%bcond_without	opencv
+%bcond_with	opencv
 %bcond_without swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	1.2.1
-Release:	3%{?extrarelsuffix}
+Release:	4%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
