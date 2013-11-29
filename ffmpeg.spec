@@ -32,7 +32,12 @@
 
 %bcond_with faac
 # bootstrap
-%bcond_without	opencv
+# rebuild ffmpeg after MESA api upgrade
+# 1. rebuild ffmpeg with disabled opencv
+# 2. rebuild opencv with new ffmpeg
+# 3. rebuild ffmpeg again
+# 4. PROFIT
+%bcond_with	opencv
 %bcond_without swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
