@@ -1,14 +1,15 @@
---- ffmpeg-1.2/configure.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/configure	2013-06-10 15:17:41.138088197 +0200
-@@ -198,6 +198,7 @@ External library support:
+diff -urN ffmpeg-2.1/configure ffmpeg-2.1-patched/configure
+--- ffmpeg-2.1/configure	2013-10-28 11:58:04.000000000 +1100
++++ ffmpeg-2.1-patched/configure	2013-10-29 22:06:02.842558987 +1100
+@@ -203,6 +203,7 @@
    --enable-libdc1394       enable IIDC-1394 grabbing using libdc1394
                             and libraw1394 [no]
    --enable-libfaac         enable AAC encoding via libfaac [no]
 +  --enable-libfaac-dlopen  enable FAAC support via dlopen()'ed libfaac [no]
-   --enable-libfdk-aac      enable AAC encoding via libfdk-aac [no]
+   --enable-libfdk-aac      enable AAC de/encoding via libfdk-aac [no]
    --enable-libflite        enable flite (voice synthesis) support via libflite [no]
    --enable-libfreetype     enable libfreetype [no]
-@@ -206,10 +207,13 @@ External library support:
+@@ -212,10 +213,13 @@
    --enable-libilbc         enable iLBC de/encoding via libilbc [no]
    --enable-libmodplug      enable ModPlug via libmodplug [no]
    --enable-libmp3lame      enable MP3 encoding via libmp3lame [no]
@@ -22,19 +23,19 @@
    --enable-libopencv       enable video filtering via libopencv [no]
    --enable-libopenjpeg     enable JPEG 2000 de/encoding via OpenJPEG [no]
    --enable-libopus         enable Opus decoding via libopus [no]
-@@ -229,9 +233,11 @@ External library support:
-                            native implementation exists [no]
+@@ -240,9 +244,11 @@
    --enable-libvpx          enable VP8 and VP9 de/encoding via libvpx [no]
+   --enable-libwavpack      enable wavpack encoding via libwavpack [no]
    --enable-libx264         enable H.264 encoding via x264 [no]
 +  --enable-libx264-dlopen  enable H.264 encoding via dlopen()'ed x264 [no]
    --enable-libxavs         enable AVS encoding via xavs [no]
    --enable-libxvid         enable Xvid encoding via xvidcore,
                             native MPEG-4/Xvid encoder exists [no]
 +  --enable-libxvid-dlopen  enable Xvid encoding via dlopen()'ed xvidcore
+   --enable-libzmq          enable message passing via libzmq [no]
+   --enable-libzvbi         enable teletext support via libzvbi [no]
    --enable-openal          enable OpenAL 1.1 capture support [no]
-   --enable-openssl         enable openssl [no]
-   --enable-x11grab         enable X11 grabbing [no]
-@@ -1146,6 +1152,7 @@ EXTERNAL_LIBRARY_LIST="
+@@ -1174,6 +1180,7 @@
      libcelt
      libdc1394
      libfaac
@@ -42,7 +43,7 @@
      libfdk_aac
      libflite
      libfreetype
-@@ -1154,9 +1161,12 @@ EXTERNAL_LIBRARY_LIST="
+@@ -1183,9 +1190,12 @@
      libilbc
      libmodplug
      libmp3lame
@@ -55,51 +56,52 @@
      libopencv
      libopenjpeg
      libopus
-@@ -1175,8 +1185,10 @@ EXTERNAL_LIBRARY_LIST="
-     libvorbis
+@@ -1209,8 +1219,10 @@
      libvpx
+     libwavpack
      libx264
 +    libx264_dlopen
      libxavs
      libxvid
 +    libxvid_dlopen
+     libzmq
+     libzvbi
      openal
-     openssl
-     x11grab
-@@ -3897,6 +3909,7 @@ enabled libcelt    && require libcelt ce
-                         die "ERROR: libcelt must be installed and version must be >= 0.11.0."; }
- enabled libcaca    && require_pkg_config caca caca.h caca_create_canvas
- enabled libfaac    && require2 libfaac "stdint.h faac.h" faacEncGetVersion -lfaac
+@@ -4237,6 +4249,7 @@
+                                die "ERROR: libcelt must be installed and version must be >= 0.11.0."; }
+ enabled libcaca           && require_pkg_config caca caca.h caca_create_canvas
+ enabled libfaac           && require2 libfaac "stdint.h faac.h" faacEncGetVersion -lfaac
 +enabled libfaac_dlopen && enable libfaac && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
- enabled libfdk_aac && require  libfdk_aac fdk-aac/aacenc_lib.h aacEncOpen -lfdk-aac
+ enabled libfdk_aac        && require libfdk_aac fdk-aac/aacenc_lib.h aacEncOpen -lfdk-aac
  flite_libs="-lflite_cmu_time_awb -lflite_cmu_us_awb -lflite_cmu_us_kal -lflite_cmu_us_kal16 -lflite_cmu_us_rms -lflite_cmu_us_slt -lflite_usenglish -lflite_cmulex -lflite"
- enabled libflite   && require2 libflite "flite/flite.h" flite_init $flite_libs
-@@ -3907,9 +3920,12 @@ enabled libgsm     && { for gsm_hdr in "
- enabled libilbc    && require  libilbc ilbc.h WebRtcIlbcfix_InitDecode -lilbc
- enabled libmodplug && require  libmodplug libmodplug/modplug.h ModPlug_Load -lmodplug
- enabled libmp3lame && require  "libmp3lame >= 3.98.3" lame/lame.h lame_set_VBR_quality -lmp3lame
+ enabled libflite          && require2 libflite "flite/flite.h" flite_init $flite_libs
+@@ -4248,9 +4261,12 @@
+ enabled libilbc           && require libilbc ilbc.h WebRtcIlbcfix_InitDecode -lilbc
+ enabled libmodplug        && require libmodplug libmodplug/modplug.h ModPlug_Load -lmodplug
+ enabled libmp3lame        && require "libmp3lame >= 3.98.3" lame/lame.h lame_set_VBR_quality -lmp3lame
 +enabled libmp3lame_dlopen && enable libmp3lame && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
- enabled libnut     && require  libnut libnut.h nut_demuxer_init -lnut
- enabled libopencore_amrnb  && require libopencore_amrnb opencore-amrnb/interf_dec.h Decoder_Interface_init -lopencore-amrnb
+ enabled libnut            && require libnut libnut.h nut_demuxer_init -lnut
+ enabled libopencore_amrnb && require libopencore_amrnb opencore-amrnb/interf_dec.h Decoder_Interface_init -lopencore-amrnb
 +enabled libopencore_amrnb_dlopen && enable libopencore_amrnb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
- enabled libopencore_amrwb  && require libopencore_amrwb opencore-amrwb/dec_if.h D_IF_init -lopencore-amrwb
+ enabled libopencore_amrwb && require libopencore_amrwb opencore-amrwb/dec_if.h D_IF_init -lopencore-amrwb
 +enabled libopencore_amrwb_dlopen && enable libopencore_amrwb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
- enabled libopencv  && require_pkg_config opencv opencv/cxcore.h cvCreateImageHeader
- enabled libopenjpeg && { check_lib openjpeg-1.5/openjpeg.h opj_version -lopenjpeg ||
-                          check_lib openjpeg.h opj_version -lopenjpeg ||
-@@ -3942,8 +3958,10 @@ enabled libvpx     && {
- enabled libx264    && require  libx264 x264.h x264_encoder_encode -lx264 &&
-                       { check_cpp_condition x264.h "X264_BUILD >= 118" ||
-                         die "ERROR: libx264 must be installed and version must be >= 0.118."; }
+ enabled libopencv         && require_pkg_config opencv opencv/cxcore.h cvCreateImageHeader
+ enabled libopenjpeg       && { check_lib openjpeg-1.5/openjpeg.h opj_version -lopenjpeg ||
+                                check_lib openjpeg.h opj_version -lopenjpeg ||
+@@ -4288,8 +4304,10 @@
+ enabled libx264           && require libx264 x264.h x264_encoder_encode -lx264 &&
+                              { check_cpp_condition x264.h "X264_BUILD >= 118" ||
+                                die "ERROR: libx264 must be installed and version must be >= 0.118."; }
 +enabled libx264_dlopen && enable libx264 && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
- enabled libxavs    && require  libxavs xavs.h xavs_encoder_encode -lxavs
- enabled libxvid    && require  libxvid xvid.h xvid_global -lxvidcore
+ enabled libxavs           && require libxavs xavs.h xavs_encoder_encode -lxavs
+ enabled libxvid           && require libxvid xvid.h xvid_global -lxvidcore
 +enabled libxvid_dlopen && enable libxvid && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
- enabled openal     && { { for al_libs in "${OPENAL_LIBS}" "-lopenal" "-lOpenAL32"; do
-                         check_lib 'AL/al.h' alGetError "${al_libs}" && break; done } ||
-                         die "ERROR: openal not found"; } &&
---- ffmpeg-1.2/libavcodec/libfaac.c.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/libavcodec/libfaac.c	2013-06-10 15:17:41.138088197 +0200
+ enabled libzmq            && require_pkg_config libzmq zmq.h zmq_ctx_new
+ enabled libzvbi           && require libzvbi libzvbi.h vbi_decoder_new -lzvbi
+ enabled openal            && { { for al_libs in "${OPENAL_LIBS}" "-lopenal" "-lOpenAL32"; do
+diff -urN ffmpeg-2.1/libavcodec/libfaac.c ffmpeg-2.1-patched/libavcodec/libfaac.c
+--- ffmpeg-2.1/libavcodec/libfaac.c	2013-10-28 11:58:05.000000000 +1100
++++ ffmpeg-2.1-patched/libavcodec/libfaac.c	2013-10-29 22:06:02.842558987 +1100
 @@ -36,6 +36,90 @@
  /* libfaac has an encoder delay of 1024 samples */
  #define FAAC_DELAY_SAMPLES 1024
@@ -191,7 +193,7 @@
  typedef struct FaacAudioContext {
      faacEncHandle faac_handle;
      AudioFrameQueue afq;
-@@ -69,6 +153,12 @@ static av_cold int Faac_encode_init(AVCo
+@@ -66,6 +150,12 @@
      FaacAudioContext *s = avctx->priv_data;
      faacEncConfigurationPtr faac_cfg;
      unsigned long samples_input, max_bytes_output;
@@ -204,8 +206,9 @@
      int ret;
  
      /* number of channels */
---- ffmpeg-1.2/libavcodec/libmp3lame.c.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/libavcodec/libmp3lame.c	2013-06-10 15:17:41.138088197 +0200
+diff -urN ffmpeg-2.1/libavcodec/libmp3lame.c ffmpeg-2.1-patched/libavcodec/libmp3lame.c
+--- ffmpeg-2.1/libavcodec/libmp3lame.c	2013-10-28 11:58:05.000000000 +1100
++++ ffmpeg-2.1-patched/libavcodec/libmp3lame.c	2013-10-29 22:06:02.843559004 +1100
 @@ -38,6 +38,135 @@
  #include "mpegaudio.h"
  #include "mpegaudiodecheader.h"
@@ -342,7 +345,7 @@
  #define BUFFER_SIZE (7200 + 2 * MPA_FRAME_SIZE + MPA_FRAME_SIZE / 4+1000) // FIXME: Buffer size to small? Adding 1000 to make up for it.
  
  typedef struct LAMEContext {
-@@ -96,6 +225,11 @@ static av_cold int mp3lame_encode_init(A
+@@ -94,6 +223,11 @@
      LAMEContext *s = avctx->priv_data;
      int ret;
  
@@ -354,8 +357,9 @@
      s->avctx = avctx;
  
      /* initialize LAME and get defaults */
---- ffmpeg-1.2/libavcodec/libopencore-amr.c.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/libavcodec/libopencore-amr.c	2013-06-10 15:23:26.785767006 +0200
+diff -urN ffmpeg-2.1/libavcodec/libopencore-amr.c ffmpeg-2.1-patched/libavcodec/libopencore-amr.c
+--- ffmpeg-2.1/libavcodec/libopencore-amr.c	2013-10-28 11:58:05.000000000 +1100
++++ ffmpeg-2.1-patched/libavcodec/libopencore-amr.c	2013-10-29 22:06:02.843559004 +1100
 @@ -27,6 +27,108 @@
  #include "audio_frame_queue.h"
  #include "internal.h"
@@ -465,7 +469,7 @@
  static int amr_decode_fix_avctx(AVCodecContext *avctx)
  {
      const int is_amr_wb = 1 + (avctx->codec_id == AV_CODEC_ID_AMR_WB);
-@@ -47,9 +149,6 @@ static int amr_decode_fix_avctx(AVCodecC
+@@ -47,9 +149,6 @@
  
  #if CONFIG_LIBOPENCORE_AMRNB
  
@@ -475,7 +479,7 @@
  typedef struct AMRContext {
      AVClass *av_class;
      void *dec_state;
-@@ -190,6 +289,11 @@ static av_cold int amr_nb_encode_init(AV
+@@ -188,6 +287,11 @@
  {
      AMRContext *s = avctx->priv_data;
  
@@ -487,7 +491,7 @@
      if (avctx->sample_rate != 8000 && avctx->strict_std_compliance > FF_COMPLIANCE_UNOFFICIAL) {
          av_log(avctx, AV_LOG_ERROR, "Only 8000Hz sample rate supported\n");
          return AVERROR(ENOSYS);
-@@ -309,10 +413,6 @@ AVCodec ff_libopencore_amrnb_encoder = {
+@@ -299,10 +403,6 @@
  
  /* -----------AMR wideband ------------*/
  #if CONFIG_LIBOPENCORE_AMRWB_DECODER
@@ -498,7 +502,7 @@
  typedef struct AMRWBContext {
      void  *state;
  } AMRWBContext;
-@@ -325,6 +425,11 @@ static av_cold int amr_wb_decode_init(AV
+@@ -315,6 +415,11 @@
      if ((ret = amr_decode_fix_avctx(avctx)) < 0)
          return ret;
  
@@ -510,9 +514,10 @@
      s->state        = D_IF_init();
  
      return 0;
---- ffmpeg-1.2/libavcodec/libx264.c.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/libavcodec/libx264.c	2013-06-10 15:17:41.138088197 +0200
-@@ -32,6 +32,98 @@
+diff -urN ffmpeg-2.1/libavcodec/libx264.c ffmpeg-2.1-patched/libavcodec/libx264.c
+--- ffmpeg-2.1/libavcodec/libx264.c	2013-10-28 11:58:05.000000000 +1100
++++ ffmpeg-2.1-patched/libavcodec/libx264.c	2013-10-29 22:06:02.844559020 +1100
+@@ -37,6 +37,98 @@
  #include <stdlib.h>
  #include <string.h>
  
@@ -546,7 +551,7 @@
 +#define x264_encoder_headers		dl_x264_encoder_headers
 +
 +#define	X264_BUILD_str num2str(X264_BUILD)
-+#define	X264_LIB "libx264.so." X264_BUILD_str
++#define	X264_LIB "libx264.so.120" X264_BUILD_str
 +#define	x264_encoder_open_str "x264_encoder_open_" X264_BUILD_str
 +
 +int dl_x264_bit_depth;
@@ -611,7 +616,7 @@
  typedef struct X264Context {
      AVClass        *class;
      x264_param_t    params;
-@@ -282,6 +374,11 @@ static av_cold int X264_init(AVCodecCont
+@@ -293,6 +385,11 @@
      X264Context *x4 = avctx->priv_data;
      int sw,sh;
  
@@ -623,9 +628,10 @@
      x264_param_default(&x4->params);
  
      x4->params.b_deblocking_filter         = avctx->flags & CODEC_FLAG_LOOP_FILTER;
---- ffmpeg-1.2/libavcodec/libxvid.c.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/libavcodec/libxvid.c	2013-06-10 15:17:41.138088197 +0200
-@@ -36,6 +36,57 @@
+diff -urN ffmpeg-2.1/libavcodec/libxvid.c ffmpeg-2.1-patched/libavcodec/libxvid.c
+--- ffmpeg-2.1/libavcodec/libxvid.c	2013-10-28 11:58:05.000000000 +1100
++++ ffmpeg-2.1-patched/libavcodec/libxvid.c	2013-10-29 22:23:52.549853645 +1100
+@@ -36,6 +36,61 @@
  #include "libxvid.h"
  #include "mpegvideo.h"
  
@@ -636,12 +642,14 @@
 +static int (*dl_xvid_global) (void *handle, int opt, void *param1, void *param2);
 +static int (*dl_xvid_plugin_single) (void *handle, int opt, void *param1, void *param2);
 +static int (*dl_xvid_plugin_lumimasking) (void *handle, int opt, void *param1, void *param2);
++static int (*dl_xvid_plugin_ssim) (void *handle, int opt, void *param1, void *param2);
 +static int (*dl_xvid_plugin_2pass2) (void *handle, int opt, void *param1, void *param2);
 +
 +#define	xvid_encore		dl_xvid_encore
 +#define	xvid_global		dl_xvid_global
 +#define	xvid_plugin_single	dl_xvid_plugin_single
 +#define xvid_plugin_lumimasking	dl_xvid_plugin_lumimasking
++#define xvid_plugin_ssim	dl_xvid_plugin_ssim
 +#define xvid_plugin_2pass2	dl_xvid_plugin_2pass2
 +#define	XVID_LIB		"libxvidcore.so.4"
 +
@@ -667,6 +675,8 @@
 +
 +  dl_sym(xvid_plugin_lumimasking, (int (*) (void *handle, int opt, void *param1, void *param2)), libxvid);
 +
++  dl_sym(xvid_plugin_ssim, (int (*) (void *handle, int opt, void *param1, void *param2)), libxvid);
++
 +  dl_sym(xvid_plugin_2pass2, (int (*) (void *handle, int opt, void *param1, void *param2)), libxvid);
 +
 +  return 0;
@@ -683,9 +693,9 @@
  /**
   * Buffer management macros.
   */
-@@ -359,6 +410,11 @@ static av_cold int xvid_encode_init(AVCo
-     xvid_enc_create_t xvid_enc_create = { 0 };
-     xvid_enc_plugin_t plugins[7];
+@@ -366,6 +421,11 @@
+     xvid_enc_create_t         xvid_enc_create = { 0 };
+     xvid_enc_plugin_t         plugins[4];
  
 +#ifdef CONFIG_LIBXVID_DLOPEN
 +    if (loadLibXVID(avctx))
@@ -695,9 +705,10 @@
      x->twopassfd = -1;
  
      /* Bring in VOP flags from ffmpeg command-line */
---- ffmpeg-1.2/libavcodec/libxvid_rc.c.dlopen~	2013-03-15 01:09:16.000000000 +0100
-+++ ffmpeg-1.2/libavcodec/libxvid_rc.c	2013-06-10 15:17:41.138088197 +0200
-@@ -28,6 +28,41 @@
+diff -urN ffmpeg-2.1/libavcodec/libxvid_rc.c ffmpeg-2.1-patched/libavcodec/libxvid_rc.c
+--- ffmpeg-2.1/libavcodec/libxvid_rc.c	2013-10-28 11:58:05.000000000 +1100
++++ ffmpeg-2.1-patched/libavcodec/libxvid_rc.c	2013-10-29 22:06:02.844559020 +1100
+@@ -29,6 +29,41 @@
  #include "libxvid.h"
  #include "mpegvideo.h"
  
@@ -739,7 +750,7 @@
  #undef NDEBUG
  #include <assert.h>
  
-@@ -37,6 +72,11 @@ int ff_xvid_rate_control_init(MpegEncCon
+@@ -39,6 +74,11 @@
      xvid_plg_create_t xvid_plg_create = { 0 };
      xvid_plugin_2pass2_t xvid_2pass2  = { 0 };
  
@@ -751,8 +762,9 @@
      fd=av_tempfile("xvidrc.", &tmp_name, 0, s->avctx);
      if (fd == -1) {
          av_log(NULL, AV_LOG_ERROR, "Can't create temporary pass2 file.\n");
---- ffmpeg-1.2/localinc/dlopen.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/dlopen.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/dlopen.h ffmpeg-2.1-patched/localinc/dlopen.h
+--- ffmpeg-2.1/localinc/dlopen.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/dlopen.h	2013-10-29 22:06:02.845559037 +1100
 @@ -0,0 +1,12 @@
 +#ifndef LOCALINC_DLOPEN_H
 +#define LOCALINC_DLOPEN_H
@@ -766,8 +778,9 @@
 +		goto error;
 +
 +#endif
---- ffmpeg-1.2/localinc/faaccfg.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/faaccfg.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/faaccfg.h ffmpeg-2.1-patched/localinc/faaccfg.h
+--- ffmpeg-2.1/localinc/faaccfg.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/faaccfg.h	2013-10-29 22:06:02.845559037 +1100
 @@ -0,0 +1,122 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -891,8 +904,9 @@
 +#pragma pack(pop)
 +
 +#endif /* _FAACCFG_H_ */
---- ffmpeg-1.2/localinc/faac.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/faac.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/faac.h ffmpeg-2.1-patched/localinc/faac.h
+--- ffmpeg-2.1/localinc/faac.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/faac.h	2013-10-29 22:06:02.845559037 +1100
 @@ -0,0 +1,99 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -993,8 +1007,9 @@
 +#endif /* __cplusplus */
 +
 +#endif /* _FAAC_H_ */
---- ffmpeg-1.2/localinc/lame/lame.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/lame/lame.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/lame/lame.h ffmpeg-2.1-patched/localinc/lame/lame.h
+--- ffmpeg-2.1/localinc/lame/lame.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/lame/lame.h	2013-10-29 22:06:02.847559070 +1100
 @@ -0,0 +1,1243 @@
 +/*
 + *	Interface to MP3 LAME encoding engine
@@ -2239,8 +2254,9 @@
 +#endif
 +#endif /* LAME_LAME_H */
 +
---- ffmpeg-1.2/localinc/neaacdec.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/neaacdec.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/neaacdec.h ffmpeg-2.1-patched/localinc/neaacdec.h
+--- ffmpeg-2.1/localinc/neaacdec.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/neaacdec.h	2013-10-29 22:06:02.847559070 +1100
 @@ -0,0 +1,258 @@
 +/*
 +** FAAD2 - Freeware Advanced Audio (AAC) Decoder including SBR decoding
@@ -2500,8 +2516,9 @@
 +#endif /* __cplusplus */
 +
 +#endif
---- ffmpeg-1.2/localinc/opencore-amrnb/interf_dec.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/opencore-amrnb/interf_dec.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/opencore-amrnb/interf_dec.h ffmpeg-2.1-patched/localinc/opencore-amrnb/interf_dec.h
+--- ffmpeg-2.1/localinc/opencore-amrnb/interf_dec.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/opencore-amrnb/interf_dec.h	2013-10-29 22:06:02.847559070 +1100
 @@ -0,0 +1,34 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -2537,8 +2554,9 @@
 +#endif
 +
 +#endif
---- ffmpeg-1.2/localinc/opencore-amrnb/interf_enc.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/opencore-amrnb/interf_enc.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/opencore-amrnb/interf_enc.h ffmpeg-2.1-patched/localinc/opencore-amrnb/interf_enc.h
+--- ffmpeg-2.1/localinc/opencore-amrnb/interf_enc.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/opencore-amrnb/interf_enc.h	2013-10-29 22:06:02.847559070 +1100
 @@ -0,0 +1,50 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -2590,8 +2608,9 @@
 +#endif
 +
 +#endif
---- ffmpeg-1.2/localinc/opencore-amrwb/dec_if.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/opencore-amrwb/dec_if.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/opencore-amrwb/dec_if.h ffmpeg-2.1-patched/localinc/opencore-amrwb/dec_if.h
+--- ffmpeg-2.1/localinc/opencore-amrwb/dec_if.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/opencore-amrwb/dec_if.h	2013-10-29 22:06:02.848559086 +1100
 @@ -0,0 +1,36 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -2629,8 +2648,9 @@
 +#endif
 +
 +#endif
---- ffmpeg-1.2/localinc/opencore-amrwb/if_rom.h.dlopen~	2013-06-10 15:17:41.139088184 +0200
-+++ ffmpeg-1.2/localinc/opencore-amrwb/if_rom.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/opencore-amrwb/if_rom.h ffmpeg-2.1-patched/localinc/opencore-amrwb/if_rom.h
+--- ffmpeg-2.1/localinc/opencore-amrwb/if_rom.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/opencore-amrwb/if_rom.h	2013-10-29 22:06:02.848559086 +1100
 @@ -0,0 +1,33 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -2665,8 +2685,9 @@
 +#endif
 +
 +#endif
---- ffmpeg-1.2/localinc/x264_config.h.dlopen~	2013-06-10 15:17:41.140088172 +0200
-+++ ffmpeg-1.2/localinc/x264_config.h	2013-06-10 15:17:41.139088184 +0200
+diff -urN ffmpeg-2.1/localinc/x264_config.h ffmpeg-2.1-patched/localinc/x264_config.h
+--- ffmpeg-2.1/localinc/x264_config.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/x264_config.h	2013-10-29 22:06:02.848559086 +1100
 @@ -0,0 +1,6 @@
 +#define X264_BIT_DEPTH     8
 +#define X264_GPL           1
@@ -2674,8 +2695,9 @@
 +#define X264_CHROMA_FORMAT 0
 +#define X264_VERSION ""
 +#define X264_POINTVER "0.129.x"
---- ffmpeg-1.2/localinc/x264.h.dlopen~	2013-06-10 15:17:41.140088172 +0200
-+++ ffmpeg-1.2/localinc/x264.h	2013-06-10 15:17:41.140088172 +0200
+diff -urN ffmpeg-2.1/localinc/x264.h ffmpeg-2.1-patched/localinc/x264.h
+--- ffmpeg-2.1/localinc/x264.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/x264.h	2013-10-29 22:06:02.849559103 +1100
 @@ -0,0 +1,908 @@
 +/*****************************************************************************
 + * x264.h: x264 public header
@@ -2720,7 +2742,7 @@
 +
 +#include "x264_config.h"
 +
-+#define X264_BUILD 129
++#define X264_BUILD 120
 +
 +/* Application developers planning to link against a shared library version of
 + * libx264 from a Microsoft Visual Studio or similar development environment
@@ -3585,8 +3607,9 @@
 +int x264_encoder_invalidate_reference( x264_t *, int64_t pts );
 +
 +#endif
---- ffmpeg-1.2/localinc/xvid.h.dlopen~	2013-06-10 15:17:41.140088172 +0200
-+++ ffmpeg-1.2/localinc/xvid.h	2013-06-10 15:17:41.140088172 +0200
+diff -urN ffmpeg-2.1/localinc/xvid.h ffmpeg-2.1-patched/localinc/xvid.h
+--- ffmpeg-2.1/localinc/xvid.h	1970-01-01 10:00:00.000000000 +1000
++++ ffmpeg-2.1-patched/localinc/xvid.h	2013-10-29 22:06:02.850559119 +1100
 @@ -0,0 +1,830 @@
 +/*****************************************************************************
 + *

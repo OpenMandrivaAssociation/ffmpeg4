@@ -1,4 +1,4 @@
-%define major		54
+%define major		55
 %define ppmajor 	52
 %define avumajor 	52
 %define swsmajor 	2
@@ -32,13 +32,18 @@
 
 %bcond_with faac
 # bootstrap
-%bcond_without	opencv
+# rebuild ffmpeg after MESA api upgrade
+# 1. rebuild ffmpeg with disabled opencv
+# 2. rebuild opencv with new ffmpeg
+# 3. rebuild ffmpeg again
+# 4. PROFIT
+%bcond_with	opencv
 %bcond_without swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	1.2.2
-Release:	1%{?extrarelsuffix}
+Version:	2.1.1
+Release:	2.1%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -47,8 +52,10 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-1.0-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch1:		ffmpeg-2.1-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
+# http://ffmpeg.org/pipermail/ffmpeg-devel/2013-October/149616.html
+Patch3:         ffmpeg-2.1-atrac3plus.patch
 
 BuildRequires:	texi2html
 BuildRequires:	yasm
@@ -218,6 +225,7 @@ This package contains the static libraries for %{name}.
 %patch1 -p1 -b .dlopen~
 %endif
 %patch2 -p1 -b .timeh~
+%patch3 -p1 -b .atrac3plus~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
@@ -355,6 +363,13 @@ export LDFLAGS="%{ldflags}"
 %{_libdir}/pkgconfig/libpostproc.pc
 %{_libdir}/pkgconfig/libavfilter.pc
 %{_libdir}/pkgconfig/libswresample.pc
+%doc %{_mandir}/man3/libavcodec.3*
+%doc %{_mandir}/man3/libavdevice.3*
+%doc %{_mandir}/man3/libavfilter.3*
+%doc %{_mandir}/man3/libavformat.3*
+%doc %{_mandir}/man3/libavutil.3*
+%doc %{_mandir}/man3/libswresample.3*
+%doc %{_mandir}/man3/libswscale.3*
 
 %files -n %{statname}
 %{_libdir}/*.a
