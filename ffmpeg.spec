@@ -42,8 +42,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.1.1
-Release:	2%{?extrarelsuffix}
+Version:	2.1.2
+Release:	1%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -56,6 +56,7 @@ Patch1:		ffmpeg-2.1-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 # http://ffmpeg.org/pipermail/ffmpeg-devel/2013-October/149616.html
 Patch3:         ffmpeg-2.1-atrac3plus.patch
+Patch4:		ffmpeg-2.1.2-compile.patch
 
 BuildRequires:	texi2html
 BuildRequires:	yasm
@@ -226,6 +227,7 @@ This package contains the static libraries for %{name}.
 %endif
 %patch2 -p1 -b .timeh~
 %patch3 -p1 -b .atrac3plus~
+%patch4 -p1 -b .compile~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
@@ -306,10 +308,11 @@ export LDFLAGS="%{ldflags}"
 %makeinstall_std SRC_PATH=`pwd`
 
 %files
-%doc INSTALL README doc/*.html doc/*.txt doc/*.conf
+%doc README doc/*.html doc/*.txt doc/*.conf
 %{_bindir}/*
 %{_mandir}/man1/*
 %{_datadir}/ffmpeg
+%exclude %{_datadir}/ffmpeg/examples
 
 %files -n %{libavcodec}
 %{_libdir}/libavcodec.so.%{major}*
@@ -371,6 +374,7 @@ export LDFLAGS="%{ldflags}"
 %doc %{_mandir}/man3/libavutil.3*
 %doc %{_mandir}/man3/libswresample.3*
 %doc %{_mandir}/man3/libswscale.3*
+%{_datadir}/ffmpeg/examples
 
 %files -n %{statname}
 %{_libdir}/*.a
