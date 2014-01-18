@@ -42,7 +42,7 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.1.2
+Version:	2.1.3
 Release:	1%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
@@ -56,7 +56,6 @@ Patch1:		ffmpeg-2.1-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 # http://ffmpeg.org/pipermail/ffmpeg-devel/2013-October/149616.html
 Patch3:         ffmpeg-2.1-atrac3plus.patch
-Patch4:		ffmpeg-2.1.2-compile.patch
 
 BuildRequires:	texi2html
 BuildRequires:	yasm
@@ -227,7 +226,6 @@ This package contains the static libraries for %{name}.
 %endif
 %patch2 -p1 -b .timeh~
 %patch3 -p1 -b .atrac3plus~
-%patch4 -p1 -b .compile~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
