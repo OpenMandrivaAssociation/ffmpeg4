@@ -37,7 +37,7 @@
 %endif
 
 %bcond_without	swscaler
-%bcond_with	faac
+%bcond_without	faac
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
@@ -114,7 +114,6 @@ This package is in Restricted as it violates several patents.
 Group:		System/Libraries
 Summary:	Shared library part of ffmpeg
 %if %{with dlopen}
-%endif
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 Suggests:	libx264.so.124%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
@@ -315,8 +314,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
-	--disable-decoder=aac \
-	--disable-encoder=aac \
+	--enable-decoder=aac \
+	--enable-encoder=aac \
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
 	--enable-libopencore-amrnb-dlopen \
