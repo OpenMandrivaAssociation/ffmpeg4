@@ -31,7 +31,7 @@
 %endif
 
 %bcond_without	swscaler
-%bcond_without	faac
+%bcond_with	faac
 # bootstrap
 # rebuild ffmpeg after MESA api upgrade
 # 1. rebuild ffmpeg with disabled opencv
@@ -44,7 +44,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.1.3
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
