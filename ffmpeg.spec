@@ -103,6 +103,7 @@ BuildRequires:	libfaac-devel
 %if 0
 Buildrequires:	pkgconfig(frei0r)
 %endif
+BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 
 %track
 prog %name = {
