@@ -245,6 +245,7 @@ export LDFLAGS="%{ldflags}"
 	--disable-stripping \
 	--enable-postproc \
 	--enable-gpl \
+	--enable-lto \
 	--enable-pthreads \
 	--enable-libtheora \
 	--enable-libvorbis \
