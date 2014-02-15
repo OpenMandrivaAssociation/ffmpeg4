@@ -284,8 +284,14 @@ export LDFLAGS="%{ldflags}"
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
+%if "%{disttag}" == "mdk"
 	--enable-decoder=aac \
 	--enable-encoder=aac \
+	--enable-nonfree
+%else
+	--disable-decoder=aac \
+	--disable-encoder=aac \
+%endif
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
 	--enable-libopencore-amrnb-dlopen \
