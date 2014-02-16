@@ -288,7 +288,7 @@ export LDFLAGS="%{ldflags}"
 %if "%{disttag}" == "mdk"
 	--enable-decoder=aac \
 	--enable-encoder=aac \
-	--enable-nonfree
+	--enable-nonfree \
 %else
 	--disable-decoder=aac \
 	--disable-encoder=aac \
