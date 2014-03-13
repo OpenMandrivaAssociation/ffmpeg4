@@ -73,6 +73,7 @@ BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls) >= 3.0
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libass)
+BuildRequires:	pkgconfig(libavc1394)
 BuildRequires:	pkgconfig(libbluray)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libdc1394-2)
