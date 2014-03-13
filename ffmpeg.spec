@@ -38,7 +38,7 @@
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
 # 4. PROFIT
-%bcond_without	opencv
+%bcond_with	opencv
 %bcond_without	swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
@@ -63,32 +63,48 @@ BuildRequires:	yasm
 BuildRequires:	bzip2-devel
 BuildRequires:	gsm-devel
 BuildRequires:	jpeg-devel
+BuildRequires:	ladspa-devel
+BuildRequires:	libgme-devel
 BuildRequires:	libnut-devel
+BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
+BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls) >= 3.0
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libass)
+BuildRequires:	pkgconfig(libbluray)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libdc1394-2)
+BuildRequires:	pkgconfig(libiec61883)
+BuildRequires:	pkgconfig(libilbc)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libopenjpeg1)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(libquvi-0.9)
 BuildRequires:	pkgconfig(librtmp)
+BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libva)
 BuildRequires:	pkgconfig(libv4l2)
+BuildRequires:	pkgconfig(openal)
 %if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
 %endif
+BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(schroedinger-1.0)
+BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
+BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vdpau)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vpx)
+BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
+BuildRequires:	pkgconfig(libzmq)
+BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf}
 BuildRequires:	x264-devel >= 0.129
 BuildRequires:	lame-devel
@@ -100,10 +116,9 @@ BuildRequires:	xvid-devel
 %if %{with faac}
 BuildRequires:	libfaac-devel
 %endif
-%if 0
 Buildrequires:	pkgconfig(frei0r)
-%endif
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
+BuildRequires:	%{_lib}opencl-devel
 
 %track
 prog %name = {
@@ -245,7 +260,12 @@ export LDFLAGS="%{ldflags}"
 	--disable-stripping \
 	--enable-postproc \
 	--enable-gpl \
+%if 0
+#(proyvind): breaks linking with both bfd & gold linkers
 	--enable-lto \
+%else
+	--disable-lto \
+%endif
 	--enable-pthreads \
 	--enable-libtheora \
 	--enable-libvorbis \
@@ -272,9 +292,26 @@ export LDFLAGS="%{ldflags}"
 	--enable-libcdio \
 	--enable-libpulse \
 	--enable-libv4l2 \
+	--enable-openal \
 %if 0
-	--enable-frei0r \
+	--enable-opencl \
 %endif
+	--enable-libzmq \
+	--enable-libzvbi \
+	--enable-libwavpack \
+	--enable-libssh \
+	--enable-libsoxr \
+	--enable-libtwolame \
+	--enable-libquvi \
+	--enable-libopus \
+	--enable-libilbc \
+	--enable-libiec61883 \
+	--enable-libgme \
+	--enable-libcaca \
+	--enable-libbluray \
+	--enable-ladspa \
+	--enable-fontconfig \
+	--enable-frei0r \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
