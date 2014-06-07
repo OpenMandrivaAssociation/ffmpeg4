@@ -359,7 +359,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libfaac
 %endif
 
-%make
+%make V=1
 
 %install
 %makeinstall_std SRC_PATH=`pwd`
