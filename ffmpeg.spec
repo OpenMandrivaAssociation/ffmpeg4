@@ -102,19 +102,20 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vpx)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
+
 BuildRequires:	pkgconfig(libzmq)
 BuildRequires:	pkgconfig(zvbi-0.2)
-%if %{build_plf}
+%if %{build_plf} || "%{disttag}" == "mdk"
 BuildRequires:	x264-devel >= 0.129
-BuildRequires:	x265-devel
+BuildRequires:	pkgconfig(x265)
 BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
 BuildRequires:	libvo-aacenc-devel
 BuildRequires:	libvo-amrwbenc-devel
 BuildRequires:	xvid-devel
 %endif
-%if %{with faac}
-BuildRequires:	libfaac-devel
+%if %{with faac} || "%{disttag}" == "mdk"
+BuildRequires:	faac-devel
 %endif
 Buildrequires:	pkgconfig(frei0r)
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
@@ -143,6 +144,15 @@ This package is in Restricted as it violates several patents.
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 %if %{with dlopen}
+%if "%{disttag}" == "mdk"
+Suggests:	%{dlopen_req libfaac}
+Suggests:	%{dlopen_req libx264}
+Suggests:	%{dlopen_req libx265}
+Suggests:	%{dlopen_req libopencore-amrnb}
+Suggests:	%{dlopen_req libopencore-amrwb}
+Suggests:	%{dlopen_req libmp3lame}
+Suggests:	%{dlopen_req libxvidcore}
+%else
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 Suggests:	libx264.so.142%{_arch_tag_suffix}
 Suggests:	libx265.so.20%{_arch_tag_suffix}
@@ -150,6 +160,7 @@ Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
 Suggests:	libxvidcore.so.4%{_arch_tag_suffix}
+%endif
 %endif
 Obsoletes:	%{_lib}ffmpeg54 < 1.1-3
 
@@ -246,6 +257,11 @@ This package contains the static libraries for %{name}.
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
+# use headers from current packages in restricted repo
+%if "%{disttag}" == "mdk"
+mv localinc/dlopen.h libavcodec
+rm -r localinc
+%endif
 
 %build
 export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
@@ -260,8 +276,7 @@ export LDFLAGS="%{ldflags}"
 	--disable-stripping \
 	--enable-postproc \
 	--enable-gpl \
-%if 0
-#(proyvind): breaks linking with both bfd & gold linkers
+%if 1
 	--enable-lto \
 %else
 	--disable-lto \
