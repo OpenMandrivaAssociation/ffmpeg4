@@ -251,9 +251,7 @@ This package contains the static libraries for %{name}.
 
 %prep
 %setup -q
-%if %{with dlopen}
 %patch1 -p1 -b .dlopen~
-%endif
 %patch2 -p1 -b .timeh~
 %patch3 -p1 -b .flto_inline_asm~
 
