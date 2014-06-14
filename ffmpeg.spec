@@ -107,7 +107,8 @@ BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(libzmq)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf} || "%{disttag}" == "mdk"
-BuildRequires:	x264-devel >= 0.129
+BuildRequires:	x264-devel >= 0.142
+BuildConflicts:	x264-devel < 0.142
 BuildRequires:	pkgconfig(x265)
 BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
