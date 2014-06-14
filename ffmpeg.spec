@@ -276,7 +276,12 @@ export LDFLAGS="%{ldflags}"
 	--disable-stripping \
 	--enable-postproc \
 	--enable-gpl \
+%if "%{distepoch}" >= "2015.0"
+# needs gcc bug fixed...
 	--enable-lto \
+%else
+	--disable-lto \
+%endif
 	--enable-pthreads \
 	--enable-libtheora \
 	--enable-libvorbis \
