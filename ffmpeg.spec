@@ -146,13 +146,13 @@ Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 %if %{with dlopen}
 %if "%{disttag}" == "mdk"
-Suggests:	%{dlopen_req libfaac}
-Suggests:	%{dlopen_req libx264}
-Suggests:	%{dlopen_req libx265}
-Suggests:	%{dlopen_req libopencore-amrnb}
-Suggests:	%{dlopen_req libopencore-amrwb}
-Suggests:	%{dlopen_req libmp3lame}
-Suggests:	%{dlopen_req libxvidcore}
+Suggests:	%{dlopen_req faac}
+Suggests:	%{dlopen_req x264}
+Suggests:	%{dlopen_req x265}
+Suggests:	%{dlopen_req opencore-amrnb}
+Suggests:	%{dlopen_req opencore-amrwb}
+Suggests:	%{dlopen_req mp3lame}
+Suggests:	%{dlopen_req xvidcore}
 %else
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 Suggests:	libx264.so.142%{_arch_tag_suffix}
