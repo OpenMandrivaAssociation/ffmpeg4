@@ -91,6 +91,7 @@ BuildRequires:	pkgconfig(openal)
 %if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
 %endif
+BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
@@ -103,7 +104,6 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vpx)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
-
 BuildRequires:	pkgconfig(libzmq)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf} || "%{disttag}" == "mdk"
@@ -275,6 +275,7 @@ export LDFLAGS="%{ldflags}"
 	--shlibdir=%{_libdir} \
 	--incdir=%{_includedir} \
 	--disable-stripping \
+	--enable-avresample \
 	--enable-postproc \
 	--enable-gpl \
 	--enable-lto \
@@ -305,9 +306,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-libpulse \
 	--enable-libv4l2 \
 	--enable-openal \
-%if 0
-	--enable-opencl \
-%endif
+	--enable-opengl \
+	--enable-openssl \
 	--enable-libzmq \
 	--enable-libzvbi \
 	--enable-libwavpack \
@@ -322,6 +322,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-libcaca \
 	--enable-libbluray \
 	--enable-ladspa \
+	--enable-libwebp \
+	--enable-avisynth \
 	--enable-fontconfig \
 	--enable-frei0r \
 %if %{build_plf}
@@ -357,7 +359,18 @@ export LDFLAGS="%{ldflags}"
 %endif
 %if %{with faac}
 	--enable-nonfree \
-	--enable-libfaac
+	--enable-libfaac \
+%endif
+%if 0
+	--disable-opencl \
+	--disable-libaacplus \
+	--disable-libfdk-aac \
+	--disable-libshine \
+	--disable-libstagefright-h264 \
+	--disable-libutvideo \
+	--disable-libflite \
+	--disable-libvidstab \
+	--disable-decklink
 %endif
 
 %make V=1
