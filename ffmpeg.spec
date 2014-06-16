@@ -87,6 +87,7 @@ BuildRequires:	pkgconfig(librtmp)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libva)
 BuildRequires:	pkgconfig(libv4l2)
+BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(openal)
 %if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
