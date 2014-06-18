@@ -4,6 +4,7 @@
 %define swsmajor 	2
 %define filtermajor 	4
 %define swrmajor 	0
+%define	resamplemajor	1
 %define libavcodec	%mklibname avcodec %{major}
 %define	libavdevice	%mklibname avdevice %{major}
 %define libavfilter	%mklibname avfilter %{filtermajor}
@@ -12,6 +13,7 @@
 %define libpostproc	%mklibname postproc %{ppmajor}
 %define libswresample	%mklibname swresample %{swrmajor}
 %define libswscale	%mklibname swscaler %{swsmajor}
+%define	libavresample	%mklibname avresample %{avresmplmajor}
 %define devname		%mklibname %{name} -d
 %define statname	%mklibname %{name} -s -d
 
@@ -89,6 +91,7 @@ BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libva)
 BuildRequires:	pkgconfig(libv4l2)
 BuildRequires:	pkgconfig(libwebp)
+BuildRequires:	pkgconfig(libzmq)
 BuildRequires:	pkgconfig(openal)
 %if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
@@ -98,15 +101,16 @@ BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(schroedinger-1.0)
+BuildRequires:	pkgconfig(shine)
 BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vdpau)
+BuildRequires:	pkgconfig(vidstab)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vpx)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
-BuildRequires:	pkgconfig(libzmq)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf} || "%{disttag}" == "mdk"
 BuildRequires:	x264-devel >= 0.142
@@ -225,6 +229,13 @@ Group:		System/Libraries
 This package contains a shared library for %{name}.
 %endif
 
+%package -n	%{libavresample}
+Summary:	Shared library part of ffmpeg
+Group:		System/Libraries
+
+%description -n %{libavresample}
+This package contains a shared library for %{name}.
+
 %package -n	%{devname}
 Summary:	Header files for the ffmpeg codec library
 Group:		Development/C
@@ -328,6 +339,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-avisynth \
 	--enable-fontconfig \
 	--enable-frei0r \
+	--enable-libshine \
+	--enable-libvidstab \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
@@ -367,11 +380,9 @@ export LDFLAGS="%{ldflags}"
 	--disable-opencl \
 	--disable-libaacplus \
 	--disable-libfdk-aac \
-	--disable-libshine \
 	--disable-libstagefright-h264 \
 	--disable-libutvideo \
 	--disable-libflite \
-	--disable-libvidstab \
 	--disable-decklink
 %endif
 
@@ -413,10 +424,14 @@ export LDFLAGS="%{ldflags}"
 %{_libdir}/libswscale.so.%{swsmajor}*
 %endif
 
+%files -n %{libavresample}
+%{_libdir}/libavresample.so.%{resamplemajor}*
+
 %files -n %{devname}
 %{_includedir}/libavcodec
 %{_includedir}/libavdevice
 %{_includedir}/libavformat
+%{_includedir}/libavresample
 %{_includedir}/libavutil
 %{_includedir}/libpostproc
 %{_includedir}/libavfilter
@@ -424,6 +439,7 @@ export LDFLAGS="%{ldflags}"
 %{_libdir}/libavcodec.so
 %{_libdir}/libavdevice.so
 %{_libdir}/libavformat.so
+%{_libdir}/libavresample.so
 %{_libdir}/libavutil.so
 %{_libdir}/libpostproc.so
 %{_libdir}/libavfilter.so
@@ -436,6 +452,7 @@ export LDFLAGS="%{ldflags}"
 %{_libdir}/pkgconfig/libavcodec.pc
 %{_libdir}/pkgconfig/libavdevice.pc
 %{_libdir}/pkgconfig/libavformat.pc
+%{_libdir}/pkgconfig/libavresample.pc
 %{_libdir}/pkgconfig/libavutil.pc
 %{_libdir}/pkgconfig/libpostproc.pc
 %{_libdir}/pkgconfig/libavfilter.pc
