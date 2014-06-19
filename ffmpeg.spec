@@ -4,7 +4,7 @@
 %define swsmajor 	2
 %define filtermajor 	4
 %define swrmajor 	0
-%define	resamplemajor	1
+%define	avrmajor	1
 %define libavcodec	%mklibname avcodec %{major}
 %define	libavdevice	%mklibname avdevice %{major}
 %define libavfilter	%mklibname avfilter %{filtermajor}
@@ -13,7 +13,7 @@
 %define libpostproc	%mklibname postproc %{ppmajor}
 %define libswresample	%mklibname swresample %{swrmajor}
 %define libswscale	%mklibname swscaler %{swsmajor}
-%define	libavresample	%mklibname avresample %{avresmplmajor}
+%define	libavresample	%mklibname avresample %{avrmajor}
 %define devname		%mklibname %{name} -d
 %define statname	%mklibname %{name} -s -d
 
@@ -426,7 +426,7 @@ export LDFLAGS="%{ldflags}"
 %endif
 
 %files -n %{libavresample}
-%{_libdir}/libavresample.so.%{resamplemajor}*
+%{_libdir}/libavresample.so.%{avrmajor}*
 
 %files -n %{devname}
 %{_includedir}/libavcodec
