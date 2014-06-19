@@ -71,6 +71,7 @@ BuildRequires:	libnut-devel
 BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(fontconfig)
+BuildRequires:	pkgconfig(fdk-aac)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gl)
@@ -343,6 +344,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libshine \
 	--enable-libvidstab \
 	--enable-libflite \
+	--enable-libfdk-aac \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
@@ -381,7 +383,6 @@ export LDFLAGS="%{ldflags}"
 %if 0
 	--disable-opencl \
 	--disable-libaacplus \
-	--disable-libfdk-aac \
 	--disable-libstagefright-h264 \
 	--disable-libutvideo \
 	--disable-decklink
