@@ -62,6 +62,7 @@ Patch3:		ffmpeg-2.2.3-fix-build-with-flto-and-inline-assembly.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	bzip2-devel
+BuildRequires:	flite-devel
 BuildRequires:	gsm-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	ladspa-devel
@@ -341,6 +342,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-frei0r \
 	--enable-libshine \
 	--enable-libvidstab \
+	--enable-libflite \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
@@ -382,7 +384,6 @@ export LDFLAGS="%{ldflags}"
 	--disable-libfdk-aac \
 	--disable-libstagefright-h264 \
 	--disable-libutvideo \
-	--disable-libflite \
 	--disable-decklink
 %endif
 
