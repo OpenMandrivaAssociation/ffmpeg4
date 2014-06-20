@@ -40,13 +40,13 @@
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
 # 4. PROFIT
-%bcond_with	opencv
+%bcond_without	opencv
 %bcond_without	swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.2.3
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -107,6 +107,7 @@ BuildRequires:	pkgconfig(shine)
 BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
+BuildRequires:	pkgconfig(libutvideo)
 BuildRequires:	pkgconfig(vdpau)
 BuildRequires:	pkgconfig(vidstab)
 BuildRequires:	pkgconfig(vorbis)
@@ -309,6 +310,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libnut \
 	--enable-libgsm \
 	--enable-libcelt \
+	--enable-libutvideo \
 %if %{with opencv}
 	--enable-libopencv \
 %endif
@@ -384,7 +386,6 @@ export LDFLAGS="%{ldflags}"
 	--disable-opencl \
 	--disable-libaacplus \
 	--disable-libstagefright-h264 \
-	--disable-libutvideo \
 	--disable-decklink
 %endif
 
