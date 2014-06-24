@@ -104,7 +104,7 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vpx)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
-BuildRequires:	pkgconfig(libzmq)
+#BuildRequires:	pkgconfig(libzmq)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf}
 BuildRequires:	x264-devel >= 0.129
@@ -297,7 +297,7 @@ export LDFLAGS="%{ldflags}"
 %if 0
 	--enable-opencl \
 %endif
-	--enable-libzmq \
+	--disable-libzmq \
 	--enable-libzvbi \
 	--enable-libwavpack \
 	--enable-libssh \
