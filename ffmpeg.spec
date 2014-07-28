@@ -53,7 +53,7 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-2.1-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch1:		ffmpeg-2.3-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 # http://ffmpeg.org/pipermail/ffmpeg-devel/2013-October/149616.html
 Patch3:		ffmpeg-2.1-atrac3plus.patch
@@ -284,6 +284,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libcelt \
 %if %{with opencv}
 	--enable-libopencv \
+	--enable-frei0r \
 %endif
 	--enable-libopenjpeg \
 	--enable-libxavs \
@@ -312,7 +313,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-libbluray \
 	--enable-ladspa \
 	--enable-fontconfig \
-	--enable-frei0r \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
