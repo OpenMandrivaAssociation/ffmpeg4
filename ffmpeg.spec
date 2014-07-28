@@ -55,8 +55,6 @@ Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch1:		ffmpeg-2.3-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
-# http://ffmpeg.org/pipermail/ffmpeg-devel/2013-October/149616.html
-Patch3:		ffmpeg-2.1-atrac3plus.patch
 
 BuildRequires:	texi2html
 BuildRequires:	yasm
@@ -243,7 +241,6 @@ This package contains the static libraries for %{name}.
 %patch1 -p1 -b .dlopen~
 %endif
 %patch2 -p1 -b .timeh~
-%patch3 -p1 -b .atrac3plus~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
