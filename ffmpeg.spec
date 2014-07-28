@@ -91,6 +91,7 @@ BuildRequires:	pkgconfig(libv4l2)
 BuildRequires:	pkgconfig(openal)
 %if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
+BuildRequires:	pkgconfig(frei0r)
 %endif
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
@@ -117,7 +118,6 @@ BuildRequires:	xvid-devel
 %if %{with faac}
 BuildRequires:	libfaac-devel
 %endif
-BuildRequires:	pkgconfig(frei0r)
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 BuildRequires:	%{_lib}opencl-devel
 
