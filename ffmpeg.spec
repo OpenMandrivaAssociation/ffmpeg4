@@ -1,19 +1,19 @@
-%define major		55
-%define ppmajor 	52
-%define avumajor 	52
-%define swsmajor 	2
-%define filtermajor 	3
-%define swrmajor 	0
-%define libavcodec	%mklibname avcodec %{major}
-%define	libavdevice	%mklibname avdevice %{major}
-%define libavfilter	%mklibname avfilter %{filtermajor}
-%define libavformat	%mklibname avformat %{major}
-%define libavutil	%mklibname avutil %{avumajor}
-%define libpostproc	%mklibname postproc %{ppmajor}
-%define libswresample	%mklibname swresample %{swrmajor}
-%define libswscale	%mklibname swscaler %{swsmajor}
-%define devname		%mklibname %{name} -d
-%define statname	%mklibname %{name} -s -d
+%define major 55
+%define ppmajor 52
+%define avumajor 52
+%define swsmajor 2
+%define filtermajor 3
+%define swrmajor 0
+%define libavcodec %mklibname avcodec %{major}
+%define libavdevice %mklibname avdevice %{major}
+%define libavfilter %mklibname avfilter %{filtermajor}
+%define libavformat %mklibname avformat %{major}
+%define libavutil %mklibname avutil %{avumajor}
+%define libpostproc %mklibname postproc %{ppmajor}
+%define libswresample %mklibname swresample %{swrmajor}
+%define libswscale %mklibname swscaler %{swsmajor}
+%define devname %mklibname %{name} -d
+%define statname %mklibname %{name} -s -d
 
 #####################
 # Hardcode PLF build
@@ -44,7 +44,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.2.4
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -56,7 +56,7 @@ Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch1:		ffmpeg-2.1-dlopen-faac-mp3lame-opencore-x264-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 # http://ffmpeg.org/pipermail/ffmpeg-devel/2013-October/149616.html
-Patch3:         ffmpeg-2.1-atrac3plus.patch
+Patch3:		ffmpeg-2.1-atrac3plus.patch
 
 BuildRequires:	texi2html
 BuildRequires:	yasm
@@ -117,7 +117,7 @@ BuildRequires:	xvid-devel
 %if %{with faac}
 BuildRequires:	libfaac-devel
 %endif
-Buildrequires:	pkgconfig(frei0r)
+BuildRequires:	pkgconfig(frei0r)
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 BuildRequires:	%{_lib}opencl-devel
 
@@ -423,4 +423,3 @@ export LDFLAGS="%{ldflags}"
 
 %files -n %{statname}
 %{_libdir}/*.a
-
