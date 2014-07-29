@@ -37,14 +37,15 @@
 # 1. rebuild ffmpeg with disabled opencv
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
-# 4. PROFIT
-%bcond_with	opencv
+# 4. ???
+# 5. PROFIT
+%bcond_without	opencv
 %bcond_without	swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.3
-Release:	2%{?extrarelsuffix}
+Release:	3%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
