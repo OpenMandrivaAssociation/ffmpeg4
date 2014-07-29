@@ -116,7 +116,9 @@ BuildRequires:	xvid-devel
 %if %{with faac}
 BuildRequires:	libfaac-devel
 %endif
+%ifnarch %{arm} aarch64
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
+%endif
 BuildRequires:	%{_lib}opencl-devel
 
 %track
