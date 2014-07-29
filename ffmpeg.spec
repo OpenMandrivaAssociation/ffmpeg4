@@ -2,7 +2,7 @@
 %define ppmajor 52
 %define avumajor 52
 %define swsmajor 2
-%define filtermajor 3
+%define filtermajor 4
 %define swrmajor 0
 %define libavcodec %mklibname avcodec %{major}
 %define libavdevice %mklibname avdevice %{major}
