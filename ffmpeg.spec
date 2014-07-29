@@ -350,7 +350,7 @@ export LDFLAGS="%{ldflags}"
 %makeinstall_std SRC_PATH=`pwd`
 
 %files
-%doc README doc/*.html doc/*.txt doc/*.conf
+%doc doc/*.html doc/*.txt doc/*.conf
 %{_bindir}/*
 %{_mandir}/man1/*
 %{_datadir}/ffmpeg
