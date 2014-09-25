@@ -1,9 +1,9 @@
-%define major 55
-%define ppmajor 52
-%define avumajor 52
-%define swsmajor 2
-%define filtermajor 4
-%define swrmajor 0
+%define major 56
+%define ppmajor 53
+%define avumajor 54
+%define swsmajor 3
+%define filtermajor 5
+%define swrmajor 1
 %define libavcodec %mklibname avcodec %{major}
 %define libavdevice %mklibname avdevice %{major}
 %define libavfilter %mklibname avfilter %{filtermajor}
@@ -42,10 +42,10 @@
 %bcond_without	opencv
 %bcond_without	swscaler
 
-Summary:	Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
+Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.3
-Release:	3%{?extrarelsuffix}
+Version:	2.4.1
+Release:	1%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -54,7 +54,7 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-2.3-dlopen-faac-mp3lame-opencore-x264-xvid.patch
+Patch1:		ffmpeg-2.4.1-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 
 BuildRequires:	texi2html
@@ -108,6 +108,7 @@ BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf}
 BuildRequires:	x264-devel >= 0.142
+BuildRequires:	x265-devel
 BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
 BuildRequires:	libvo-aacenc-devel
@@ -147,6 +148,7 @@ Group:		System/Libraries
 %if %{with dlopen}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 Suggests:	libx264.so.142%{_arch_tag_suffix}
+Suggests:	libx265.so.32%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
@@ -240,10 +242,10 @@ This package contains the static libraries for %{name}.
 
 %prep
 %setup -q
+%patch2 -p1 -b .timeh~
 %if %{with dlopen}
 %patch1 -p1 -b .dlopen~
 %endif
-%patch2 -p1 -b .timeh~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
@@ -319,6 +321,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencore-amrwb \
 	--enable-version3 \
 	--enable-libx264 \
+	--enable-libx265 \
 	--enable-libvo-aacenc \
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
@@ -336,6 +339,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libopencore-amrnb-dlopen \
 	--enable-libopencore-amrwb-dlopen \
 	--enable-libx264-dlopen \
+	--enable-libx265-dlopen \
 	--enable-libxvid-dlopen \
 %if !%{with faac}
 	--enable-libfaac-dlopen \
