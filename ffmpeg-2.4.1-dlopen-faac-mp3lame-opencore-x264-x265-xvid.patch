@@ -1,5 +1,5 @@
 --- ffmpeg-2.4.1/configure.dlopen~	2014-09-21 23:43:13.000000000 +0200
-+++ ffmpeg-2.4.1/configure	2014-09-25 16:01:29.148815211 +0200
++++ ffmpeg-2.4.1/configure	2014-09-25 16:55:07.661578265 +0200
 @@ -209,7 +209,9 @@ External library support:
    --enable-libdc1394       enable IIDC-1394 grabbing using libdc1394
                             and libraw1394 [no]
@@ -113,7 +113,7 @@
  enabled libzvbi           && require libzvbi libzvbi.h vbi_decoder_new -lzvbi
  enabled openal            && { { for al_libs in "${OPENAL_LIBS}" "-lopenal" "-lOpenAL32"; do
 --- ffmpeg-2.4.1/libavcodec/libfaac.c.dlopen~	2014-09-14 18:07:48.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libfaac.c	2014-09-25 16:01:29.148815211 +0200
++++ ffmpeg-2.4.1/libavcodec/libfaac.c	2014-09-25 16:55:07.661578265 +0200
 @@ -36,6 +36,90 @@
  /* libfaac has an encoder delay of 1024 samples */
  #define FAAC_DELAY_SAMPLES 1024
@@ -218,8 +218,8 @@
      int ret;
  
      /* number of channels */
---- ffmpeg-2.4.1/libavcodec/libfdk-aacdec.c.dlopen~	2014-09-25 16:35:36.227223209 +0200
-+++ ffmpeg-2.4.1/libavcodec/libfdk-aacdec.c	2014-09-25 16:53:42.775639485 +0200
+--- ffmpeg-2.4.1/libavcodec/libfdk-aacdec.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
++++ ffmpeg-2.4.1/libavcodec/libfdk-aacdec.c	2014-09-25 16:55:07.661578265 +0200
 @@ -25,6 +25,57 @@
  #include "avcodec.h"
  #include "internal.h"
@@ -290,8 +290,8 @@
      s->handle = aacDecoder_Open(avctx->extradata_size ? TT_MP4_RAW : TT_MP4_ADTS, 1);
      if (!s->handle) {
          av_log(avctx, AV_LOG_ERROR, "Error opening decoder\n");
---- ffmpeg-2.4.1/libavcodec/libfdk-aacenc.c.dlopen~	2014-09-25 16:52:45.967349686 +0200
-+++ ffmpeg-2.4.1/libavcodec/libfdk-aacenc.c	2014-09-25 16:35:24.790366190 +0200
+--- ffmpeg-2.4.1/libavcodec/libfdk-aacenc.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
++++ ffmpeg-2.4.1/libavcodec/libfdk-aacenc.c	2014-09-25 16:55:07.662578252 +0200
 @@ -26,6 +26,48 @@
  #include "audio_frame_queue.h"
  #include "internal.h"
@@ -354,7 +354,7 @@
          av_log(avctx, AV_LOG_ERROR, "Unable to open the encoder: %s\n",
                 aac_get_error(err));
 --- ffmpeg-2.4.1/libavcodec/libmp3lame.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libmp3lame.c	2014-09-25 16:01:29.148815211 +0200
++++ ffmpeg-2.4.1/libavcodec/libmp3lame.c	2014-09-25 16:55:07.662578252 +0200
 @@ -38,6 +38,140 @@
  #include "mpegaudio.h"
  #include "mpegaudiodecheader.h"
@@ -509,7 +509,7 @@
  
      /* initialize LAME and get defaults */
 --- ffmpeg-2.4.1/libavcodec/libopencore-amr.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libopencore-amr.c	2014-09-25 16:01:29.149815199 +0200
++++ ffmpeg-2.4.1/libavcodec/libopencore-amr.c	2014-09-25 16:55:07.662578252 +0200
 @@ -27,6 +27,108 @@
  #include "audio_frame_queue.h"
  #include "internal.h"
@@ -665,7 +665,7 @@
  
      return 0;
 --- ffmpeg-2.4.1/libavcodec/libx264.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libx264.c	2014-09-25 16:01:29.149815199 +0200
++++ ffmpeg-2.4.1/libavcodec/libx264.c	2014-09-25 17:12:25.150607867 +0200
 @@ -39,6 +39,120 @@
  #include <stdlib.h>
  #include <string.h>
@@ -800,8 +800,8 @@
  
      x4->params.b_deblocking_filter         = avctx->flags & CODEC_FLAG_LOOP_FILTER;
 --- ffmpeg-2.4.1/libavcodec/libx265.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libx265.c	2014-09-25 16:01:29.149815199 +0200
-@@ -33,6 +33,67 @@
++++ ffmpeg-2.4.1/libavcodec/libx265.c	2014-09-25 17:10:18.570190340 +0200
+@@ -33,6 +33,70 @@
  #include "avcodec.h"
  #include "internal.h"
  
@@ -855,6 +855,9 @@
 +	dl_sym(x265_param_default_preset, (int (*)(x265_param*, const char *, const char *)), libx265);
 +	dl_sym(x265_param_parse, (int (*)(x265_param*, const char*, const char *)), libx265);
 +	dl_sym(x265_encoder_headers, (int (*)(x265_encoder*, x265_nal**, uint32_t*)), libx265);
++	dl_x265_encoder_open = (x265_encoder* (*)(x265_param *)) dlsym(libx265, x265_encoder_open_str);
++	if(err = dlerror())
++		goto error;
 +	ptr = (int*) dlsym(libx265, "x265_max_bit_depth");
 +	dl_x265_max_bit_depth = *ptr;
 +	return 0;
@@ -869,7 +872,7 @@
  typedef struct libx265Context {
      const AVClass *class;
  
-@@ -95,6 +156,11 @@ static av_cold int libx265_encode_init(A
+@@ -95,6 +159,11 @@ static av_cold int libx265_encode_init(A
          return AVERROR(ENOMEM);
      }
  
@@ -882,7 +885,7 @@
      if (!ctx->params) {
          av_log(avctx, AV_LOG_ERROR, "Could not allocate x265 param structure.\n");
 --- ffmpeg-2.4.1/libavcodec/libxvid.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libxvid.c	2014-09-25 16:01:29.149815199 +0200
++++ ffmpeg-2.4.1/libavcodec/libxvid.c	2014-09-25 16:55:07.662578252 +0200
 @@ -45,6 +45,61 @@
  #include <io.h>
  #endif
@@ -958,7 +961,7 @@
  
      /* Bring in VOP flags from ffmpeg command-line */
 --- ffmpeg-2.4.1/libavcodec/libxvid_rc.c.dlopen~	2014-09-21 23:43:14.000000000 +0200
-+++ ffmpeg-2.4.1/libavcodec/libxvid_rc.c	2014-09-25 16:01:29.149815199 +0200
++++ ffmpeg-2.4.1/libavcodec/libxvid_rc.c	2014-09-25 16:55:07.663578240 +0200
 @@ -39,6 +39,41 @@
  #include "libxvid.h"
  #include "mpegvideo.h"
@@ -1013,8 +1016,8 @@
      fd = av_tempfile("xvidrc.", &tmp_name, 0, s->avctx);
      if (fd == -1) {
          av_log(NULL, AV_LOG_ERROR, "Can't create temporary pass2 file.\n");
---- ffmpeg-2.4.1/localinc/dlopen.h.dlopen~	2014-09-25 16:01:29.149815199 +0200
-+++ ffmpeg-2.4.1/localinc/dlopen.h	2014-09-25 16:01:29.149815199 +0200
+--- ffmpeg-2.4.1/localinc/dlopen.h.dlopen~	2014-09-25 16:55:07.663578240 +0200
++++ ffmpeg-2.4.1/localinc/dlopen.h	2014-09-25 16:55:07.663578240 +0200
 @@ -0,0 +1,12 @@
 +#ifndef LOCALINC_DLOPEN_H
 +#define LOCALINC_DLOPEN_H
@@ -1028,8 +1031,8 @@
 +		goto error;
 +
 +#endif
---- ffmpeg-2.4.1/localinc/faaccfg.h.dlopen~	2014-09-25 16:01:29.149815199 +0200
-+++ ffmpeg-2.4.1/localinc/faaccfg.h	2014-09-25 16:01:29.149815199 +0200
+--- ffmpeg-2.4.1/localinc/faaccfg.h.dlopen~	2014-09-25 16:55:07.663578240 +0200
++++ ffmpeg-2.4.1/localinc/faaccfg.h	2014-09-25 16:55:07.663578240 +0200
 @@ -0,0 +1,122 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -1153,8 +1156,8 @@
 +#pragma pack(pop)
 +
 +#endif /* _FAACCFG_H_ */
---- ffmpeg-2.4.1/localinc/faac.h.dlopen~	2014-09-25 16:01:29.149815199 +0200
-+++ ffmpeg-2.4.1/localinc/faac.h	2014-09-25 16:01:29.149815199 +0200
+--- ffmpeg-2.4.1/localinc/faac.h.dlopen~	2014-09-25 16:55:07.663578240 +0200
++++ ffmpeg-2.4.1/localinc/faac.h	2014-09-25 16:55:07.663578240 +0200
 @@ -0,0 +1,99 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -1255,8 +1258,8 @@
 +#endif /* __cplusplus */
 +
 +#endif /* _FAAC_H_ */
---- ffmpeg-2.4.1/localinc/fdk-aac/aacdecoder_lib.h.dlopen~	2014-09-25 16:01:29.150815186 +0200
-+++ ffmpeg-2.4.1/localinc/fdk-aac/aacdecoder_lib.h	2014-09-25 16:01:29.150815186 +0200
+--- ffmpeg-2.4.1/localinc/fdk-aac/aacdecoder_lib.h.dlopen~	2014-09-25 16:55:07.663578240 +0200
++++ ffmpeg-2.4.1/localinc/fdk-aac/aacdecoder_lib.h	2014-09-25 16:55:07.663578240 +0200
 @@ -0,0 +1,689 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -1947,8 +1950,8 @@
 +#endif
 +
 +#endif /* AACDECODER_LIB_H */
---- ffmpeg-2.4.1/localinc/fdk-aac/aacenc_lib.h.dlopen~	2014-09-25 16:01:29.151815174 +0200
-+++ ffmpeg-2.4.1/localinc/fdk-aac/aacenc_lib.h	2014-09-25 16:01:29.151815174 +0200
+--- ffmpeg-2.4.1/localinc/fdk-aac/aacenc_lib.h.dlopen~	2014-09-25 16:55:07.664578227 +0200
++++ ffmpeg-2.4.1/localinc/fdk-aac/aacenc_lib.h	2014-09-25 16:55:07.664578227 +0200
 @@ -0,0 +1,1228 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3178,8 +3181,8 @@
 +#endif
 +
 +#endif   /* _AAC_ENC_LIB_H_ */
---- ffmpeg-2.4.1/localinc/fdk-aac/FDK_audio.h.dlopen~	2014-09-25 16:01:29.151815174 +0200
-+++ ffmpeg-2.4.1/localinc/fdk-aac/FDK_audio.h	2014-09-25 16:01:29.151815174 +0200
+--- ffmpeg-2.4.1/localinc/fdk-aac/FDK_audio.h.dlopen~	2014-09-25 16:55:07.665578215 +0200
++++ ffmpeg-2.4.1/localinc/fdk-aac/FDK_audio.h	2014-09-25 16:55:07.664578227 +0200
 @@ -0,0 +1,635 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3816,8 +3819,8 @@
 +#endif
 +
 +#endif /* FDK_AUDIO_H */
---- ffmpeg-2.4.1/localinc/fdk-aac/genericStds.h.dlopen~	2014-09-25 16:01:29.151815174 +0200
-+++ ffmpeg-2.4.1/localinc/fdk-aac/genericStds.h	2014-09-25 16:01:29.151815174 +0200
+--- ffmpeg-2.4.1/localinc/fdk-aac/genericStds.h.dlopen~	2014-09-25 16:55:07.665578215 +0200
++++ ffmpeg-2.4.1/localinc/fdk-aac/genericStds.h	2014-09-25 16:55:07.665578215 +0200
 @@ -0,0 +1,480 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -4299,8 +4302,8 @@
 +#endif
 +
 +#endif /* __GENERICSTDS_H__ */
---- ffmpeg-2.4.1/localinc/fdk-aac/machine_type.h.dlopen~	2014-09-25 16:01:29.152815161 +0200
-+++ ffmpeg-2.4.1/localinc/fdk-aac/machine_type.h	2014-09-25 16:01:29.152815161 +0200
+--- ffmpeg-2.4.1/localinc/fdk-aac/machine_type.h.dlopen~	2014-09-25 16:55:07.665578215 +0200
++++ ffmpeg-2.4.1/localinc/fdk-aac/machine_type.h	2014-09-25 16:55:07.665578215 +0200
 @@ -0,0 +1,357 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -4659,8 +4662,8 @@
 +#endif
 +
 +#endif /* __MACHINE_TYPE_H__ */
---- ffmpeg-2.4.1/localinc/lame/lame.h.dlopen~	2014-09-25 16:01:29.152815161 +0200
-+++ ffmpeg-2.4.1/localinc/lame/lame.h	2014-09-25 16:01:29.152815161 +0200
+--- ffmpeg-2.4.1/localinc/lame/lame.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/lame/lame.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,1243 @@
 +/*
 + *	Interface to MP3 LAME encoding engine
@@ -5905,8 +5908,8 @@
 +#endif
 +#endif /* LAME_LAME_H */
 +
---- ffmpeg-2.4.1/localinc/neaacdec.h.dlopen~	2014-09-25 16:01:29.152815161 +0200
-+++ ffmpeg-2.4.1/localinc/neaacdec.h	2014-09-25 16:01:29.152815161 +0200
+--- ffmpeg-2.4.1/localinc/neaacdec.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/neaacdec.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,258 @@
 +/*
 +** FAAD2 - Freeware Advanced Audio (AAC) Decoder including SBR decoding
@@ -6166,8 +6169,8 @@
 +#endif /* __cplusplus */
 +
 +#endif
---- ffmpeg-2.4.1/localinc/opencore-amrnb/interf_dec.h.dlopen~	2014-09-25 16:01:29.152815161 +0200
-+++ ffmpeg-2.4.1/localinc/opencore-amrnb/interf_dec.h	2014-09-25 16:01:29.152815161 +0200
+--- ffmpeg-2.4.1/localinc/opencore-amrnb/interf_dec.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/opencore-amrnb/interf_dec.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,34 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -6203,8 +6206,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.4.1/localinc/opencore-amrnb/interf_enc.h.dlopen~	2014-09-25 16:01:29.152815161 +0200
-+++ ffmpeg-2.4.1/localinc/opencore-amrnb/interf_enc.h	2014-09-25 16:01:29.152815161 +0200
+--- ffmpeg-2.4.1/localinc/opencore-amrnb/interf_enc.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/opencore-amrnb/interf_enc.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,50 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -6256,8 +6259,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.4.1/localinc/opencore-amrwb/dec_if.h.dlopen~	2014-09-25 16:01:29.153815149 +0200
-+++ ffmpeg-2.4.1/localinc/opencore-amrwb/dec_if.h	2014-09-25 16:01:29.153815149 +0200
+--- ffmpeg-2.4.1/localinc/opencore-amrwb/dec_if.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/opencore-amrwb/dec_if.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,36 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -6295,8 +6298,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.4.1/localinc/opencore-amrwb/if_rom.h.dlopen~	2014-09-25 16:01:29.153815149 +0200
-+++ ffmpeg-2.4.1/localinc/opencore-amrwb/if_rom.h	2014-09-25 16:01:29.153815149 +0200
+--- ffmpeg-2.4.1/localinc/opencore-amrwb/if_rom.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/opencore-amrwb/if_rom.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,33 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -6331,8 +6334,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.4.1/localinc/x264_config.h.dlopen~	2014-09-25 16:01:29.153815149 +0200
-+++ ffmpeg-2.4.1/localinc/x264_config.h	2014-09-25 16:01:29.153815149 +0200
+--- ffmpeg-2.4.1/localinc/x264_config.h.dlopen~	2014-09-25 16:55:07.666578202 +0200
++++ ffmpeg-2.4.1/localinc/x264_config.h	2014-09-25 16:55:07.666578202 +0200
 @@ -0,0 +1,6 @@
 +#define X264_BIT_DEPTH     8
 +#define X264_GPL           1
@@ -6340,8 +6343,8 @@
 +#define X264_CHROMA_FORMAT 0
 +#define X264_VERSION ""
 +#define X264_POINTVER "0.142.x"
---- ffmpeg-2.4.1/localinc/x264.h.dlopen~	2014-09-25 16:01:29.153815149 +0200
-+++ ffmpeg-2.4.1/localinc/x264.h	2014-09-25 16:01:29.153815149 +0200
+--- ffmpeg-2.4.1/localinc/x264.h.dlopen~	2014-09-25 16:55:07.667578190 +0200
++++ ffmpeg-2.4.1/localinc/x264.h	2014-09-25 16:55:07.667578190 +0200
 @@ -0,0 +1,908 @@
 +/*****************************************************************************
 + * x264.h: x264 public header
@@ -7251,8 +7254,8 @@
 +int x264_encoder_invalidate_reference( x264_t *, int64_t pts );
 +
 +#endif
---- ffmpeg-2.4.1/localinc/x265_config.h.dlopen~	2014-09-25 16:01:29.153815149 +0200
-+++ ffmpeg-2.4.1/localinc/x265_config.h	2014-09-25 16:01:29.153815149 +0200
+--- ffmpeg-2.4.1/localinc/x265_config.h.dlopen~	2014-09-25 16:55:07.667578190 +0200
++++ ffmpeg-2.4.1/localinc/x265_config.h	2014-09-25 16:55:07.667578190 +0200
 @@ -0,0 +1,34 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
@@ -7288,8 +7291,8 @@
 +#define X265_BUILD 32
 +
 +#endif
---- ffmpeg-2.4.1/localinc/x265.h.dlopen~	2014-09-25 16:01:29.154815136 +0200
-+++ ffmpeg-2.4.1/localinc/x265.h	2014-09-25 16:01:29.154815136 +0200
+--- ffmpeg-2.4.1/localinc/x265.h.dlopen~	2014-09-25 16:55:07.667578190 +0200
++++ ffmpeg-2.4.1/localinc/x265.h	2014-09-25 16:55:07.667578190 +0200
 @@ -0,0 +1,1138 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
@@ -8429,8 +8432,8 @@
 +#endif
 +
 +#endif // X265_H
---- ffmpeg-2.4.1/localinc/xvid.h.dlopen~	2014-09-25 16:01:29.154815136 +0200
-+++ ffmpeg-2.4.1/localinc/xvid.h	2014-09-25 16:01:29.154815136 +0200
+--- ffmpeg-2.4.1/localinc/xvid.h.dlopen~	2014-09-25 16:55:07.668578177 +0200
++++ ffmpeg-2.4.1/localinc/xvid.h	2014-09-25 16:55:07.668578177 +0200
 @@ -0,0 +1,830 @@
 +/*****************************************************************************
 + *
