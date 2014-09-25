@@ -109,6 +109,7 @@ BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf}
 BuildRequires:	x264-devel >= 0.142
 BuildRequires:	x265-devel
+BuildRequires:	pkgconfig(fdk-aac)
 BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
 BuildRequires:	libvo-aacenc-devel
@@ -153,6 +154,7 @@ Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
 Suggests:	libxvidcore.so.4%{_arch_tag_suffix}
+Suggests:	libfdk-aac.so.0%{_arch_tag_suffix}
 %endif
 Obsoletes:	%{_lib}ffmpeg54 < 1.1-3
 
@@ -317,6 +319,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-fontconfig \
 %if %{build_plf}
 	--enable-libmp3lame \
+	--enable-libfdk-aac \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
 	--enable-version3 \
@@ -336,6 +339,7 @@ export LDFLAGS="%{ldflags}"
 %endif
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
+	--enable-libfdk-aac-dlopen \
 	--enable-libopencore-amrnb-dlopen \
 	--enable-libopencore-amrwb-dlopen \
 	--enable-libx264-dlopen \
