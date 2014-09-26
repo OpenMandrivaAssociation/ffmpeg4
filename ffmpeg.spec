@@ -39,13 +39,13 @@
 # 3. rebuild ffmpeg again
 # 4. ???
 # 5. PROFIT
-%bcond_without	opencv
+%bcond_with	opencv
 %bcond_without	swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.4.1
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
