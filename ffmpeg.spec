@@ -45,7 +45,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.4.2
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -149,7 +149,7 @@ Group:		System/Libraries
 %if %{with dlopen}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 Suggests:	libx264.so.142%{_arch_tag_suffix}
-Suggests:	libx265.so.32%{_arch_tag_suffix}
+Suggests:	libx265.so.35%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
@@ -257,6 +257,8 @@ export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
 export LDFLAGS="%{ldflags}"
 
 ./configure \
+	--cc=%{__cc} \
+	--cxx=%{__cxx} \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_libdir} \
@@ -333,9 +335,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-decoder=aac \
 	--enable-encoder=aac \
 	--enable-nonfree \
-%else
-	--disable-decoder=aac \
-	--disable-encoder=aac \
 %endif
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
