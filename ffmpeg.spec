@@ -71,7 +71,9 @@ BuildRequires:	libnut-devel
 BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(fontconfig)
+%if !%{with dlopen} || "%{disttag}" == "mdk"
 BuildRequires:	pkgconfig(fdk-aac)
+%endif
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gl)
