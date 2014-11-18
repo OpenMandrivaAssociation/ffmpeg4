@@ -311,6 +311,7 @@ export LDFLAGS="%{ldflags}"
 	--disable-stripping \
 	--enable-avresample \
 	--enable-postproc \
+	--enable-gpl \
 %ifarch %{ix86} x86_64
 	--disable-lto \
 %else
@@ -346,7 +347,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-libv4l2 \
 	--enable-openal \
 	--enable-opengl \
-	--enable-openssl \
 	--enable-libzmq \
 	--enable-libzvbi \
 	--enable-libwavpack \
@@ -384,7 +384,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libxvid \
 %else
 %if "%{disttag}" == "mdk"
-	--enable-gpl \
+	--enable-openssl \
 	--enable-nonfree \
 %endif
 %if %{with dlopen}
