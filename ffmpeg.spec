@@ -300,6 +300,8 @@ mv localinc/dlopen.h libavcodec
 export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
 export LDFLAGS="%{ldflags}"
 
+%define	__cc	gcc
+%define	__cxx	g++
 ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
