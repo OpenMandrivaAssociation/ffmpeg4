@@ -135,7 +135,7 @@ BuildRequires:	faac-devel
 %ifnarch %{armx}
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 %endif
-BuildRequires:	%{_lib}opencl-devel
+BuildRequires:	opencl-devel
 
 %track
 prog %name = {
