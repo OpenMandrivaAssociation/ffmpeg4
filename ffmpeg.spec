@@ -120,7 +120,6 @@ BuildRequires:	pkgconfig(vpx)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(zvbi-0.2)
-BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf} || "%{disttag}" == "mdk"
 BuildRequires:	x264-devel >= 0.142
 BuildConflicts:	libx264.so.133 libx264_133
