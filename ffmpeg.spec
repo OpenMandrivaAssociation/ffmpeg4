@@ -130,7 +130,7 @@ BuildRequires:	opencore-amr-devel
 BuildRequires:	libvo-amrwbenc-devel
 BuildRequires:	xvid-devel
 %endif
-%if %{with faac} || "%{disttag}" == "mdk"
+%if %{with faac}
 BuildRequires:	faac-devel
 %endif
 %ifnarch %{arm} aarch64
@@ -396,12 +396,12 @@ export LDFLAGS="%{ldflags}"
 	--enable-libx264-dlopen \
 	--enable-libx265-dlopen \
 	--enable-libxvid-dlopen \
-%if !%{with faac}
+%if %{with faac}
 	--enable-libfaac-dlopen \
 %endif
 %endif
 %endif
-%if %{with faac}
+%if %{with faac} && !%{with dlopen}
 	--enable-nonfree \
 	--enable-libfaac \
 %endif
