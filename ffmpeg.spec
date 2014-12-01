@@ -101,7 +101,6 @@ BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	pkgconfig(frei0r)
 %endif
-BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
@@ -383,10 +382,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
-%if "%{disttag}" == "mdk"
 	--enable-openssl \
 	--enable-nonfree \
-%endif
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
 	--enable-libfdk-aac-dlopen \
