@@ -382,8 +382,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
-	--enable-openssl \
-	--enable-nonfree \
 %if %{with dlopen}
 	--enable-libmp3lame-dlopen \
 	--enable-libfdk-aac-dlopen \
