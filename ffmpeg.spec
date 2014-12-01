@@ -127,7 +127,6 @@ BuildConflicts:	libx264.so.133 libx264_133
 BuildRequires:	pkgconfig(x265)
 BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
-BuildRequires:	libvo-aacenc-devel
 BuildRequires:	libvo-amrwbenc-devel
 BuildRequires:	xvid-devel
 %endif
@@ -381,7 +380,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-version3 \
 	--enable-libx264 \
 	--enable-libx265 \
-	--enable-libvo-aacenc \
+	--disable-libvo-aacenc \
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
