@@ -399,8 +399,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-nonfree \
 	--enable-libfaac \
 %endif
+	--enable-opencl \
 %if 0
-	--disable-opencl \
 	--disable-libaacplus \
 	--disable-libstagefright-h264 \
 	--disable-decklink
