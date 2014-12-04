@@ -290,9 +290,6 @@ This package contains the static libraries for %{name}.
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
 # use headers from current packages in restricted repo
-%if "%{disttag}" == "mdk"
-mv localinc/dlopen.h libavcodec
-%endif
 
 %build
 export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
