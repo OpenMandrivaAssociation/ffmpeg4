@@ -370,6 +370,10 @@ export LDFLAGS="%{ldflags}"
 	--enable-libflite \
 	--disable-decoder=aac \
 	--disable-encoder=aac \
+	--enable-libxcb \
+	--enable-libxcb-shm \
+	--enable-libxcb-xfixes \
+	--enable-libxcb-shape \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libfdk-aac \
