@@ -81,6 +81,7 @@ BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libass)
 BuildRequires:	pkgconfig(libavc1394)
 BuildRequires:	pkgconfig(libbluray)
+BuildRequires:	pkgconfig(libbs2b)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libdc1394-2)
 BuildRequires:	pkgconfig(libiec61883)
@@ -105,9 +106,7 @@ BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(schroedinger-1.0)
-%if 0
 BuildRequires:	pkgconfig(shine)
-%endif
 BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
@@ -363,9 +362,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libwebp \
 	--enable-avisynth \
 	--enable-fontconfig \
-%if 0
 	--enable-libshine \
-%endif
 	--enable-libvidstab \
 	--enable-libflite \
 	--disable-decoder=aac \
