@@ -1,5 +1,5 @@
---- ffmpeg-2.4.3/libavcodec/x86/lpc.c.flto_inline_asm~	2014-11-02 02:47:35.000000000 +0100
-+++ ffmpeg-2.4.3/libavcodec/x86/lpc.c	2014-11-10 11:42:12.460142602 +0100
+--- ffmpeg-2.5/libavcodec/x86/lpc.c.flto_inline_asm~	2014-12-01 01:21:45.000000000 +0100
++++ ffmpeg-2.5/libavcodec/x86/lpc.c	2014-12-04 12:39:33.772459568 +0100
 @@ -26,8 +26,8 @@
  #include "libavutil/x86/cpu.h"
  #include "libavcodec/lpc.h"
@@ -11,8 +11,8 @@
  
  #if HAVE_SSE2_INLINE
  
---- ffmpeg-2.4.3/libavcodec/x86/simple_idct.c.flto_inline_asm~	2014-11-02 02:47:35.000000000 +0100
-+++ ffmpeg-2.4.3/libavcodec/x86/simple_idct.c	2014-11-10 11:42:12.460142602 +0100
+--- ffmpeg-2.5/libavcodec/x86/simple_idct.c.flto_inline_asm~	2014-12-01 01:21:45.000000000 +0100
++++ ffmpeg-2.5/libavcodec/x86/simple_idct.c	2014-12-04 12:39:33.772459568 +0100
 @@ -52,8 +52,8 @@
  #define ROW_SHIFT 11
  #define COL_SHIFT 20 // 6
@@ -24,30 +24,28 @@
  
  DECLARE_ALIGNED(8, static const int16_t, coeffs)[]= {
          1<<(ROW_SHIFT-1), 0, 1<<(ROW_SHIFT-1), 0,
---- ffmpeg-2.4.3/libavfilter/libmpcodecs/vf_fspp.c.flto_inline_asm~	2014-11-02 02:47:35.000000000 +0100
-+++ ffmpeg-2.4.3/libavfilter/libmpcodecs/vf_fspp.c	2014-11-10 11:42:12.460142602 +0100
-@@ -709,24 +709,24 @@ const vf_info_t ff_vf_info_fspp = {
+--- ffmpeg-2.5/libavfilter/libmpcodecs/vf_fspp.c.flto_inline_asm~	2014-12-04 12:39:33.775802952 +0100
++++ ffmpeg-2.5/libavfilter/libmpcodecs/vf_fspp.c	2014-12-04 12:51:49.422255950 +0100
+@@ -709,21 +709,21 @@ const vf_info_t ff_vf_info_fspp = {
  
- #if HAVE_MMX
+ #if HAVE_MMX_INLINE
  
 -DECLARE_ASM_CONST(8, uint64_t, MM_FIX_0_382683433)=FIX64(0.382683433, 14);
 -DECLARE_ALIGNED(8, uint64_t, ff_MM_FIX_0_541196100)=FIX64(0.541196100, 14);
 -DECLARE_ALIGNED(8, uint64_t, ff_MM_FIX_0_707106781)=FIX64(0.707106781, 14);
 -DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_306562965)=FIX64(1.306562965, 14);
--
--DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_414213562_A)=FIX64(1.414213562, 14);
--
--DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_847759065)=FIX64(1.847759065, 13);
--DECLARE_ASM_CONST(8, uint64_t, MM_FIX_2_613125930)=FIX64(-2.613125930, 13); //-
--DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_414213562)=FIX64(1.414213562, 13);
--DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_082392200)=FIX64(1.082392200, 13);
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_0_382683433)=FIX64(0.382683433, 14);
 +DECLARE_ALIGNED(8, __attribute__ ((externally_visible)) uint64_t, ff_MM_FIX_0_541196100)=FIX64(0.541196100, 14);
 +DECLARE_ALIGNED(8, __attribute__ ((externally_visible)) uint64_t, ff_MM_FIX_0_707106781)=FIX64(0.707106781, 14);
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_1_306562965)=FIX64(1.306562965, 14);
-+
+ 
+-DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_414213562_A)=FIX64(1.414213562, 14);
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_1_414213562_A)=FIX64(1.414213562, 14);
-+
+ 
+-DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_847759065)=FIX64(1.847759065, 13);
+-DECLARE_ASM_CONST(8, uint64_t, MM_FIX_2_613125930)=FIX64(-2.613125930, 13); //-
+-DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_414213562)=FIX64(1.414213562, 13);
+-DECLARE_ASM_CONST(8, uint64_t, MM_FIX_1_082392200)=FIX64(1.082392200, 13);
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_1_847759065)=FIX64(1.847759065, 13);
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_2_613125930)=FIX64(-2.613125930, 13); //-
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_1_414213562)=FIX64(1.414213562, 13);
@@ -60,15 +58,10 @@
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_0_566454497)=FIX64(0.566454497, 14);
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_FIX_0_198912367)=FIX64(0.198912367, 14);
  
--DECLARE_ASM_CONST(8, uint64_t, MM_DESCALE_RND)=C64(4);
--DECLARE_ASM_CONST(8, uint64_t, MM_2)=C64(2);
-+DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_DESCALE_RND)=C64(4);
-+DECLARE_ASM_CONST_VISIBLE(8, uint64_t, MM_2)=C64(2);
- 
- #else /* !HAVE_MMX */
- 
---- ffmpeg-2.4.3/libavutil/mem.h.flto_inline_asm~	2014-11-02 02:47:36.000000000 +0100
-+++ ffmpeg-2.4.3/libavutil/mem.h	2014-11-10 11:42:12.460142602 +0100
+ DECLARE_ASM_CONST(8, uint64_t, MM_DESCALE_RND)=C64(4);
+ DECLARE_ASM_CONST(8, uint64_t, MM_2)=C64(2);
+--- ffmpeg-2.5/libavutil/mem.h.flto_inline_asm~	2014-12-01 01:21:49.000000000 +0100
++++ ffmpeg-2.5/libavutil/mem.h	2014-12-04 12:39:33.775802952 +0100
 @@ -42,6 +42,8 @@
  #if defined(__INTEL_COMPILER) && __INTEL_COMPILER < 1110 || defined(__SUNPRO_C)
      #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n))) v
@@ -100,8 +93,8 @@
  #endif
  
  #if AV_GCC_VERSION_AT_LEAST(3,1)
---- ffmpeg-2.4.3/libpostproc/postprocess.c.flto_inline_asm~	2014-11-02 02:47:36.000000000 +0100
-+++ ffmpeg-2.4.3/libpostproc/postprocess.c	2014-11-10 11:42:12.460142602 +0100
+--- ffmpeg-2.5/libpostproc/postprocess.c.flto_inline_asm~	2014-12-04 01:24:39.000000000 +0100
++++ ffmpeg-2.5/libpostproc/postprocess.c	2014-12-04 12:39:33.775802952 +0100
 @@ -117,17 +117,17 @@ const char *postproc_license(void)
  //#define NUM_BLOCKS_AT_ONCE 16 //not used yet
  
@@ -128,8 +121,8 @@
  
  
  static const struct PPFilter filters[]=
---- ffmpeg-2.4.3/libswscale/x86/rgb2rgb.c.flto_inline_asm~	2014-11-02 02:47:36.000000000 +0100
-+++ ffmpeg-2.4.3/libswscale/x86/rgb2rgb.c	2014-11-10 11:43:07.104490108 +0100
+--- ffmpeg-2.5/libswscale/x86/rgb2rgb.c.flto_inline_asm~	2014-12-01 01:21:50.000000000 +0100
++++ ffmpeg-2.5/libswscale/x86/rgb2rgb.c	2014-12-04 12:39:33.775802952 +0100
 @@ -37,7 +37,7 @@
  
  #if HAVE_INLINE_ASM
@@ -169,8 +162,8 @@
  
  DECLARE_ALIGNED(8, extern const uint64_t, ff_bgr2YOffset);
  DECLARE_ALIGNED(8, extern const uint64_t, ff_w1111);
---- ffmpeg-2.4.3/libswscale/x86/swscale.c.flto_inline_asm~	2014-11-02 02:47:36.000000000 +0100
-+++ ffmpeg-2.4.3/libswscale/x86/swscale.c	2014-11-10 11:44:33.586095155 +0100
+--- ffmpeg-2.5/libswscale/x86/swscale.c.flto_inline_asm~	2014-12-04 01:24:39.000000000 +0100
++++ ffmpeg-2.5/libswscale/x86/swscale.c	2014-12-04 12:39:33.775802952 +0100
 @@ -34,8 +34,8 @@
  
  #define DITHER1XBPP
@@ -203,8 +196,8 @@
  
  
  //MMX versions
---- ffmpeg-2.4.3/libswscale/x86/yuv2rgb.c.flto_inline_asm~	2014-11-10 11:42:12.463475997 +0100
-+++ ffmpeg-2.4.3/libswscale/x86/yuv2rgb.c	2014-11-10 11:45:16.250220307 +0100
+--- ffmpeg-2.5/libswscale/x86/yuv2rgb.c.flto_inline_asm~	2014-12-01 01:21:50.000000000 +0100
++++ ffmpeg-2.5/libswscale/x86/yuv2rgb.c	2014-12-04 12:39:33.775802952 +0100
 @@ -42,12 +42,12 @@
  #define DITHER1XBPP // only for MMX
  
@@ -223,8 +216,8 @@
  
  //MMX versions
  #if HAVE_MMX_INLINE && HAVE_6REGS
---- ffmpeg-2.4.3/libswscale/x86/yuv2rgb_template.c.flto_inline_asm~	2014-11-02 02:47:36.000000000 +0100
-+++ ffmpeg-2.4.3/libswscale/x86/yuv2rgb_template.c	2014-11-10 11:42:12.463475997 +0100
+--- ffmpeg-2.5/libswscale/x86/yuv2rgb_template.c.flto_inline_asm~	2014-12-01 01:21:50.000000000 +0100
++++ ffmpeg-2.5/libswscale/x86/yuv2rgb_template.c	2014-12-04 12:39:33.775802952 +0100
 @@ -271,11 +271,11 @@ static inline int RENAME(yuv420_rgb16)(S
      RGB_PACK24_B
  
