@@ -106,7 +106,9 @@ BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(schroedinger-1.0)
+%if 0
 BuildRequires:	pkgconfig(shine)
+%endif
 BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
@@ -362,7 +364,9 @@ export LDFLAGS="%{ldflags}"
 	--enable-libwebp \
 	--enable-avisynth \
 	--enable-fontconfig \
+%if 0
 	--enable-libshine \
+%endif
 	--enable-libvidstab \
 	--enable-libflite \
 	--disable-decoder=aac \
