@@ -374,6 +374,7 @@ export LDFLAGS="%{ldflags}"
 	--enable-libxcb-shm \
 	--enable-libxcb-xfixes \
 	--enable-libxcb-shape \
+	--enable-libbs2b \
 %if %{build_plf}
 	--enable-libmp3lame \
 	--enable-libfdk-aac \
