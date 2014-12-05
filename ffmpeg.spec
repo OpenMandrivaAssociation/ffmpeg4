@@ -58,7 +58,7 @@ Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 Patch1:		ffmpeg-2.5-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
-Patch4:		ffmpeg-2.4.2-local-headers-for-dlopen.patch
+Patch4:		ffmpeg-2.5-local-headers-for-dlopen.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	bzip2-devel
