@@ -32,6 +32,10 @@
 %bcond_without dlopen
 %endif
 
+# OpenCL can speed up things and offload work to the GPU, but as of 2014/12/21
+# (Mesa 10.4.0, Xorg 1.6.3, Intel driver 2.99.917), it causes crashes on startup
+%bcond_with	opencl
+
 %bcond_without	swscaler
 %bcond_with	faac
 # bootstrap
@@ -46,7 +50,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.5.1
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -135,7 +139,9 @@ BuildRequires:	faac-devel
 %ifnarch %{armx}
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 %endif
+%if %{with opencl}
 BuildRequires:	opencl-devel
+%endif
 
 %track
 prog %name = {
@@ -402,7 +408,11 @@ export LDFLAGS="%{ldflags}"
 	--enable-nonfree \
 	--enable-libfaac \
 %endif
+%if %{with opencl}
 	--enable-opencl \
+%else
+	--disable-opencl \
+%endif
 %if 0
 	--disable-libaacplus \
 	--disable-libstagefright-h264 \
