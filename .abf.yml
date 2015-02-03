@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   ffmpeg-2.5.2.tar.bz2: e167475426e8edf55601e79d3367c2210baa5f11
+sources:
+  ffmpeg-2.5.3.tar.bz2: 160d53a0d6b8df18336fac7f068c390ac2d34cef
