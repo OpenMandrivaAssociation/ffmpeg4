@@ -8,10 +8,10 @@
    --enable-libfdk-aac      enable AAC de/encoding via libfdk-aac [no]
 +  --enable-libfdk-aac-dlopen enable AAC de/encoding via dlopen()'ed libfdk-aac [no]
    --enable-libflite        enable flite (voice synthesis) support via libflite [no]
-   --enable-libfreetype     enable libfreetype [no]
-   --enable-libfribidi      enable libfribidi [no]
+   --enable-libfreetype     enable libfreetype, needed for drawtext filter [no]
+   --enable-libfribidi      enable libfribidi, improves drawtext filter [no]
 @@ -219,10 +221,13 @@ External library support:
-   --enable-libilbc         enable iLBC de/encoding via libilbc [no]
+   --enable-libmfx          enable HW acceleration through libmfx
    --enable-libmodplug      enable ModPlug via libmodplug [no]
    --enable-libmp3lame      enable MP3 encoding via libmp3lame [no]
 +  --enable-libmp3lame-dlopen enable MP3 encoding via dlopen()'ed libmp3lame [no]
@@ -22,8 +22,8 @@
    --enable-libopencore-amrwb enable AMR-WB decoding via libopencore-amrwb [no]
 +  --enable-libopencore-amrwb-dlopen enable AMR-WB decoding via dlopen()'ed libopencore-amrwb [no]
    --enable-libopencv       enable video filtering via libopencv [no]
+   --enable-libopenh264     enable H.264 encoding via OpenH264 [no]
    --enable-libopenjpeg     enable JPEG 2000 de/encoding via OpenJPEG [no]
-   --enable-libopus         enable Opus de/encoding via libopus [no]
 @@ -249,7 +254,9 @@ External library support:
    --enable-libwavpack      enable wavpack encoding via libwavpack [no]
    --enable-libwebp         enable WebP encoding via libwebp [no]
@@ -32,10 +32,10 @@
    --enable-libx265         enable HEVC encoding via x265 [no]
 +  --enable-libx265-dlopen  enable HEVC encoding via dlopen()'ed x265 [no]
    --enable-libxavs         enable AVS encoding via xavs [no]
-   --enable-libxcb          enable X11 grabbing using XCB [auto]
-   --enable-libxcb-shm      enable X11 grabbing shm communication [auto]
+   --enable-libxcb          enable X11 grabbing using XCB [autodetect]
+   --enable-libxcb-shm      enable X11 grabbing shm communication [autodetect]
 @@ -257,6 +264,7 @@ External library support:
-   --enable-libxcb-shape    enable X11 grabbing shape rendering [auto]
+   --enable-libxcb-shape    enable X11 grabbing shape rendering [autodetect]
    --enable-libxvid         enable Xvid encoding via xvidcore,
                             native MPEG-4/Xvid encoder exists [no]
 +  --enable-libxvid-dlopen  enable Xvid encoding via dlopen()'ed xvidcore
@@ -53,7 +53,7 @@
      libfontconfig
      libfreetype
 @@ -1359,9 +1369,12 @@ EXTERNAL_LIBRARY_LIST="
-     libilbc
+     libmfx
      libmodplug
      libmp3lame
 +    libmp3lame_dlopen
@@ -63,8 +63,8 @@
      libopencore_amrwb
 +    libopencore_amrwb_dlopen
      libopencv
+     libopenh264
      libopenjpeg
-     libopus
 @@ -1387,13 +1400,16 @@ EXTERNAL_LIBRARY_LIST="
      libwavpack
      libwebp
@@ -93,7 +93,7 @@
  enabled libflite          && require2 libflite "flite/flite.h" flite_init $flite_libs
  enabled fontconfig        && enable libfontconfig
 @@ -4869,9 +4887,12 @@ enabled libgsm            && { for gsm_h
- enabled libilbc           && require libilbc ilbc.h WebRtcIlbcfix_InitDecode -lilbc
+ enabled libmfx            && require_pkg_config libmfx "mfx/mfxvideo.h" MFXInit
  enabled libmodplug        && require_pkg_config libmodplug libmodplug/modplug.h ModPlug_Load
  enabled libmp3lame        && require "libmp3lame >= 3.98.3" lame/lame.h lame_set_VBR_quality -lmp3lame
 +enabled libmp3lame_dlopen && enable libmp3lame && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
@@ -103,8 +103,8 @@
  enabled libopencore_amrwb && require libopencore_amrwb opencore-amrwb/dec_if.h D_IF_init -lopencore-amrwb
 +enabled libopencore_amrwb_dlopen && enable libopencore_amrwb && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
  enabled libopencv         && require_pkg_config opencv opencv/cxcore.h cvCreateImageHeader
+ enabled libopenh264       && require_pkg_config openh264 wels/codec_api.h WelsGetCodecVersion
  enabled libopenjpeg       && { check_lib openjpeg.h opj_version -lopenmj2 -DOPJ_STATIC ||
-                                check_lib openjpeg-1.5/openjpeg.h opj_version -lopenjpeg -DOPJ_STATIC ||
 @@ -4915,11 +4936,14 @@ enabled libx264           && { use_pkg_c
                                   warn "using libx264 without pkg-config"; } } &&
                               { check_cpp_condition x264.h "X264_BUILD >= 118" ||
@@ -119,7 +119,7 @@
 +enabled libxvid_dlopen    && enable libxvid && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
  enabled libzmq            && require_pkg_config libzmq zmq.h zmq_ctx_new
  enabled libzvbi           && require libzvbi libzvbi.h vbi_decoder_new -lzvbi
- enabled openal            && { { for al_libs in "${OPENAL_LIBS}" "-lopenal" "-lOpenAL32"; do
+ enabled nvenc             && { check_header nvEncodeAPI.h || die "ERROR: nvEncodeAPI.h not found."; } &&
 --- ffmpeg-2.5/libavcodec/dlopen.h.dlopen~	2014-12-04 22:55:37.819536982 +0100
 +++ ffmpeg-2.5/libavcodec/dlopen.h	2014-12-04 22:55:37.819536982 +0100
 @@ -0,0 +1,12 @@
@@ -1034,5 +1034,5 @@
 +#endif
 +
      fd = av_tempfile("xvidrc.", &tmp_name, 0, s->avctx);
-     if (fd == -1) {
+     if (fd < 0) {
          av_log(NULL, AV_LOG_ERROR, "Can't create temporary pass2 file.\n");
