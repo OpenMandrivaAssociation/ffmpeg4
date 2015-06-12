@@ -1,5 +1,5 @@
---- ffmpeg-2.6.2/localinc/faaccfg.h.dl_headers~	2015-05-06 20:10:54.944689793 +0200
-+++ ffmpeg-2.6.2/localinc/faaccfg.h	2015-05-06 21:08:14.358388206 +0200
+--- ffmpeg-2.7/localinc/faaccfg.h.dl_headers~	2015-06-12 00:38:01.336134139 +0200
++++ ffmpeg-2.7/localinc/faaccfg.h	2015-06-12 00:38:01.336134139 +0200
 @@ -0,0 +1,122 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -123,8 +123,8 @@
 +#pragma pack(pop)
 +
 +#endif /* _FAACCFG_H_ */
---- ffmpeg-2.6.2/localinc/faac.h.dl_headers~	2015-05-06 20:10:54.944689793 +0200
-+++ ffmpeg-2.6.2/localinc/faac.h	2015-05-06 21:08:14.554389787 +0200
+--- ffmpeg-2.7/localinc/faac.h.dl_headers~	2015-06-12 00:38:01.336134139 +0200
++++ ffmpeg-2.7/localinc/faac.h	2015-06-12 00:38:01.336134139 +0200
 @@ -0,0 +1,99 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -225,8 +225,8 @@
 +#endif /* __cplusplus */
 +
 +#endif /* _FAAC_H_ */
---- ffmpeg-2.6.2/localinc/fdk-aac/aacdecoder_lib.h.dl_headers~	2015-05-06 20:10:54.943689785 +0200
-+++ ffmpeg-2.6.2/localinc/fdk-aac/aacdecoder_lib.h	2015-05-06 21:08:26.308484531 +0200
+--- ffmpeg-2.7/localinc/fdk-aac/aacdecoder_lib.h.dl_headers~	2015-06-12 00:38:01.337134130 +0200
++++ ffmpeg-2.7/localinc/fdk-aac/aacdecoder_lib.h	2015-06-12 00:38:01.337134130 +0200
 @@ -0,0 +1,760 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -988,8 +988,8 @@
 +#endif
 +
 +#endif /* AACDECODER_LIB_H */
---- ffmpeg-2.6.2/localinc/fdk-aac/aacenc_lib.h.dl_headers~	2015-05-06 20:10:54.943689785 +0200
-+++ ffmpeg-2.6.2/localinc/fdk-aac/aacenc_lib.h	2015-05-06 21:08:26.618487029 +0200
+--- ffmpeg-2.7/localinc/fdk-aac/aacenc_lib.h.dl_headers~	2015-06-12 00:38:01.337134130 +0200
++++ ffmpeg-2.7/localinc/fdk-aac/aacenc_lib.h	2015-06-12 00:38:01.337134130 +0200
 @@ -0,0 +1,1228 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -2219,8 +2219,8 @@
 +#endif
 +
 +#endif   /* _AAC_ENC_LIB_H_ */
---- ffmpeg-2.6.2/localinc/fdk-aac/FDK_audio.h.dl_headers~	2015-05-06 20:10:54.941689770 +0200
-+++ ffmpeg-2.6.2/localinc/fdk-aac/FDK_audio.h	2015-05-06 21:08:26.913489407 +0200
+--- ffmpeg-2.7/localinc/fdk-aac/FDK_audio.h.dl_headers~	2015-06-12 00:38:01.338134121 +0200
++++ ffmpeg-2.7/localinc/fdk-aac/FDK_audio.h	2015-06-12 00:38:01.338134121 +0200
 @@ -0,0 +1,655 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -2877,8 +2877,8 @@
 +#endif
 +
 +#endif /* FDK_AUDIO_H */
---- ffmpeg-2.6.2/localinc/fdk-aac/genericStds.h.dl_headers~	2015-05-06 20:10:54.942689778 +0200
-+++ ffmpeg-2.6.2/localinc/fdk-aac/genericStds.h	2015-05-06 21:08:27.219491873 +0200
+--- ffmpeg-2.7/localinc/fdk-aac/genericStds.h.dl_headers~	2015-06-12 00:38:01.338134121 +0200
++++ ffmpeg-2.7/localinc/fdk-aac/genericStds.h	2015-06-12 00:38:01.338134121 +0200
 @@ -0,0 +1,480 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3360,8 +3360,8 @@
 +#endif
 +
 +#endif /* __GENERICSTDS_H__ */
---- ffmpeg-2.6.2/localinc/fdk-aac/machine_type.h.dl_headers~	2015-05-06 20:10:54.942689778 +0200
-+++ ffmpeg-2.6.2/localinc/fdk-aac/machine_type.h	2015-05-06 21:08:27.808496620 +0200
+--- ffmpeg-2.7/localinc/fdk-aac/machine_type.h.dl_headers~	2015-06-12 00:38:01.338134121 +0200
++++ ffmpeg-2.7/localinc/fdk-aac/machine_type.h	2015-06-12 00:38:01.338134121 +0200
 @@ -0,0 +1,357 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3720,8 +3720,8 @@
 +#endif
 +
 +#endif /* __MACHINE_TYPE_H__ */
---- ffmpeg-2.6.2/localinc/lame/lame.h.dl_headers~	2015-05-06 20:10:54.944689793 +0200
-+++ ffmpeg-2.6.2/localinc/lame/lame.h	2015-05-06 20:10:54.944689793 +0200
+--- ffmpeg-2.7/localinc/lame/lame.h.dl_headers~	2015-06-12 00:38:01.339134112 +0200
++++ ffmpeg-2.7/localinc/lame/lame.h	2015-06-12 00:38:01.339134112 +0200
 @@ -0,0 +1,1243 @@
 +/*
 + *	Interface to MP3 LAME encoding engine
@@ -4966,8 +4966,8 @@
 +#endif
 +#endif /* LAME_LAME_H */
 +
---- ffmpeg-2.6.2/localinc/neaacdec.h.dl_headers~	2015-05-06 20:10:54.945689801 +0200
-+++ ffmpeg-2.6.2/localinc/neaacdec.h	2015-05-06 21:07:24.022982160 +0200
+--- ffmpeg-2.7/localinc/neaacdec.h.dl_headers~	2015-06-12 00:38:01.339134112 +0200
++++ ffmpeg-2.7/localinc/neaacdec.h	2015-06-12 00:38:01.339134112 +0200
 @@ -0,0 +1,258 @@
 +/*
 +** FAAD2 - Freeware Advanced Audio (AAC) Decoder including SBR decoding
@@ -5227,8 +5227,8 @@
 +#endif /* __cplusplus */
 +
 +#endif
---- ffmpeg-2.6.2/localinc/opencore-amrnb/interf_dec.h.dl_headers~	2015-05-06 20:10:54.945689801 +0200
-+++ ffmpeg-2.6.2/localinc/opencore-amrnb/interf_dec.h	2015-05-06 21:08:43.880626122 +0200
+--- ffmpeg-2.7/localinc/opencore-amrnb/interf_dec.h.dl_headers~	2015-06-12 00:38:01.339134112 +0200
++++ ffmpeg-2.7/localinc/opencore-amrnb/interf_dec.h	2015-06-12 00:38:01.339134112 +0200
 @@ -0,0 +1,34 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5264,8 +5264,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.6.2/localinc/opencore-amrnb/interf_enc.h.dl_headers~	2015-05-06 20:10:54.945689801 +0200
-+++ ffmpeg-2.6.2/localinc/opencore-amrnb/interf_enc.h	2015-05-06 21:08:44.213628805 +0200
+--- ffmpeg-2.7/localinc/opencore-amrnb/interf_enc.h.dl_headers~	2015-06-12 00:38:01.340134103 +0200
++++ ffmpeg-2.7/localinc/opencore-amrnb/interf_enc.h	2015-06-12 00:38:01.339134112 +0200
 @@ -0,0 +1,50 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5317,8 +5317,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.6.2/localinc/opencore-amrwb/dec_if.h.dl_headers~	2015-05-06 20:10:54.945689801 +0200
-+++ ffmpeg-2.6.2/localinc/opencore-amrwb/dec_if.h	2015-05-06 21:08:52.988699487 +0200
+--- ffmpeg-2.7/localinc/opencore-amrwb/dec_if.h.dl_headers~	2015-06-12 00:38:01.340134103 +0200
++++ ffmpeg-2.7/localinc/opencore-amrwb/dec_if.h	2015-06-12 00:38:01.340134103 +0200
 @@ -0,0 +1,36 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5356,8 +5356,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.6.2/localinc/opencore-amrwb/if_rom.h.dl_headers~	2015-05-06 20:10:54.945689801 +0200
-+++ ffmpeg-2.6.2/localinc/opencore-amrwb/if_rom.h	2015-05-06 21:08:53.231701446 +0200
+--- ffmpeg-2.7/localinc/opencore-amrwb/if_rom.h.dl_headers~	2015-06-12 00:38:01.340134103 +0200
++++ ffmpeg-2.7/localinc/opencore-amrwb/if_rom.h	2015-06-12 00:38:01.340134103 +0200
 @@ -0,0 +1,33 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5392,8 +5392,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.6.2/localinc/x264_config.h.dl_headers~	2015-05-06 20:10:54.945689801 +0200
-+++ ffmpeg-2.6.2/localinc/x264_config.h	2015-05-06 21:07:11.781883336 +0200
+--- ffmpeg-2.7/localinc/x264_config.h.dl_headers~	2015-06-12 00:38:01.340134103 +0200
++++ ffmpeg-2.7/localinc/x264_config.h	2015-06-12 11:08:16.714253729 +0200
 @@ -0,0 +1,6 @@
 +#define X264_BIT_DEPTH     8
 +#define X264_GPL           1
@@ -5401,8 +5401,8 @@
 +#define X264_CHROMA_FORMAT 0
 +#define X264_VERSION ""
 +#define X264_POINTVER "0.144.x"
---- ffmpeg-2.6.2/localinc/x264.h.dl_headers~	2015-05-06 20:10:54.946689808 +0200
-+++ ffmpeg-2.6.2/localinc/x264.h	2015-05-06 21:07:12.141886243 +0200
+--- ffmpeg-2.7/localinc/x264.h.dl_headers~	2015-06-12 00:38:01.340134103 +0200
++++ ffmpeg-2.7/localinc/x264.h	2015-06-12 11:08:17.123249931 +0200
 @@ -0,0 +1,949 @@
 +/*****************************************************************************
 + * x264.h: x264 public header
@@ -6353,8 +6353,8 @@
 +int x264_encoder_invalidate_reference( x264_t *, int64_t pts );
 +
 +#endif
---- ffmpeg-2.6.2/localinc/x265_config.h.dl_headers~	2015-05-06 20:10:54.946689808 +0200
-+++ ffmpeg-2.6.2/localinc/x265_config.h	2015-05-06 21:07:12.458888802 +0200
+--- ffmpeg-2.7/localinc/x265_config.h.dl_headers~	2015-06-12 00:38:01.341134094 +0200
++++ ffmpeg-2.7/localinc/x265_config.h	2015-06-12 11:08:17.459246811 +0200
 @@ -0,0 +1,34 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
@@ -6387,12 +6387,12 @@
 +/* Incremented each time public API is changed, X265_BUILD is used as
 + * the shared library SONAME on platforms which support it. It also
 + * prevents linking against a different version of the static lib */
-+#define X265_BUILD 57
++#define X265_BUILD 61
 +
 +#endif
---- ffmpeg-2.6.2/localinc/x265.h.dl_headers~	2015-05-06 20:10:54.947689816 +0200
-+++ ffmpeg-2.6.2/localinc/x265.h	2015-05-06 21:07:12.792891500 +0200
-@@ -0,0 +1,1323 @@
+--- ffmpeg-2.7/localinc/x265.h.dl_headers~	2015-06-12 00:38:01.341134094 +0200
++++ ffmpeg-2.7/localinc/x265.h	2015-06-12 11:08:17.814243514 +0200
+@@ -0,0 +1,1385 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
 + *
@@ -6811,7 +6811,7 @@
 +     *
 +     * Frame encoders are distributed between the available thread pools, and
 +     * the encoder will never generate more thread pools than frameNumThreads */
-+    char*     numaPools;
++    const char* numaPools;
 +
 +    /* Enable wavefront parallel processing, greatly increases parallelism for
 +     * less than 1% compression efficiency loss. Requires a thread pool, enabled
@@ -6853,7 +6853,7 @@
 +     * order. Otherwise the encoder will emit per-stream statistics into the log
 +     * file when x265_encoder_log is called (presumably at the end of the
 +     * encode) */
-+    char*     csvfn;
++    const char* csvfn;
 +
 +    /*== Internal Picture Specification ==*/
 +
@@ -7273,7 +7273,7 @@
 +    int       analysisMode;
 +
 +    /* Filename for analysisMode save/load. Default name is "x265_analysis.dat" */
-+    char*     analysisFileName;
++    const char* analysisFileName;
 +
 +    /*== Rate Control ==*/
 +
@@ -7366,7 +7366,7 @@
 +
 +        /* Filename of the 2pass output/input stats file, if unspecified the
 +         * encoder will default to using x265_2pass.log */
-+        char*     statFileName;
++        const char* statFileName;
 +
 +        /* temporally blur quants */
 +        double    qblur;
@@ -7588,12 +7588,10 @@
 +void x265_picture_init(x265_param *param, x265_picture *pic);
 +
 +/* x265_max_bit_depth:
-+ *      Specifies the maximum number of bits per pixel that x265 can input. This
-+ *      is also the max bit depth that x265 encodes in.  When x265_max_bit_depth
-+ *      is 8, the internal and input bit depths must be 8.  When
-+ *      x265_max_bit_depth is 12, the internal and input bit depths can be
-+ *      either 8, 10, or 12. Note that the internal bit depth must be the same
-+ *      for all encoders allocated in the same process. */
++ *      Specifies the numer of bits per pixel that x265 uses internally to
++ *      represent a pixel, and the bit depth of the output bitstream.
++ *      param->internalBitDepth must be set to this value. x265_max_bit_depth
++ *      will be 8 for default builds, 10 for HIGH_BIT_DEPTH builds. */
 +X265_API extern const int x265_max_bit_depth;
 +
 +/* x265_version_str:
@@ -7640,6 +7638,21 @@
 + *      Once flushing has begun, all subsequent calls must pass pic_in as NULL. */
 +int x265_encoder_encode(x265_encoder *encoder, x265_nal **pp_nal, uint32_t *pi_nal, x265_picture *pic_in, x265_picture *pic_out);
 +
++/* x265_encoder_reconfig:
++ *      various parameters from x265_param are copied.
++ *      this takes effect immediately, on whichever frame is encoded next;
++ *      returns 0 on success, negative on parameter validation error.
++ *
++ *      not all parameters can be changed; see the actual function for a
++ *      detailed breakdown.  since not all parameters can be changed, moving
++ *      from preset to preset may not always fully copy all relevant parameters,
++ *      but should still work usably in practice. however, more so than for
++ *      other presets, many of the speed shortcuts used in ultrafast cannot be
++ *      switched out of; using reconfig to switch between ultrafast and other
++ *      presets is not recommended without a more fine-grained breakdown of
++ *      parameters to take this into account. */
++int x265_encoder_reconfig(x265_encoder *, x265_param *);
++
 +/* x265_encoder_get_stats:
 + *       returns encoder statistics */
 +void x265_encoder_get_stats(x265_encoder *encoder, x265_stats *, uint32_t statsSizeBytes);
@@ -7658,15 +7671,28 @@
 + *       release library static allocations, reset configured CTU size */
 +void x265_cleanup(void);
 +
++#define X265_MAJOR_VERSION 1
 +
 +/* === Multi-lib API ===
-+ * By using this method to gain access to the libx265 interfaces, you allow shim
-+ * implementations of x265_api_get() to choose between various available libx265
-+ * libraries based on the encoder parameters. The most likely use case is to
-+ * choose between 8bpp and 16bpp builds of libx265. */
++ * By using this method to gain access to the libx265 interfaces, you allow run-
++ * time selection between various available libx265 libraries based on the
++ * encoder parameters. The most likely use case is to choose between 8bpp and
++ * 16bpp builds of libx265. */
 +
 +typedef struct x265_api
 +{
++    int           api_major_version;    /* X265_MAJOR_VERSION */
++    int           api_build_number;     /* X265_BUILD (soname) */
++    int           sizeof_param;         /* sizeof(x265_param) */
++    int           sizeof_picture;       /* sizeof(x265_picture) */
++    int           sizeof_analysis_data; /* sizeof(x265_analysis_data) */
++    int           sizeof_zone;          /* sizeof(x265_zone) */
++    int           sizeof_stats;         /* sizeof(x265_stats) */
++
++    int           bit_depth;
++    const char*   version_str;
++    const char*   build_info_str;
++
 +    /* libx265 public API functions, documented above with x265_ prefixes */
 +    x265_param*   (*param_alloc)(void);
 +    void          (*param_free)(x265_param*);
@@ -7679,15 +7705,14 @@
 +    void          (*picture_init)(x265_param*, x265_picture*);
 +    x265_encoder* (*encoder_open)(x265_param*);
 +    void          (*encoder_parameters)(x265_encoder*, x265_param*);
++    int           (*encoder_reconfig)(x265_encoder*, x265_param*);
 +    int           (*encoder_headers)(x265_encoder*, x265_nal**, uint32_t*);
 +    int           (*encoder_encode)(x265_encoder*, x265_nal**, uint32_t*, x265_picture*, x265_picture*);
 +    void          (*encoder_get_stats)(x265_encoder*, x265_stats*, uint32_t);
 +    void          (*encoder_log)(x265_encoder*, int, char**);
 +    void          (*encoder_close)(x265_encoder*);
 +    void          (*cleanup)(void);
-+    const char*   version_str;
-+    const char*   build_info_str;
-+    int           max_bit_depth;
++    /* add new pointers to the end, or increment X265_MAJOR_VERSION */
 +} x265_api;
 +
 +/* Force a link error in the case of linking against an incompatible API version.
@@ -7711,13 +7736,50 @@
 + *   Obviously the shared library file extension is platform specific */
 +const x265_api* x265_api_get(int bitDepth);
 +
++/* x265_api_query:
++ *   Retrieve the programming interface for a linked x265 library, like
++ *   x265_api_get(), except this function accepts X265_BUILD as the second
++ *   argument rather than using the build number as part of the function name.
++ *   Applications which dynamically link to libx265 can use this interface to
++ *   query the library API and achieve a relative amount of version skew
++ *   flexibility. The function may return NULL if the library determines that
++ *   the apiVersion that your application was compiled against is not compatible
++ *   with the library you have linked with.
++ *
++ *   api_major_version will be incremented any time non-backward compatible
++ *   changes are made to any public structures or functions. If
++ *   api_major_version does not match X265_MAJOR_VERSION from the x265.h your
++ *   application compiled against, your application must not use the returned
++ *   x265_api pointer.
++ *
++ *   Users of this API *must* also validate the sizes of any structures which
++ *   are not treated as opaque in application code. For instance, if your
++ *   application dereferences a x265_param pointer, then it must check that
++ *   api->sizeof_param matches the sizeof(x265_param) that your application
++ *   compiled with. */
++const x265_api* x265_api_query(int bitDepth, int apiVersion, int* err);
++
++#define X265_API_QUERY_ERR_NONE           0 /* returned API pointer is non-NULL */
++#define X265_API_QUERY_ERR_VER_REFUSED    1 /* incompatible version skew        */
++#define X265_API_QUERY_ERR_LIB_NOT_FOUND  2 /* libx265_main10 not found, for ex */
++#define X265_API_QUERY_ERR_FUNC_NOT_FOUND 3 /* unable to bind x265_api_query    */
++#define X265_API_QUERY_ERR_WRONG_BITDEPTH 4 /* libx265_main10 not 10bit, for ex */
++
++static const char * const x265_api_query_errnames[] = {
++    "api queried from libx265",
++    "libx265 version is not compatible with this application",
++    "unable to bind a libx265 with requested bit depth",
++    "unable to bind x265_api_query from libx265",
++    "libx265 has an invalid bitdepth"
++};
++
 +#ifdef __cplusplus
 +}
 +#endif
 +
 +#endif // X265_H
---- ffmpeg-2.6.2/localinc/xvid.h.dl_headers~	2015-05-06 20:10:54.947689816 +0200
-+++ ffmpeg-2.6.2/localinc/xvid.h	2015-05-06 21:07:17.771931699 +0200
+--- ffmpeg-2.7/localinc/xvid.h.dl_headers~	2015-06-12 00:38:01.342134084 +0200
++++ ffmpeg-2.7/localinc/xvid.h	2015-06-12 00:38:01.342134084 +0200
 @@ -0,0 +1,830 @@
 +/*****************************************************************************
 + *
