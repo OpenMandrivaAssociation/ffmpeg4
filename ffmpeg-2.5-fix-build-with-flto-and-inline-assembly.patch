@@ -199,3 +199,28 @@
  #undef RGB_PACK24_B
  #define RGB_PACK24_B\
      "pshufw    $0xc6,  %%mm2, %%mm1 \n"\
+--- ffmpeg-2.7.2/libavutil/mem.h.omv~	2015-07-27 09:28:21.099807396 +0200
++++ ffmpeg-2.7.2/libavutil/mem.h	2015-07-27 09:29:26.071398610 +0200
+@@ -55,7 +55,7 @@
+         AV_PRAGMA(DATA_ALIGN(v,n))                      \
+         __attribute__ ((externally_visible)) const t __attribute__((aligned(n))) v
+ #elif defined(__GNUC__)
+-    #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n))) v
++    #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n)))  __attribute__((used)) __attribute__((visibility("default"))) __attribute__((used)) __attribute__((visibility("default")))v
+     #define DECLARE_ASM_CONST(n,t,v)    static const t av_used __attribute__ ((aligned (n))) v
+     #define DECLARE_ASM_CONST_VISIBLE(n,t,v)    __attribute__ ((externally_visible)) const t av_used __attribute__ ((aligned (n))) v
+ #elif defined(_MSC_VER)
+--- ffmpeg-2.7.2/libavcodec/cabac_tablegen.h.omv~	2015-07-27 09:42:31.063357589 +0200
++++ ffmpeg-2.7.2/libavcodec/cabac_tablegen.h	2015-07-27 09:43:07.551654001 +0200
+@@ -25,9 +25,10 @@
+ 
+ #if CONFIG_HARDCODED_TABLES
+ #define cabac_tableinit()
++#error SVP
+ #include "libavcodec/cabac_tables.h"
+ #else
+-uint8_t ff_h264_cabac_tables[512 + 4*2*64 + 4*64 + 63];
++uint8_t __attribute__((used)) __attribute__((visibility("default"))) ff_h264_cabac_tables[512 + 4*2*64 + 4*64 + 63];
+ 
+ static const uint8_t lps_range[64][4]= {
+ {128,176,208,240}, {128,167,197,227}, {128,158,187,216}, {123,150,178,205},

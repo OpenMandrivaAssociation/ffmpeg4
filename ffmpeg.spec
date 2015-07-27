@@ -1,6 +1,3 @@
-# FIXME Unresolved symbols
-%define _disable_lto	1
-
 %define major		56
 %define ppmajor 	53
 %define avumajor 	54
@@ -53,7 +50,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.7.2
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
