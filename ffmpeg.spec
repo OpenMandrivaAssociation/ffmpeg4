@@ -1,3 +1,6 @@
+# FIXME Unresolved symbols
+%define _disable_lto	1
+
 %define major		56
 %define ppmajor 	53
 %define avumajor 	54
@@ -49,8 +52,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.7.1
-Release:	2
+Version:	2.7.2
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -59,7 +62,7 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-2.7-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
+Patch1:		ffmpeg-2.7.2-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch4:		ffmpeg-local-headers-for-dlopen.patch
