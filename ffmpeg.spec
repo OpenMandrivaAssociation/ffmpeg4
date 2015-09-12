@@ -49,8 +49,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.7.2
-Release:	2
+Version:	2.8
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -59,7 +59,7 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-2.7.2-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
+Patch1:		ffmpeg-2.8-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch4:		ffmpeg-local-headers-for-dlopen.patch
@@ -125,7 +125,7 @@ BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf} || "%{disttag}" == "mdk"
-BuildRequires:	x264-devel >= 0.144
+BuildRequires:	x264-devel >= 0.146
 BuildConflicts:	libx264.so.133 libx264_133
 BuildRequires:	pkgconfig(x265)
 BuildRequires:	lame-devel
@@ -180,8 +180,8 @@ Suggests:	%{dlopen_req xvidcore}
 %if %{with faac}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 %endif
-Suggests:	libx264.so.144%{_arch_tag_suffix}
-Suggests:	libx265.so.61%{_arch_tag_suffix}
+Suggests:	libx264.so.146%{_arch_tag_suffix}
+Suggests:	libx265.so.75%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
