@@ -49,7 +49,7 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.8.1
+Version:	2.8.4
 Release:	1
 %if %{build_plf}
 License:	GPLv3+
