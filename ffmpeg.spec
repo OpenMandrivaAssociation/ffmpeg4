@@ -44,7 +44,7 @@
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
 # 4. PROFIT
-%bcond_without	opencv
+%bcond_with	opencv
 %bcond_without	swscaler
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
