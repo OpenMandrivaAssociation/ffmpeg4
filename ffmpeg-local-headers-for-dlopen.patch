@@ -1,5 +1,5 @@
---- ffmpeg-2.8/localinc/faaccfg.h.dl_headers~	2015-09-12 16:46:46.586720963 +0200
-+++ ffmpeg-2.8/localinc/faaccfg.h	2015-09-12 16:46:46.586720963 +0200
+--- ffmpeg-2.8.6/localinc/faaccfg.h.dl_headers~	2016-02-12 22:23:50.652958945 +0100
++++ ffmpeg-2.8.6/localinc/faaccfg.h	2016-02-12 22:23:50.652958945 +0100
 @@ -0,0 +1,122 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -123,8 +123,8 @@
 +#pragma pack(pop)
 +
 +#endif /* _FAACCFG_H_ */
---- ffmpeg-2.8/localinc/faac.h.dl_headers~	2015-09-12 16:46:46.586720963 +0200
-+++ ffmpeg-2.8/localinc/faac.h	2015-09-12 16:46:46.586720963 +0200
+--- ffmpeg-2.8.6/localinc/faac.h.dl_headers~	2016-02-12 22:23:50.653958948 +0100
++++ ffmpeg-2.8.6/localinc/faac.h	2016-02-12 22:23:50.652958945 +0100
 @@ -0,0 +1,99 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -225,8 +225,8 @@
 +#endif /* __cplusplus */
 +
 +#endif /* _FAAC_H_ */
---- ffmpeg-2.8/localinc/fdk-aac/aacdecoder_lib.h.dl_headers~	2015-09-12 16:46:46.587720958 +0200
-+++ ffmpeg-2.8/localinc/fdk-aac/aacdecoder_lib.h	2015-09-12 16:46:46.587720958 +0200
+--- ffmpeg-2.8.6/localinc/fdk-aac/aacdecoder_lib.h.dl_headers~	2016-02-12 22:23:50.653958948 +0100
++++ ffmpeg-2.8.6/localinc/fdk-aac/aacdecoder_lib.h	2016-02-12 22:23:50.653958948 +0100
 @@ -0,0 +1,760 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -988,8 +988,8 @@
 +#endif
 +
 +#endif /* AACDECODER_LIB_H */
---- ffmpeg-2.8/localinc/fdk-aac/aacenc_lib.h.dl_headers~	2015-09-12 16:46:46.588720953 +0200
-+++ ffmpeg-2.8/localinc/fdk-aac/aacenc_lib.h	2015-09-12 16:46:46.588720953 +0200
+--- ffmpeg-2.8.6/localinc/fdk-aac/aacenc_lib.h.dl_headers~	2016-02-12 22:23:50.654958950 +0100
++++ ffmpeg-2.8.6/localinc/fdk-aac/aacenc_lib.h	2016-02-12 22:23:50.654958950 +0100
 @@ -0,0 +1,1228 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -2219,8 +2219,8 @@
 +#endif
 +
 +#endif   /* _AAC_ENC_LIB_H_ */
---- ffmpeg-2.8/localinc/fdk-aac/FDK_audio.h.dl_headers~	2015-09-12 16:46:46.588720953 +0200
-+++ ffmpeg-2.8/localinc/fdk-aac/FDK_audio.h	2015-09-12 16:46:46.588720953 +0200
+--- ffmpeg-2.8.6/localinc/fdk-aac/FDK_audio.h.dl_headers~	2016-02-12 22:23:50.654958950 +0100
++++ ffmpeg-2.8.6/localinc/fdk-aac/FDK_audio.h	2016-02-12 22:23:50.654958950 +0100
 @@ -0,0 +1,655 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -2877,8 +2877,8 @@
 +#endif
 +
 +#endif /* FDK_AUDIO_H */
---- ffmpeg-2.8/localinc/fdk-aac/genericStds.h.dl_headers~	2015-09-12 16:46:46.589720948 +0200
-+++ ffmpeg-2.8/localinc/fdk-aac/genericStds.h	2015-09-12 16:46:46.589720948 +0200
+--- ffmpeg-2.8.6/localinc/fdk-aac/genericStds.h.dl_headers~	2016-02-12 22:23:50.655958953 +0100
++++ ffmpeg-2.8.6/localinc/fdk-aac/genericStds.h	2016-02-12 22:23:50.655958953 +0100
 @@ -0,0 +1,480 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3360,8 +3360,8 @@
 +#endif
 +
 +#endif /* __GENERICSTDS_H__ */
---- ffmpeg-2.8/localinc/fdk-aac/machine_type.h.dl_headers~	2015-09-12 16:46:46.589720948 +0200
-+++ ffmpeg-2.8/localinc/fdk-aac/machine_type.h	2015-09-12 16:46:46.589720948 +0200
+--- ffmpeg-2.8.6/localinc/fdk-aac/machine_type.h.dl_headers~	2016-02-12 22:23:50.655958953 +0100
++++ ffmpeg-2.8.6/localinc/fdk-aac/machine_type.h	2016-02-12 22:23:50.655958953 +0100
 @@ -0,0 +1,357 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3720,8 +3720,8 @@
 +#endif
 +
 +#endif /* __MACHINE_TYPE_H__ */
---- ffmpeg-2.8/localinc/lame/lame.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/lame/lame.h	2015-09-12 16:46:46.590720943 +0200
+--- ffmpeg-2.8.6/localinc/lame/lame.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/lame/lame.h	2016-02-12 22:23:50.656958955 +0100
 @@ -0,0 +1,1243 @@
 +/*
 + *	Interface to MP3 LAME encoding engine
@@ -4966,8 +4966,8 @@
 +#endif
 +#endif /* LAME_LAME_H */
 +
---- ffmpeg-2.8/localinc/neaacdec.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/neaacdec.h	2015-09-12 16:46:46.590720943 +0200
+--- ffmpeg-2.8.6/localinc/neaacdec.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/neaacdec.h	2016-02-12 22:23:50.656958955 +0100
 @@ -0,0 +1,258 @@
 +/*
 +** FAAD2 - Freeware Advanced Audio (AAC) Decoder including SBR decoding
@@ -5227,8 +5227,8 @@
 +#endif /* __cplusplus */
 +
 +#endif
---- ffmpeg-2.8/localinc/opencore-amrnb/interf_dec.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/opencore-amrnb/interf_dec.h	2015-09-12 16:46:46.590720943 +0200
+--- ffmpeg-2.8.6/localinc/opencore-amrnb/interf_dec.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/opencore-amrnb/interf_dec.h	2016-02-12 22:23:50.656958955 +0100
 @@ -0,0 +1,34 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5264,8 +5264,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8/localinc/opencore-amrnb/interf_enc.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/opencore-amrnb/interf_enc.h	2015-09-12 16:46:46.590720943 +0200
+--- ffmpeg-2.8.6/localinc/opencore-amrnb/interf_enc.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/opencore-amrnb/interf_enc.h	2016-02-12 22:23:50.656958955 +0100
 @@ -0,0 +1,50 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5317,8 +5317,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8/localinc/opencore-amrwb/dec_if.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/opencore-amrwb/dec_if.h	2015-09-12 16:46:46.590720943 +0200
+--- ffmpeg-2.8.6/localinc/opencore-amrwb/dec_if.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/opencore-amrwb/dec_if.h	2016-02-12 22:23:50.656958955 +0100
 @@ -0,0 +1,36 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5356,8 +5356,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8/localinc/opencore-amrwb/if_rom.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/opencore-amrwb/if_rom.h	2015-09-12 16:46:46.590720943 +0200
+--- ffmpeg-2.8.6/localinc/opencore-amrwb/if_rom.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/opencore-amrwb/if_rom.h	2016-02-12 22:23:50.656958955 +0100
 @@ -0,0 +1,33 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5392,18 +5392,18 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8/localinc/x264_config.h.dl_headers~	2015-09-12 16:46:46.590720943 +0200
-+++ ffmpeg-2.8/localinc/x264_config.h	2015-09-12 16:47:01.162647463 +0200
+--- ffmpeg-2.8.6/localinc/x264_config.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
++++ ffmpeg-2.8.6/localinc/x264_config.h	2016-02-13 01:28:02.175266093 +0100
 @@ -0,0 +1,6 @@
 +#define X264_BIT_DEPTH     8
 +#define X264_GPL           1
 +#define X264_INTERLACED    1
 +#define X264_CHROMA_FORMAT 0
 +#define X264_VERSION ""
-+#define X264_POINTVER "0.146.x"
---- ffmpeg-2.8/localinc/x264.h.dl_headers~	2015-09-12 16:46:46.591720938 +0200
-+++ ffmpeg-2.8/localinc/x264.h	2015-09-12 16:47:01.406646255 +0200
-@@ -0,0 +1,949 @@
++#define X264_POINTVER "0.148.x"
+--- ffmpeg-2.8.6/localinc/x264.h.dl_headers~	2016-02-12 22:23:50.657958957 +0100
++++ ffmpeg-2.8.6/localinc/x264.h	2016-02-13 01:28:02.392266370 +0100
+@@ -0,0 +1,959 @@
 +/*****************************************************************************
 + * x264.h: x264 public header
 + *****************************************************************************
@@ -5434,6 +5434,10 @@
 +#ifndef X264_X264_H
 +#define X264_X264_H
 +
++#ifdef __cplusplus
++extern "C" {
++#endif
++
 +#if !defined(_STDINT_H) && !defined(_STDINT_H_) && !defined(_STDINT_H_INCLUDED) && !defined(_STDINT) &&\
 +    !defined(_SYS_STDINT_H_) && !defined(_INTTYPES_H) && !defined(_INTTYPES_H_) && !defined(_INTTYPES)
 +# ifdef _MSC_VER
@@ -5447,7 +5451,7 @@
 +
 +#include "x264_config.h"
 +
-+#define X264_BUILD 146
++#define X264_BUILD 148
 +
 +/* Application developers planning to link against a shared library version of
 + * libx264 from a Microsoft Visual Studio or similar development environment
@@ -5496,7 +5500,7 @@
 + * All data returned in an x264_nal_t, including the data in p_payload, is no longer
 + * valid after the next call to x264_encoder_encode.  Thus it must be used or copied
 + * before calling x264_encoder_encode or x264_encoder_headers again. */
-+typedef struct
++typedef struct x264_nal_t
 +{
 +    int i_ref_idc;  /* nal_priority_e */
 +    int i_type;     /* nal_unit_type_e */
@@ -5564,6 +5568,9 @@
 +#define X264_CPU_FAST_NEON_MRC   0x0000004  /* Transfer from NEON to ARM register is fast (Cortex-A9) */
 +#define X264_CPU_ARMV8           0x0000008
 +
++/* MIPS */
++#define X264_CPU_MSA             0x0000001  /* MIPS MSA */
++
 +/* Analyse flags */
 +#define X264_ANALYSE_I4x4       0x0001  /* Analyse i4x4 */
 +#define X264_ANALYSE_I8x8       0x0002  /* Analyse i8x8 (requires 8x8 transform) */
@@ -5620,16 +5627,17 @@
 +#define X264_CSP_I420           0x0001  /* yuv 4:2:0 planar */
 +#define X264_CSP_YV12           0x0002  /* yvu 4:2:0 planar */
 +#define X264_CSP_NV12           0x0003  /* yuv 4:2:0, with one y plane and one packed u+v */
-+#define X264_CSP_I422           0x0004  /* yuv 4:2:2 planar */
-+#define X264_CSP_YV16           0x0005  /* yvu 4:2:2 planar */
-+#define X264_CSP_NV16           0x0006  /* yuv 4:2:2, with one y plane and one packed u+v */
-+#define X264_CSP_V210           0x0007  /* 10-bit yuv 4:2:2 packed in 32 */
-+#define X264_CSP_I444           0x0008  /* yuv 4:4:4 planar */
-+#define X264_CSP_YV24           0x0009  /* yvu 4:4:4 planar */
-+#define X264_CSP_BGR            0x000a  /* packed bgr 24bits   */
-+#define X264_CSP_BGRA           0x000b  /* packed bgr 32bits   */
-+#define X264_CSP_RGB            0x000c  /* packed rgb 24bits   */
-+#define X264_CSP_MAX            0x000d  /* end of list */
++#define X264_CSP_NV21           0x0004  /* yuv 4:2:0, with one y plane and one packed v+u */
++#define X264_CSP_I422           0x0005  /* yuv 4:2:2 planar */
++#define X264_CSP_YV16           0x0006  /* yvu 4:2:2 planar */
++#define X264_CSP_NV16           0x0007  /* yuv 4:2:2, with one y plane and one packed u+v */
++#define X264_CSP_V210           0x0008  /* 10-bit yuv 4:2:2 packed in 32 */
++#define X264_CSP_I444           0x0009  /* yuv 4:4:4 planar */
++#define X264_CSP_YV24           0x000a  /* yvu 4:4:4 planar */
++#define X264_CSP_BGR            0x000b  /* packed bgr 24bits   */
++#define X264_CSP_BGRA           0x000c  /* packed bgr 32bits   */
++#define X264_CSP_RGB            0x000d  /* packed rgb 24bits   */
++#define X264_CSP_MAX            0x000e  /* end of list */
 +#define X264_CSP_VFLIP          0x1000  /* the csp is vertically flipped */
 +#define X264_CSP_HIGH_DEPTH     0x2000  /* the csp has a depth of 16 bits per pixel component */
 +
@@ -5641,7 +5649,7 @@
 +#define X264_TYPE_BREF          0x0004  /* Non-disposable B-frame */
 +#define X264_TYPE_B             0x0005
 +#define X264_TYPE_KEYFRAME      0x0006  /* IDR or I depending on b_open_gop option */
-+#define IS_X264_TYPE_I(x) ((x)==X264_TYPE_I || (x)==X264_TYPE_IDR)
++#define IS_X264_TYPE_I(x) ((x)==X264_TYPE_I || (x)==X264_TYPE_IDR || (x)==X264_TYPE_KEYFRAME)
 +#define IS_X264_TYPE_B(x) ((x)==X264_TYPE_B || (x)==X264_TYPE_BREF)
 +
 +/* Log level */
@@ -5663,7 +5671,7 @@
 +/* Zones: override ratecontrol or other options for specific sections of the video.
 + * See x264_encoder_reconfig() for which options can be changed.
 + * If zones overlap, whichever comes later in the list takes precedence. */
-+typedef struct
++typedef struct x264_zone_t
 +{
 +    int i_start, i_end; /* range of frame numbers */
 +    int b_force_qp; /* whether to use qp vs bitrate factor */
@@ -5957,7 +5965,7 @@
 + * H.264 level restriction information
 + ****************************************************************************/
 +
-+typedef struct
++typedef struct x264_level_t
 +{
 +    int level_idc;
 +    int mbps;        /* max macroblock processing rate (macroblocks/sec) */
@@ -6094,7 +6102,7 @@
 +    PIC_STRUCT_TRIPLE            = 9, // triple frame
 +};
 +
-+typedef struct
++typedef struct x264_hrd_t
 +{
 +    double cpb_initial_arrival_time;
 +    double cpb_final_arrival_time;
@@ -6112,14 +6120,14 @@
 + * Payloads are written first in order of input, apart from in the case when HRD
 + * is enabled where payloads are written after the Buffering Period SEI. */
 +
-+typedef struct
++typedef struct x264_sei_payload_t
 +{
 +    int payload_size;
 +    int payload_type;
 +    uint8_t *payload;
 +} x264_sei_payload_t;
 +
-+typedef struct
++typedef struct x264_sei_t
 +{
 +    int num_payloads;
 +    x264_sei_payload_t *payloads;
@@ -6127,7 +6135,7 @@
 +    void (*sei_free)( void* );
 +} x264_sei_t;
 +
-+typedef struct
++typedef struct x264_image_t
 +{
 +    int     i_csp;       /* Colorspace */
 +    int     i_plane;     /* Number of image planes */
@@ -6135,7 +6143,7 @@
 +    uint8_t *plane[4];   /* Pointers to each plane */
 +} x264_image_t;
 +
-+typedef struct
++typedef struct x264_image_properties_t
 +{
 +    /* All arrays of data here are ordered as follows:
 +     * each array contains one offset per macroblock, in raster scan order.  In interlaced
@@ -6191,13 +6199,11 @@
 +    double f_crf_avg;
 +} x264_image_properties_t;
 +
-+typedef struct
++typedef struct x264_picture_t
 +{
 +    /* In: force picture type (if not auto)
 +     *     If x264 encoding parameters are violated in the forcing of picture types,
 +     *     x264 will correct the input picture type and log a warning.
-+     *     The quality of frametype decisions may suffer if a great deal of fine-grained
-+     *     mixing of auto and forced frametypes is done.
 +     * Out: type of the picture encoded */
 +    int     i_type;
 +    /* In: force quantizer for != X264_QP_AUTO */
@@ -6352,9 +6358,13 @@
 + *      Returns 0 on success, negative on failure. */
 +int x264_encoder_invalidate_reference( x264_t *, int64_t pts );
 +
++#ifdef __cplusplus
++}
 +#endif
---- ffmpeg-2.8/localinc/x265_config.h.dl_headers~	2015-09-12 16:46:46.591720938 +0200
-+++ ffmpeg-2.8/localinc/x265_config.h	2015-09-12 16:46:46.591720938 +0200
++
++#endif
+--- ffmpeg-2.8.6/localinc/x265_config.h.dl_headers~	2016-02-12 22:23:50.657958957 +0100
++++ ffmpeg-2.8.6/localinc/x265_config.h	2016-02-13 01:28:06.372271452 +0100
 @@ -0,0 +1,34 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
@@ -6387,16 +6397,17 @@
 +/* Incremented each time public API is changed, X265_BUILD is used as
 + * the shared library SONAME on platforms which support it. It also
 + * prevents linking against a different version of the static lib */
-+#define X265_BUILD 75
++#define X265_BUILD 80
 +
 +#endif
---- ffmpeg-2.8/localinc/x265.h.dl_headers~	2015-09-12 16:46:46.592720933 +0200
-+++ ffmpeg-2.8/localinc/x265.h	2015-09-12 16:46:46.592720933 +0200
-@@ -0,0 +1,1488 @@
+--- ffmpeg-2.8.6/localinc/x265.h.dl_headers~	2016-02-12 22:23:50.658958960 +0100
++++ ffmpeg-2.8.6/localinc/x265.h	2016-02-13 01:28:06.624271774 +0100
+@@ -0,0 +1,1523 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
 + *
 + * Authors: Steve Borho <steve@borho.org>
++ *          Min Chen <chenm003@163.com>
 + *
 + * This program is free software; you can redistribute it and/or modify
 + * it under the terms of the GNU General Public License as published by
@@ -6486,13 +6497,15 @@
 +/* Stores all analysis data for a single frame */
 +typedef struct x265_analysis_data
 +{
-+    void*            interData;
-+    void*            intraData;
++    int64_t          satdCost;
 +    uint32_t         frameRecordSize;
 +    uint32_t         poc;
 +    uint32_t         sliceType;
 +    uint32_t         numCUsInFrame;
 +    uint32_t         numPartitions;
++    void*            interData;
++    void*            intraData;
++    int              bScenecut;
 +} x265_analysis_data;
 +
 +/* cu statistics */
@@ -6538,6 +6551,7 @@
 +    uint16_t         maxLumaLevel;
 +    char             sliceType;
 +    int              bScenecut;
++    int              frameLatency;
 +    x265_cu_stats    cuStats;
 +} x265_frame_stats;
 +
@@ -6604,7 +6618,7 @@
 +
 +    /* An array of quantizer offsets to be applied to this image during encoding.
 +     * These are added on top of the decisions made by rateControl.
-+     * Adaptive quantization must be enabled to use this feature. These quantizer 
++     * Adaptive quantization must be enabled to use this feature. These quantizer
 +     * offsets should be given for each 16x16 block. Behavior if quant
 +     * offsets differ between encoding passes is undefined. */
 +    float            *quantOffsets;
@@ -7010,7 +7024,7 @@
 +
 +    /* Enables the emission of a user data SEI with the stream headers which
 +     * describes the encoder version, build info, and parameters. This is
-+     * very helpful for debugging, but may interfere with regression tests. 
++     * very helpful for debugging, but may interfere with regression tests.
 +     * Default enabled */
 +    int       bEmitInfoSEI;
 +
@@ -7070,9 +7084,9 @@
 +    int       bBPyramid;
 +
 +    /* A value which is added to the cost estimate of B frames in the lookahead.
-+     * It may be a positive value (making B frames appear more expensive, which
-+     * causes the lookahead to chose more P frames) or negative, which makes the
-+     * lookahead chose more B frames. Default is 0, there are no limits */
++     * It may be a positive value (making B frames appear less expensive, which
++     * biases the lookahead to choose more B frames) or negative, which makes the
++     * lookahead choose more P frames. Default is 0, there are no limits */
 +    int       bFrameBias;
 +
 +    /* The number of frames that must be queued in the lookahead before it may
@@ -7096,6 +7110,11 @@
 +    /* An arbitrary threshold which determines how aggressively the lookahead
 +     * should detect scene cuts. The default (40) is recommended. */
 +    int       scenecutThreshold;
++
++    /* Replace keyframes by using a column of intra blocks that move across the video
++     * from one side to the other, thereby "refreshing" the image. In effect, instead of a
++     * big keyframe, the keyframe is "spread" over many frames. */
++    int       bIntraRefresh;
 +
 +    /*== Coding Unit (CU) definitions ==*/
 +
@@ -7216,6 +7235,9 @@
 +     * 4 split CUs at the next lower CU depth.  The two flags may be combined */
 +    uint32_t  limitReferences;
 +
++    /* Limit modes analyzed for each CU using cost metrics from the 4 sub-CUs */
++    uint32_t limitModes;
++
 +    /* ME search method (DIA, HEX, UMH, STAR, FULL). The search patterns
 +     * (methods) are sorted in increasing complexity, with diamond being the
 +     * simplest and fastest and full being the slowest.  DIA, HEX, and UMH were
@@ -7326,13 +7348,19 @@
 +    /* Psycho-visual rate-distortion strength. Only has an effect in presets
 +     * which use RDO. It makes mode decision favor options which preserve the
 +     * energy of the source, at the cost of lost compression. The value must
-+     * be between 0 and 2.0, 1.0 is typical. Default 0.3 */
++     * be between 0 and 5.0, 1.0 is typical. Default 2.0 */
 +    double    psyRd;
 +
 +    /* Strength of psycho-visual optimizations in quantization. Only has an
 +     * effect in presets which use RDOQ (rd-levels 4 and 5).  The value must be
 +     * between 0 and 50, 1.0 is typical. Default 1.0 */
 +    double    psyRdoq;
++
++    /* Perform quantisation parameter based RD refinement. RD cost is calculated
++     * on the best CU partitions, chosen after the CU analysis, for a range of QPs
++     * to find the optimal rounding effect. Only effective at rd-levels 5 and 6.
++     * Default disabled */
++    int       bEnableRdRefine;
 +
 +    /* If X265_ANALYSIS_SAVE, write per-frame analysis information into analysis
 +     * buffers.  if X265_ANALYSIS_LOAD, read analysis information into analysis
@@ -7444,7 +7472,7 @@
 +
 +        /* Enable slow and a more detailed first pass encode in multi pass rate control */
 +        int       bEnableSlowFirstPass;
-+        
++
 +        /* rate-control overrides */
 +        int        zoneCount;
 +        x265_zone* zones;
@@ -7457,14 +7485,14 @@
 +         * values will affect all encoders in the same process */
 +        const char* lambdaFileName;
 +
-+        /* Enable stricter conditions to check bitrate deviations in CBR mode. May compromise 
++        /* Enable stricter conditions to check bitrate deviations in CBR mode. May compromise
 +         * quality to maintain bitrate adherence */
 +        int bStrictCbr;
 +
-+        /* Enable adaptive quantization at CU granularity. This parameter specifies 
-+         * the minimum CU size at which QP can be adjusted, i.e. Quantization Group 
-+         * (QG) size. Allowed values are 64, 32, 16 provided it falls within the 
-+         * inclusuve range [maxCUSize, minCUSize]. Experimental, default: maxCUSize*/
++        /* Enable adaptive quantization at CU granularity. This parameter specifies
++         * the minimum CU size at which QP can be adjusted, i.e. Quantization Group
++         * (QG) size. Allowed values are 64, 32, 16 provided it falls within the
++         * inclusuve range [maxCUSize, minCUSize]. Experimental, default: maxCUSize */
 +        uint32_t qgSize;
 +    } rc;
 +
@@ -7768,6 +7796,22 @@
 + *      close an encoder handler */
 +void x265_encoder_close(x265_encoder *);
 +
++/* x265_encoder_intra_refresh:
++ *      If an intra refresh is not in progress, begin one with the next P-frame.
++ *      If an intra refresh is in progress, begin one as soon as the current one finishes.
++ *      Requires bIntraRefresh to be set.
++ *
++ *      Useful for interactive streaming where the client can tell the server that packet loss has
++ *      occurred.  In this case, keyint can be set to an extremely high value so that intra refreshes
++ *      occur only when calling x265_encoder_intra_refresh.
++ *
++ *      In multi-pass encoding, if x265_encoder_intra_refresh is called differently in each pass,
++ *      behavior is undefined.
++ *
++ *      Should not be called during an x265_encoder_encode. */
++
++int x265_encoder_intra_refresh(x265_encoder *);
++
 +/* x265_cleanup:
 + *       release library static allocations, reset configured CTU size */
 +void x265_cleanup(void);
@@ -7815,6 +7859,7 @@
 +    void          (*cleanup)(void);
 +
 +    int           sizeof_frame_stats;   /* sizeof(x265_frame_stats) */
++    int           (*encoder_intra_refresh)(x265_encoder*);
 +    /* add new pointers to the end, or increment X265_MAJOR_VERSION */
 +} x265_api;
 +
@@ -7881,8 +7926,8 @@
 +#endif
 +
 +#endif // X265_H
---- ffmpeg-2.8/localinc/xvid.h.dl_headers~	2015-09-12 16:46:46.592720933 +0200
-+++ ffmpeg-2.8/localinc/xvid.h	2015-09-12 16:46:46.592720933 +0200
+--- ffmpeg-2.8.6/localinc/xvid.h.dl_headers~	2016-02-12 22:23:50.659958962 +0100
++++ ffmpeg-2.8.6/localinc/xvid.h	2016-02-13 01:28:26.379297084 +0100
 @@ -0,0 +1,830 @@
 +/*****************************************************************************
 + *
@@ -7905,7 +7950,7 @@
 + *  along with this program ; if not, write to the Free Software
 + *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 + *
-+ * $Id: xvid.h 2082 2014-04-08 20:19:42Z Isibaar $
++ * $Id: xvid.h 2123 2015-06-17 19:49:29Z Isibaar $
 + *
 + ****************************************************************************/
 +
@@ -7943,7 +7988,7 @@
 +#define XVID_API_MAJOR(a)        (((a)>>16) & 0xff)
 +#define XVID_API_MINOR(a)        (((a)>> 0) & 0xff)
 +
-+#define XVID_VERSION             XVID_MAKE_VERSION(1,3,3)
++#define XVID_VERSION             XVID_MAKE_VERSION(1,3,4)
 +#define XVID_API                 XVID_MAKE_API(4, 3)
 +
 +/* Bitstream Version
@@ -7957,7 +8002,7 @@
 + * doesnt hurt but not increasing it could cause difficulty for decoders in the
 + * future
 + */
-+#define XVID_BS_VERSION 65 
++#define XVID_BS_VERSION 67 
 +
 +/*****************************************************************************
 + * error codes

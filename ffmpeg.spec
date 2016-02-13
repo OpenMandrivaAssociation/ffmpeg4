@@ -50,7 +50,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	2.8.6
-Release:	1
+Release:	3
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -180,8 +180,8 @@ Suggests:	%{dlopen_req xvidcore}
 %if %{with faac}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 %endif
-Suggests:	libx264.so.146%{_arch_tag_suffix}
-Suggests:	libx265.so.75%{_arch_tag_suffix}
+Suggests:	libx264.so.148%{_arch_tag_suffix}
+Suggests:	libx265.so.80%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
