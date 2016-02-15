@@ -1,10 +1,10 @@
-%define major		56
-%define ppmajor 	53
-%define avumajor 	54
-%define swsmajor 	3
-%define filtermajor 	5
-%define swrmajor 	1
-%define	avrmajor	2
+%define major		57
+%define ppmajor 	54
+%define avumajor 	55
+%define swsmajor 	4
+%define filtermajor 	6
+%define swrmajor 	2
+%define	avrmajor	3
 %define libavcodec	%mklibname avcodec %{major}
 %define	libavdevice	%mklibname avdevice %{major}
 %define libavfilter	%mklibname avfilter %{filtermajor}
@@ -49,8 +49,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	2.8.6
-Release:	3
+Version:	3.0
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -59,7 +59,7 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
-Patch1:		ffmpeg-2.8-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
+Patch1:		ffmpeg-3.0-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch4:		ffmpeg-local-headers-for-dlopen.patch
@@ -94,7 +94,6 @@ BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libopenjpeg1)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libpulse)
-BuildRequires:	pkgconfig(libquvi)
 BuildRequires:	pkgconfig(librtmp)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libva)
@@ -356,7 +355,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-libssh \
 	--enable-libsoxr \
 	--enable-libtwolame \
-	--enable-libquvi \
 	--enable-libopus \
 	--enable-libilbc \
 	--enable-libiec61883 \
