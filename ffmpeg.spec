@@ -385,7 +385,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-version3 \
 	--enable-libx264 \
 	--enable-libx265 \
-	--disable-libvo-aacenc \
 	--enable-libvo-amrwbenc \
 	--enable-libxvid \
 %else
