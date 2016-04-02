@@ -1,5 +1,5 @@
---- ffmpeg-2.8.6/localinc/faaccfg.h.dl_headers~	2016-02-12 22:23:50.652958945 +0100
-+++ ffmpeg-2.8.6/localinc/faaccfg.h	2016-02-12 22:23:50.652958945 +0100
+--- ffmpeg-3.0.1/localinc/faaccfg.h.dl_headers~	2016-04-02 21:45:05.668276389 +0200
++++ ffmpeg-3.0.1/localinc/faaccfg.h	2016-04-02 21:45:05.668276389 +0200
 @@ -0,0 +1,122 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -123,8 +123,8 @@
 +#pragma pack(pop)
 +
 +#endif /* _FAACCFG_H_ */
---- ffmpeg-2.8.6/localinc/faac.h.dl_headers~	2016-02-12 22:23:50.653958948 +0100
-+++ ffmpeg-2.8.6/localinc/faac.h	2016-02-12 22:23:50.652958945 +0100
+--- ffmpeg-3.0.1/localinc/faac.h.dl_headers~	2016-04-02 21:45:05.668276389 +0200
++++ ffmpeg-3.0.1/localinc/faac.h	2016-04-02 21:45:05.668276389 +0200
 @@ -0,0 +1,99 @@
 +/*
 + * FAAC - Freeware Advanced Audio Coder
@@ -225,8 +225,8 @@
 +#endif /* __cplusplus */
 +
 +#endif /* _FAAC_H_ */
---- ffmpeg-2.8.6/localinc/fdk-aac/aacdecoder_lib.h.dl_headers~	2016-02-12 22:23:50.653958948 +0100
-+++ ffmpeg-2.8.6/localinc/fdk-aac/aacdecoder_lib.h	2016-02-12 22:23:50.653958948 +0100
+--- ffmpeg-3.0.1/localinc/fdk-aac/aacdecoder_lib.h.dl_headers~	2016-04-02 21:45:05.669276377 +0200
++++ ffmpeg-3.0.1/localinc/fdk-aac/aacdecoder_lib.h	2016-04-02 21:45:05.669276377 +0200
 @@ -0,0 +1,760 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -988,8 +988,8 @@
 +#endif
 +
 +#endif /* AACDECODER_LIB_H */
---- ffmpeg-2.8.6/localinc/fdk-aac/aacenc_lib.h.dl_headers~	2016-02-12 22:23:50.654958950 +0100
-+++ ffmpeg-2.8.6/localinc/fdk-aac/aacenc_lib.h	2016-02-12 22:23:50.654958950 +0100
+--- ffmpeg-3.0.1/localinc/fdk-aac/aacenc_lib.h.dl_headers~	2016-04-02 21:45:05.670276364 +0200
++++ ffmpeg-3.0.1/localinc/fdk-aac/aacenc_lib.h	2016-04-02 21:45:05.670276364 +0200
 @@ -0,0 +1,1228 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -2219,8 +2219,8 @@
 +#endif
 +
 +#endif   /* _AAC_ENC_LIB_H_ */
---- ffmpeg-2.8.6/localinc/fdk-aac/FDK_audio.h.dl_headers~	2016-02-12 22:23:50.654958950 +0100
-+++ ffmpeg-2.8.6/localinc/fdk-aac/FDK_audio.h	2016-02-12 22:23:50.654958950 +0100
+--- ffmpeg-3.0.1/localinc/fdk-aac/FDK_audio.h.dl_headers~	2016-04-02 21:45:05.671276352 +0200
++++ ffmpeg-3.0.1/localinc/fdk-aac/FDK_audio.h	2016-04-02 21:45:05.670276364 +0200
 @@ -0,0 +1,655 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -2877,8 +2877,8 @@
 +#endif
 +
 +#endif /* FDK_AUDIO_H */
---- ffmpeg-2.8.6/localinc/fdk-aac/genericStds.h.dl_headers~	2016-02-12 22:23:50.655958953 +0100
-+++ ffmpeg-2.8.6/localinc/fdk-aac/genericStds.h	2016-02-12 22:23:50.655958953 +0100
+--- ffmpeg-3.0.1/localinc/fdk-aac/genericStds.h.dl_headers~	2016-04-02 21:45:05.671276352 +0200
++++ ffmpeg-3.0.1/localinc/fdk-aac/genericStds.h	2016-04-02 21:45:05.671276352 +0200
 @@ -0,0 +1,480 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3360,8 +3360,8 @@
 +#endif
 +
 +#endif /* __GENERICSTDS_H__ */
---- ffmpeg-2.8.6/localinc/fdk-aac/machine_type.h.dl_headers~	2016-02-12 22:23:50.655958953 +0100
-+++ ffmpeg-2.8.6/localinc/fdk-aac/machine_type.h	2016-02-12 22:23:50.655958953 +0100
+--- ffmpeg-3.0.1/localinc/fdk-aac/machine_type.h.dl_headers~	2016-04-02 21:45:05.671276352 +0200
++++ ffmpeg-3.0.1/localinc/fdk-aac/machine_type.h	2016-04-02 21:45:05.671276352 +0200
 @@ -0,0 +1,357 @@
 +
 +/* -----------------------------------------------------------------------------------------------------------
@@ -3720,8 +3720,8 @@
 +#endif
 +
 +#endif /* __MACHINE_TYPE_H__ */
---- ffmpeg-2.8.6/localinc/lame/lame.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/lame/lame.h	2016-02-12 22:23:50.656958955 +0100
+--- ffmpeg-3.0.1/localinc/lame/lame.h.dl_headers~	2016-04-02 21:45:05.672276340 +0200
++++ ffmpeg-3.0.1/localinc/lame/lame.h	2016-04-02 21:45:05.672276340 +0200
 @@ -0,0 +1,1243 @@
 +/*
 + *	Interface to MP3 LAME encoding engine
@@ -4966,8 +4966,8 @@
 +#endif
 +#endif /* LAME_LAME_H */
 +
---- ffmpeg-2.8.6/localinc/neaacdec.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/neaacdec.h	2016-02-12 22:23:50.656958955 +0100
+--- ffmpeg-3.0.1/localinc/neaacdec.h.dl_headers~	2016-04-02 21:45:05.672276340 +0200
++++ ffmpeg-3.0.1/localinc/neaacdec.h	2016-04-02 21:45:05.672276340 +0200
 @@ -0,0 +1,258 @@
 +/*
 +** FAAD2 - Freeware Advanced Audio (AAC) Decoder including SBR decoding
@@ -5227,8 +5227,8 @@
 +#endif /* __cplusplus */
 +
 +#endif
---- ffmpeg-2.8.6/localinc/opencore-amrnb/interf_dec.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/opencore-amrnb/interf_dec.h	2016-02-12 22:23:50.656958955 +0100
+--- ffmpeg-3.0.1/localinc/opencore-amrnb/interf_dec.h.dl_headers~	2016-04-02 21:45:05.672276340 +0200
++++ ffmpeg-3.0.1/localinc/opencore-amrnb/interf_dec.h	2016-04-02 21:45:05.672276340 +0200
 @@ -0,0 +1,34 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5264,8 +5264,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8.6/localinc/opencore-amrnb/interf_enc.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/opencore-amrnb/interf_enc.h	2016-02-12 22:23:50.656958955 +0100
+--- ffmpeg-3.0.1/localinc/opencore-amrnb/interf_enc.h.dl_headers~	2016-04-02 21:45:05.672276340 +0200
++++ ffmpeg-3.0.1/localinc/opencore-amrnb/interf_enc.h	2016-04-02 21:45:05.672276340 +0200
 @@ -0,0 +1,50 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5317,8 +5317,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8.6/localinc/opencore-amrwb/dec_if.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/opencore-amrwb/dec_if.h	2016-02-12 22:23:50.656958955 +0100
+--- ffmpeg-3.0.1/localinc/opencore-amrwb/dec_if.h.dl_headers~	2016-04-02 21:45:05.673276328 +0200
++++ ffmpeg-3.0.1/localinc/opencore-amrwb/dec_if.h	2016-04-02 21:45:05.673276328 +0200
 @@ -0,0 +1,36 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5356,8 +5356,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8.6/localinc/opencore-amrwb/if_rom.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/opencore-amrwb/if_rom.h	2016-02-12 22:23:50.656958955 +0100
+--- ffmpeg-3.0.1/localinc/opencore-amrwb/if_rom.h.dl_headers~	2016-04-02 21:45:05.673276328 +0200
++++ ffmpeg-3.0.1/localinc/opencore-amrwb/if_rom.h	2016-04-02 21:45:05.673276328 +0200
 @@ -0,0 +1,33 @@
 +/* ------------------------------------------------------------------
 + * Copyright (C) 2009 Martin Storsjo
@@ -5392,8 +5392,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8.6/localinc/x264_config.h.dl_headers~	2016-02-12 22:23:50.656958955 +0100
-+++ ffmpeg-2.8.6/localinc/x264_config.h	2016-02-13 01:28:02.175266093 +0100
+--- ffmpeg-3.0.1/localinc/x264_config.h.dl_headers~	2016-04-02 21:45:05.673276328 +0200
++++ ffmpeg-3.0.1/localinc/x264_config.h	2016-04-02 21:45:05.673276328 +0200
 @@ -0,0 +1,6 @@
 +#define X264_BIT_DEPTH     8
 +#define X264_GPL           1
@@ -5401,8 +5401,8 @@
 +#define X264_CHROMA_FORMAT 0
 +#define X264_VERSION ""
 +#define X264_POINTVER "0.148.x"
---- ffmpeg-2.8.6/localinc/x264.h.dl_headers~	2016-02-12 22:23:50.657958957 +0100
-+++ ffmpeg-2.8.6/localinc/x264.h	2016-02-13 01:28:02.392266370 +0100
+--- ffmpeg-3.0.1/localinc/x264.h.dl_headers~	2016-04-02 21:45:05.673276328 +0200
++++ ffmpeg-3.0.1/localinc/x264.h	2016-04-02 21:45:05.673276328 +0200
 @@ -0,0 +1,959 @@
 +/*****************************************************************************
 + * x264.h: x264 public header
@@ -6363,8 +6363,8 @@
 +#endif
 +
 +#endif
---- ffmpeg-2.8.6/localinc/x265_config.h.dl_headers~	2016-02-12 22:23:50.657958957 +0100
-+++ ffmpeg-2.8.6/localinc/x265_config.h	2016-02-13 01:28:06.372271452 +0100
+--- ffmpeg-3.0.1/localinc/x265_config.h.dl_headers~	2016-04-02 21:45:05.673276328 +0200
++++ ffmpeg-3.0.1/localinc/x265_config.h	2016-04-02 21:45:21.285085837 +0200
 @@ -0,0 +1,34 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
@@ -6397,12 +6397,12 @@
 +/* Incremented each time public API is changed, X265_BUILD is used as
 + * the shared library SONAME on platforms which support it. It also
 + * prevents linking against a different version of the static lib */
-+#define X265_BUILD 80
++#define X265_BUILD 79
 +
 +#endif
---- ffmpeg-2.8.6/localinc/x265.h.dl_headers~	2016-02-12 22:23:50.658958960 +0100
-+++ ffmpeg-2.8.6/localinc/x265.h	2016-02-13 01:28:06.624271774 +0100
-@@ -0,0 +1,1523 @@
+--- ffmpeg-3.0.1/localinc/x265.h.dl_headers~	2016-04-02 21:45:05.674276316 +0200
++++ ffmpeg-3.0.1/localinc/x265.h	2016-04-02 21:45:21.516083018 +0200
+@@ -0,0 +1,1517 @@
 +/*****************************************************************************
 + * Copyright (C) 2013 x265 project
 + *
@@ -7356,12 +7356,6 @@
 +     * between 0 and 50, 1.0 is typical. Default 1.0 */
 +    double    psyRdoq;
 +
-+    /* Perform quantisation parameter based RD refinement. RD cost is calculated
-+     * on the best CU partitions, chosen after the CU analysis, for a range of QPs
-+     * to find the optimal rounding effect. Only effective at rd-levels 5 and 6.
-+     * Default disabled */
-+    int       bEnableRdRefine;
-+
 +    /* If X265_ANALYSIS_SAVE, write per-frame analysis information into analysis
 +     * buffers.  if X265_ANALYSIS_LOAD, read analysis information into analysis
 +     * buffer and use this analysis information to reduce the amount of work
@@ -7926,8 +7920,8 @@
 +#endif
 +
 +#endif // X265_H
---- ffmpeg-2.8.6/localinc/xvid.h.dl_headers~	2016-02-12 22:23:50.659958962 +0100
-+++ ffmpeg-2.8.6/localinc/xvid.h	2016-02-13 01:28:26.379297084 +0100
+--- ffmpeg-3.0.1/localinc/xvid.h.dl_headers~	2016-04-02 21:45:05.675276303 +0200
++++ ffmpeg-3.0.1/localinc/xvid.h	2016-04-02 21:45:05.675276303 +0200
 @@ -0,0 +1,830 @@
 +/*****************************************************************************
 + *
