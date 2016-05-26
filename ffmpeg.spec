@@ -438,6 +438,7 @@ export LDFLAGS="%{ldflags}"
 
 %files doc
 %doc doc/*.html doc/*.txt doc/*.conf
+%{_docdir}/ffmpeg/*.html
 
 %files -n %{libavcodec}
 %{_libdir}/libavcodec.so.%{major}*
