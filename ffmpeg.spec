@@ -50,7 +50,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	3.0.2
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -160,6 +160,15 @@ compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 %if %{build_plf}
 This package is in Restricted as it violates several patents.
 %endif
+
+%package doc
+Summary:	Documentation for %{name}
+Group:		Development/Other
+BuildArch:	noarch
+Conflicts:	%{name} < 3.0.2-2
+
+%description doc
+Documentation for %{name}.
 
 %package -n	%{libavcodec}
 Summary:	Shared library part of ffmpeg
@@ -422,11 +431,14 @@ export LDFLAGS="%{ldflags}"
 %makeinstall_std SRC_PATH=`pwd`
 
 %files
-%doc doc/*.html doc/*.txt doc/*.conf
 %{_bindir}/*
 %{_mandir}/man1/*
 %{_datadir}/ffmpeg
 %exclude %{_datadir}/ffmpeg/examples
+
+%files doc
+%doc doc/*.html doc/*.txt doc/*.conf
+%{_docdir}/ffmpeg/*.html
 
 %files -n %{libavcodec}
 %{_libdir}/libavcodec.so.%{major}*
