@@ -49,8 +49,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	3.0.2
-Release:	2
+Version:	3.1
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -115,7 +115,6 @@ BuildRequires:	pkgconfig(shine)
 BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
-BuildRequires:	pkgconfig(libutvideo)
 BuildRequires:	pkgconfig(vdpau)
 BuildRequires:	pkgconfig(vidstab)
 BuildRequires:	pkgconfig(vorbis)
@@ -343,7 +342,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-libnut \
 	--enable-libgsm \
 	--enable-libcelt \
-	--enable-libutvideo \
 %if %{with opencv}
 	--enable-libopencv \
 	--enable-frei0r \
