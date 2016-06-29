@@ -50,7 +50,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	3.1
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -377,8 +377,6 @@ export LDFLAGS="%{ldflags}"
 %endif
 	--enable-libvidstab \
 	--enable-libflite \
-	--disable-decoder=aac \
-	--disable-encoder=aac \
 	--enable-libxcb \
 	--enable-libxcb-shm \
 	--enable-libxcb-xfixes \
