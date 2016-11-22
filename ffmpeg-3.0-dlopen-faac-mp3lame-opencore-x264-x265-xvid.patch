@@ -1,10 +1,8 @@
 --- ffmpeg-3.1/configure.dlopen~	2016-06-27 01:54:28.000000000 +0200
 +++ ffmpeg-3.1/configure	2016-06-27 12:37:16.132817676 +0200
-@@ -226,7 +226,9 @@ External library support:
+@@ -226,6 +226,7 @@ External library support:
    --enable-libebur128      enable libebur128 for EBU R128 measurement,
                             needed for loudnorm filter [no]
-   --enable-libfaac         enable AAC encoding via libfaac [no]
-+  --enable-libfaac-dlopen  enable AAC encoding via dlopen()'ed libfaac [no]
    --enable-libfdk-aac      enable AAC de/encoding via libfdk-aac [no]
 +  --enable-libfdk-aac-dlopen enable AAC de/encoding via dlopen()'ed libfdk-aac [no]
    --enable-libflite        enable flite (voice synthesis) support via libflite [no]
@@ -42,11 +40,9 @@
    --enable-libzimg         enable z.lib, needed for zscale filter [no]
    --enable-libzmq          enable message passing via libzmq [no]
    --enable-libzvbi         enable teletext support via libzvbi [no]
-@@ -1487,7 +1495,9 @@ EXTERNAL_LIBRARY_LIST="
+@@ -1487,6 +1495,7 @@ EXTERNAL_LIBRARY_LIST="
      libdc1394
      libebur128
-     libfaac
-+    libfaac_dlopen
      libfdk_aac
 +    libfdk_aac_dlopen
      libflite
@@ -82,11 +78,7 @@
      libzimg
      libzmq
      libzvbi
-@@ -5642,9 +5658,11 @@ enabled libcelt           && require lib
- enabled libcaca           && require_pkg_config caca caca.h caca_create_canvas
- enabled libebur128        && require ebur128 ebur128.h ebur128_relative_threshold -lebur128
- enabled libfaac           && require2 libfaac "stdint.h faac.h" faacEncGetVersion -lfaac
-+enabled libfaac_dlopen    && enable libfaac && add_cppflags "-I$(dirname `readlink -f $0`)/localinc"
+@@ -5642,6 +5658,7 @@ enabled libcelt           && require lib
  enabled libfdk_aac        && { use_pkg_config fdk-aac "fdk-aac/aacenc_lib.h" aacEncOpen ||
                                 { require libfdk_aac fdk-aac/aacenc_lib.h aacEncOpen -lfdk-aac &&
                                   warn "using libfdk without pkg-config"; } }
@@ -139,112 +131,6 @@
 +		goto error;
 +
 +#endif
---- ffmpeg-3.1/libavcodec/libfaac.c.dlopen~	2016-06-27 01:54:29.000000000 +0200
-+++ ffmpeg-3.1/libavcodec/libfaac.c	2016-06-27 12:31:11.729298478 +0200
-@@ -36,6 +36,90 @@
- /* libfaac has an encoder delay of 1024 samples */
- #define FAAC_DELAY_SAMPLES 1024
- 
-+#ifdef CONFIG_LIBFAAC_DLOPEN
-+#include "dlopen.h"
-+
-+static int (*dl_faacEncGetDecoderSpecificInfo) (faacEncHandle hEncoder, unsigned char **ppBuffer,
-+					  unsigned long *pSizeOfDecoderSpecificInfo);
-+static int (*dl_faacEncSetConfiguration) (faacEncHandle hEncoder,
-+				    faacEncConfigurationPtr config);
-+
-+static faacEncConfigurationPtr (*dl_faacEncGetCurrentConfiguration) (faacEncHandle hEncoder);
-+static faacEncHandle (*dl_faacEncOpen) (unsigned long sampleRate,
-+				  unsigned int numChannels,
-+				  unsigned long *inputSamples,
-+				  unsigned long *maxOutputBytes);
-+static int (*dl_faacEncEncode) (faacEncHandle hEncoder, int32_t * inputBuffer, unsigned int samplesInput,
-+			 unsigned char *outputBuffer,
-+			 unsigned int bufferSize);
-+static int (*dl_faacEncClose) (faacEncHandle hEncoder);
-+
-+#define faacEncGetDecoderSpecificInfo	dl_faacEncGetDecoderSpecificInfo
-+#define faacEncSetConfiguration		dl_faacEncSetConfiguration
-+#define	faacEncGetCurrentConfiguration	dl_faacEncGetCurrentConfiguration
-+#define	faacEncOpen			dl_faacEncOpen
-+#define	faacEncEncode			dl_faacEncEncode
-+#define	faacEncClose			dl_faacEncClose
-+#define	FAAC_LIB			"libfaac.so.0"
-+
-+static int loadLibFaac(AVCodecContext *avctx);
-+static int loadLibFaac(AVCodecContext *avctx) {
-+    void *libfaac = NULL;
-+    const char *err = NULL;
-+
-+
-+    libfaac = dlopen(FAAC_LIB, RTLD_LAZY);
-+    if ((err = dlerror())) {
-+	av_log(avctx, AV_LOG_FATAL, "%s\n%s is missing, faac support disabled\n", err, FAAC_LIB);
-+	if (libfaac)
-+	    dlclose(libfaac);
-+	return 1;
-+    }
-+
-+    dl_sym(faacEncGetDecoderSpecificInfo, (int (*) (faacEncHandle hEncoder,
-+				    unsigned char **ppBuffer,
-+		    		    unsigned long *pSizeOfDecoderSpecificInfo)),
-+		    libfaac);
-+
-+    dl_sym(faacEncGetDecoderSpecificInfo, (int (*) (faacEncHandle hEncoder,
-+				    unsigned char **ppBuffer,
-+		    		    unsigned long *pSizeOfDecoderSpecificInfo)),
-+	    	    libfaac);
-+
-+    dl_sym(faacEncSetConfiguration, (int (*) (faacEncHandle hEncoder,
-+		    		    faacEncConfigurationPtr config)),
-+	    	    libfaac);
-+
-+    dl_sym(faacEncGetCurrentConfiguration, (faacEncConfigurationPtr (*) (faacEncHandle hEncoder)),
-+	    	    libfaac);
-+
-+    dl_sym(faacEncOpen, (faacEncHandle (*) (unsigned long sampleRate,
-+		    		    unsigned int numChannels,
-+		    		    unsigned long *inputSamples,
-+		    		    unsigned long *maxOutputBytes)),
-+	    	    libfaac);
-+
-+    dl_sym(faacEncEncode, (int (*) (faacEncHandle hEncoder,
-+				    int32_t * inputBuffer,
-+				    unsigned int samplesInput,
-+		    		    unsigned char *outputBuffer,
-+		    		    unsigned int bufferSize)),
-+	    	    libfaac);
-+
-+    dl_sym(faacEncClose, (int (*) (faacEncHandle hEncoder)),
-+	    	    libfaac);
-+
-+    return 0;
-+
-+error:
-+    av_log(avctx, AV_LOG_FATAL, "libfaac: Missing symbols in %s: %s "
-+	    "faac support disabled\n", FAAC_LIB, err);
-+    dlclose(libfaac);
-+    return 1;
-+
-+}
-+#endif
-+
- typedef struct FaacAudioContext {
-     faacEncHandle faac_handle;
-     AudioFrameQueue afq;
-@@ -66,6 +150,12 @@ static av_cold int Faac_encode_init(AVCo
-     FaacAudioContext *s = avctx->priv_data;
-     faacEncConfigurationPtr faac_cfg;
-     unsigned long samples_input, max_bytes_output;
-+
-+#ifdef CONFIG_LIBFAAC_DLOPEN
-+    if (loadLibFaac(avctx))
-+	return -1;
-+#endif
-+
-     int ret;
- 
-     /* number of channels */
 --- ffmpeg-3.1/libavcodec/libfdk-aacdec.c.dlopen~	2016-06-27 01:54:29.000000000 +0200
 +++ ffmpeg-3.1/libavcodec/libfdk-aacdec.c	2016-06-27 12:31:11.730298485 +0200
 @@ -31,6 +31,54 @@

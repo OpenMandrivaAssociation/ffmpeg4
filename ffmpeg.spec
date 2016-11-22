@@ -49,7 +49,7 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	3.1.5
+Version:	3.2
 Release:	1
 %if %{build_plf}
 License:	GPLv3+
@@ -123,8 +123,7 @@ BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
 BuildRequires:	pkgconfig(zvbi-0.2)
 %if %{build_plf} || "%{disttag}" == "mdk"
-BuildRequires:	x264-devel >= 0.146
-BuildConflicts:	libx264.so.133 libx264_133
+BuildRequires:	x264-devel >= 0.148
 BuildRequires:	pkgconfig(x265)
 BuildRequires:	lame-devel
 BuildRequires:	opencore-amr-devel
@@ -188,7 +187,7 @@ Suggests:	%{dlopen_req xvidcore}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 %endif
 Suggests:	libx264.so.148%{_arch_tag_suffix}
-Suggests:	libx265.so.79%{_arch_tag_suffix}
+Suggests:	libx265.so.95%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
