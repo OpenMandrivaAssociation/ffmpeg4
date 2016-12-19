@@ -49,8 +49,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	3.0.2
-Release:	3
+Version:	3.0.5
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -309,6 +309,7 @@ find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
 export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
 export LDFLAGS="%{ldflags}"
 
+# why?
 %define	__cc	gcc
 %define	__cxx	g++
 ./configure \
