@@ -49,11 +49,7 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-<<<<<<< HEAD
 Version:	3.2.2
-=======
-Version:	3.0.5
->>>>>>> origin/3.0
 Release:	1
 %if %{build_plf}
 License:	GPLv3+
