@@ -307,6 +307,7 @@ find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
 export CFLAGS="%{optflags} -fPIC -I%{_includedir}/openjpeg-1.5/"
 export LDFLAGS="%{ldflags}"
 
+# why?
 %define	__cc	gcc
 %define	__cxx	g++
 ./configure \
