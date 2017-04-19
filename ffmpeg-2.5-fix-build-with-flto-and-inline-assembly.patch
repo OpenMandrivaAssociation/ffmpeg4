@@ -1,5 +1,5 @@
---- ffmpeg-3.2/libavcodec/cabac.c.flto_inline_asm~	2016-10-27 18:17:39.000000000 +0200
-+++ ffmpeg-3.2/libavcodec/cabac.c	2016-11-22 15:36:31.757898355 +0100
+--- ffmpeg-3.3/libavcodec/cabac.c.flto_inline_asm~	2017-04-13 03:55:55.000000000 +0200
++++ ffmpeg-3.3/libavcodec/cabac.c	2017-04-19 00:00:07.575644672 +0200
 @@ -32,7 +32,7 @@
  #include "cabac.h"
  #include "cabac_functions.h"
@@ -9,8 +9,8 @@
      9,8,7,7,6,6,6,6,5,5,5,5,5,5,5,5,
      4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
      3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
---- ffmpeg-3.2/libavcodec/x86/lpc.c.flto_inline_asm~	2016-03-29 04:25:25.000000000 +0200
-+++ ffmpeg-3.2/libavcodec/x86/lpc.c	2016-11-22 15:36:31.757898355 +0100
+--- ffmpeg-3.3/libavcodec/x86/lpc.c.flto_inline_asm~	2017-04-13 03:55:55.000000000 +0200
++++ ffmpeg-3.3/libavcodec/x86/lpc.c	2017-04-19 00:00:07.575644672 +0200
 @@ -26,8 +26,8 @@
  #include "libavutil/x86/cpu.h"
  #include "libavcodec/lpc.h"
@@ -22,8 +22,8 @@
  
  #if HAVE_SSE2_INLINE
  
---- ffmpeg-3.2/libavcodec/x86/simple_idct.c.flto_inline_asm~	2016-03-29 04:25:25.000000000 +0200
-+++ ffmpeg-3.2/libavcodec/x86/simple_idct.c	2016-11-22 15:36:31.757898355 +0100
+--- ffmpeg-3.3/libavcodec/x86/simple_idct.c.flto_inline_asm~	2017-04-13 03:55:55.000000000 +0200
++++ ffmpeg-3.3/libavcodec/x86/simple_idct.c	2017-04-19 00:00:07.575644672 +0200
 @@ -52,8 +52,8 @@
  #define ROW_SHIFT 11
  #define COL_SHIFT 20 // 6
@@ -35,8 +35,8 @@
  
  DECLARE_ALIGNED(8, static const int16_t, coeffs)[]= {
          1<<(ROW_SHIFT-1), 0, 1<<(ROW_SHIFT-1), 0,
---- ffmpeg-3.2/libavutil/mem.h.flto_inline_asm~	2016-10-27 18:17:40.000000000 +0200
-+++ ffmpeg-3.2/libavutil/mem.h	2016-11-22 16:03:12.422251277 +0100
+--- ffmpeg-3.3/libavutil/mem.h.flto_inline_asm~	2017-04-13 03:55:55.000000000 +0200
++++ ffmpeg-3.3/libavutil/mem.h	2017-04-19 00:02:47.850951210 +0200
 @@ -90,6 +90,8 @@
  #if defined(__INTEL_COMPILER) && __INTEL_COMPILER < 1110 || defined(__SUNPRO_C)
      #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n))) v
@@ -46,10 +46,10 @@
  #elif defined(__TI_COMPILER_VERSION__)
      #define DECLARE_ALIGNED(n,t,v)                      \
          AV_PRAGMA(DATA_ALIGN(v,n))                      \
-@@ -98,14 +100,16 @@
-         AV_PRAGMA(DATA_ALIGN(v,n))                      \
-         static const t __attribute__((aligned(n))) v
- #elif defined(__GNUC__)
+@@ -101,14 +103,16 @@
+     #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (FFMIN(n, 16)))) v
+     #define DECLARE_ASM_CONST(n,t,v)    static const t av_used __attribute__ ((aligned (FFMIN(n, 16)))) v
+ #elif defined(__GNUC__) || defined(__clang__)
 -    #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n))) v
 +    #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n))) __attribute__((used)) __attribute__((visibility("default"))) v
      #define DECLARE_ASM_CONST(n,t,v)    static const t av_used __attribute__ ((aligned (n))) v
@@ -64,8 +64,8 @@
  #endif
  
  /**
---- ffmpeg-3.2/libpostproc/postprocess.c.flto_inline_asm~	2016-06-27 01:54:30.000000000 +0200
-+++ ffmpeg-3.2/libpostproc/postprocess.c	2016-11-22 15:36:31.757898355 +0100
+--- ffmpeg-3.3/libpostproc/postprocess.c.flto_inline_asm~	2016-06-27 01:54:30.000000000 +0200
++++ ffmpeg-3.3/libpostproc/postprocess.c	2017-04-19 00:00:07.576644681 +0200
 @@ -121,17 +121,17 @@ const char *postproc_license(void)
  //#define NUM_BLOCKS_AT_ONCE 16 //not used yet
  
@@ -92,8 +92,8 @@
  
  
  static const struct PPFilter filters[]=
---- ffmpeg-3.2/libswscale/x86/rgb2rgb.c.flto_inline_asm~	2016-10-22 01:52:30.000000000 +0200
-+++ ffmpeg-3.2/libswscale/x86/rgb2rgb.c	2016-11-22 15:36:31.757898355 +0100
+--- ffmpeg-3.3/libswscale/x86/rgb2rgb.c.flto_inline_asm~	2017-04-13 03:55:56.000000000 +0200
++++ ffmpeg-3.3/libswscale/x86/rgb2rgb.c	2017-04-19 00:00:07.576644681 +0200
 @@ -36,7 +36,7 @@
  
  #if HAVE_INLINE_ASM
@@ -133,8 +133,8 @@
  
  DECLARE_ALIGNED(8, extern const uint64_t, ff_bgr2YOffset);
  DECLARE_ALIGNED(8, extern const uint64_t, ff_w1111);
---- ffmpeg-3.2/libswscale/x86/swscale.c.flto_inline_asm~	2016-10-27 18:17:40.000000000 +0200
-+++ ffmpeg-3.2/libswscale/x86/swscale.c	2016-11-22 15:36:31.757898355 +0100
+--- ffmpeg-3.3/libswscale/x86/swscale.c.flto_inline_asm~	2017-04-13 03:55:56.000000000 +0200
++++ ffmpeg-3.3/libswscale/x86/swscale.c	2017-04-19 00:00:07.577644689 +0200
 @@ -33,8 +33,8 @@
  
  #define DITHER1XBPP
@@ -167,8 +167,8 @@
  
  
  //MMX versions
---- ffmpeg-3.2/libswscale/x86/yuv2rgb.c.flto_inline_asm~	2016-03-29 04:25:33.000000000 +0200
-+++ ffmpeg-3.2/libswscale/x86/yuv2rgb.c	2016-11-22 15:36:31.758898332 +0100
+--- ffmpeg-3.3/libswscale/x86/yuv2rgb.c.flto_inline_asm~	2016-03-29 04:25:33.000000000 +0200
++++ ffmpeg-3.3/libswscale/x86/yuv2rgb.c	2017-04-19 00:00:07.577644689 +0200
 @@ -42,12 +42,12 @@
  #define DITHER1XBPP // only for MMX
  
@@ -187,8 +187,8 @@
  
  //MMX versions
  #if HAVE_MMX_INLINE && HAVE_6REGS
---- ffmpeg-3.2/libswscale/x86/yuv2rgb_template.c.flto_inline_asm~	2016-03-29 04:25:33.000000000 +0200
-+++ ffmpeg-3.2/libswscale/x86/yuv2rgb_template.c	2016-11-22 15:36:31.758898332 +0100
+--- ffmpeg-3.3/libswscale/x86/yuv2rgb_template.c.flto_inline_asm~	2016-03-29 04:25:33.000000000 +0200
++++ ffmpeg-3.3/libswscale/x86/yuv2rgb_template.c	2017-04-19 00:00:07.577644689 +0200
 @@ -271,11 +271,11 @@ static inline int RENAME(yuv420_rgb16)(S
      RGB_PACK24_B
  

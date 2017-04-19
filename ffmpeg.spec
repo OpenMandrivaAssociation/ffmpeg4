@@ -49,8 +49,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	3.2.4
-Release:	2
+Version:	3.3
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -322,6 +322,8 @@ export LDFLAGS="%{ldflags}"
 	--enable-avresample \
 	--enable-postproc \
 	--enable-gpl \
+	--enable-version3 \
+	--enable-nonfree \
 %ifarch %{ix86} x86_64
 	--disable-lto \
 %else
@@ -332,7 +334,6 @@ export LDFLAGS="%{ldflags}"
 	--enable-libvorbis \
 	--disable-encoder=vorbis \
 	--enable-libvpx \
-	--enable-x11grab \
 	--enable-runtime-cpudetect \
 	--enable-libdc1394 \
 	--enable-libschroedinger \
