@@ -310,7 +310,7 @@ export LDFLAGS="%{ldflags}"
 # why?
 %define	__cc	gcc
 %define	__cxx	g++
-./configure \
+if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
 	--prefix=%{_prefix} \
@@ -418,8 +418,13 @@ export LDFLAGS="%{ldflags}"
 %if 0
 	--disable-libaacplus \
 	--disable-libstagefright-h264 \
-	--disable-decklink
+	--disable-decklink \
 %endif
+	; then
+	
+	cat config.log
+	exit 1
+fi
 
 %make V=1
 
