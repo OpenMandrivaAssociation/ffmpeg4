@@ -50,7 +50,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	3.3.3
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -107,7 +107,7 @@ BuildRequires:	pkgconfig(frei0r)
 %endif
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
-BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(schroedinger-1.0)
 %if 0
 BuildRequires:	pkgconfig(shine)
@@ -324,6 +324,7 @@ if ! ./configure \
 	--enable-gpl \
 	--enable-version3 \
 	--enable-nonfree \
+	--enable-ffplay \
 %ifarch %{ix86} x86_64
 	--disable-lto \
 %else
