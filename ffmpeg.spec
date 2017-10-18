@@ -71,7 +71,6 @@ BuildRequires:	gsm-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	ladspa-devel
 BuildRequires:	libgme-devel
-BuildRequires:	libnut-devel
 BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(fontconfig)
@@ -108,7 +107,6 @@ BuildRequires:	pkgconfig(frei0r)
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(speex)
 BuildRequires:	pkgconfig(sdl2)
-BuildRequires:	pkgconfig(schroedinger-1.0)
 %if 0
 BuildRequires:	pkgconfig(shine)
 %endif
