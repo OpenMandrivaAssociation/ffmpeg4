@@ -305,6 +305,11 @@ find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
 export CFLAGS="%{optflags} -fPIC -I/usr/include/openjpeg-2.2"
 export LDFLAGS="%{ldflags}"
 
+%ifarch %{ix86}
+# Allow the use of %xmm7 and friends in inline assembly
+export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
+%endif
+
 # why?
 %define	__cc	gcc
 %define	__cxx	g++
