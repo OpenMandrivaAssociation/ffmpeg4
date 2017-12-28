@@ -1,10 +1,10 @@
-%define major		57
-%define ppmajor 	54
-%define avumajor 	55
-%define swsmajor 	4
-%define filtermajor 	6
-%define swrmajor 	2
-%define	avrmajor	3
+%define major		58
+%define ppmajor 	55
+%define avumajor 	56
+%define swsmajor 	5
+%define filtermajor 	7
+%define swrmajor 	3
+%define	avrmajor	4
 %define libavcodec	%mklibname avcodec %{major}
 %define	libavdevice	%mklibname avdevice %{major}
 %define libavfilter	%mklibname avfilter %{filtermajor}
@@ -49,8 +49,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	3.4.1
-Release:	2
+Version:	3.5.0
+Release:	0.20171227.0
 %if %{build_plf}
 License:	GPLv3+
 %else
