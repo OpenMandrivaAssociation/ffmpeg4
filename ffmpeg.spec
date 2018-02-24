@@ -63,6 +63,7 @@ Patch1:		ffmpeg-3.0-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch4:		ffmpeg-local-headers-for-dlopen.patch
+Patch5:		ffmpeg-3.5.0-force_dl.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	bzip2-devel
@@ -296,6 +297,7 @@ This package contains the static libraries for %{name}.
 %endif
 %endif
 %patch3 -p1 -b .flto_inline_asm~
+%patch5 -p1 -b .force_dl
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644

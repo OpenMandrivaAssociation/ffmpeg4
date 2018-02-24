@@ -1,0 +1,11 @@
+--- ffmpeg-3.5.0/configure.orig	2018-02-24 11:56:59.274144073 +0000
++++ ffmpeg-3.5.0/configure	2018-02-24 11:57:23.642987425 +0000
+@@ -5804,7 +5804,7 @@
+ enabled  lzma && check_lib lzma   lzma.h lzma_version_number -llzma
+ 
+ # On some systems dynamic loading requires no extra linker flags
+-check_lib libdl dlfcn.h "dlopen dlsym" || check_lib libdl dlfcn.h "dlopen dlsym" -ldl
++check_lib libdl dlfcn.h "dlopen dlsym" -ldl
+ 
+ check_lib libm math.h sin -lm
+ 
