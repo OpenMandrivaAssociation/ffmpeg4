@@ -59,10 +59,12 @@ License:	GPLv2+
 Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
+Source1:	restricted-multimedia-headers.tar.xz
+# Creates Source1
+Source10:	package-restricted-headers.sh
 Patch1:		ffmpeg-3.0-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
-Patch4:		ffmpeg-local-headers-for-dlopen.patch
 Patch5:		ffmpeg-3.5.0-force_dl.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
@@ -139,13 +141,6 @@ BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 BuildRequires:	opencl-devel
 %endif
 
-%track
-prog %name = {
-	url = http://ffmpeg.org/download.html
-	version = %version
-	regex = "(__VER__) was released on"
-}
-
 %description
 ffmpeg is a hyper fast realtime audio/video encoder, a streaming server
 and a generic audio and video file converter.
@@ -185,8 +180,8 @@ Suggests:	%{dlopen_req xvidcore}
 %if %{with faac}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 %endif
-Suggests:	libx264.so.148%{_arch_tag_suffix}
-Suggests:	libx265.so.95%{_arch_tag_suffix}
+Suggests:	libx264.so.152%{_arch_tag_suffix}
+Suggests:	libx265.so.151%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
@@ -288,13 +283,10 @@ Provides:	%{name}-static-devel = %{EVRD}
 This package contains the static libraries for %{name}.
 
 %prep
-%setup -q
+%setup -q -a 1
 %patch2 -p1 -b .timeh~
 %if %{with dlopen}
 %patch1 -p1 -b .dlopen~
-%if "%{disttag}" == "omv"
-%patch4 -p1 -b .dl_headers~
-%endif
 %endif
 %patch3 -p1 -b .flto_inline_asm~
 %patch5 -p1 -b .force_dl
