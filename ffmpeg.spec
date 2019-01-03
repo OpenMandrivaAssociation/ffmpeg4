@@ -47,10 +47,14 @@
 %bcond_with	opencv
 %bcond_without	swscaler
 
+# (tpg) use OpenMP
+%global optflags %{optflags} -fopenmp
+%global ldflags %{ldflags} -fopenmp
+
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	4.0.2
-Release:	2
+Version:	4.1
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -58,7 +62,7 @@ License:	GPLv2+
 %endif
 Group:		Video
 Url:		http://ffmpeg.org/
-Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
+Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
 Source1:	restricted-multimedia-headers.tar.xz
 # Creates Source1
 Source10:	package-restricted-headers.sh
