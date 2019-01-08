@@ -12,7 +12,10 @@
 %define libavutil	%mklibname avutil %{avumajor}
 %define libpostproc	%mklibname postproc %{ppmajor}
 %define libswresample	%mklibname swresample %{swrmajor}
-%define libswscale	%mklibname swscaler %{swsmajor}
+%define libswscale	%mklibname swscale %{swsmajor}
+# Workaround for incorrect naming in previous version.
+# Can be dropped on next soname bump.
+%define oldlibswscale	%mklibname swscaler %{swsmajor}
 %define	libavresample	%mklibname avresample %{avrmajor}
 %define devname		%mklibname %{name} -d
 %define statname	%mklibname %{name} -s -d
@@ -248,6 +251,7 @@ This package contains a shared library for %{name}.
 %package -n	%{libswscale}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
+%rename %{oldlibswscale}
 
 %description -n %{libswscale}
 This package contains a shared library for %{name}.
