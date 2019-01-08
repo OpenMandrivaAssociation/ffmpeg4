@@ -1,5 +1,6 @@
 #!/bin/sh
-sudo dnf install 'pkgconfig(x264)' 'pkgconfig(x265)' 'pkgconfig(fdk-aac)' faad2-devel 'pkgconfig(opencore-amrwb)' 'pkgconfig(opencore-amrnb)' xvid-devel
+sudo dnf --refresh install 'pkgconfig(x264)' 'pkgconfig(x265)' 'pkgconfig(fdk-aac)' faad2-devel 'pkgconfig(opencore-amrwb)' 'pkgconfig(opencore-amrnb)' xvid-devel
+sudo dnf upgrade 'pkgconfig(x264)' 'pkgconfig(x265)' 'pkgconfig(fdk-aac)' faad2-devel 'pkgconfig(opencore-amrwb)' 'pkgconfig(opencore-amrnb)' xvid-devel
 LOCALDIR=$(realpath $(dirname $0))
 TMPDIR=`mktemp -d /tmp/mmheadersXXXXXX`
 mkdir -p $TMPDIR/localinc
