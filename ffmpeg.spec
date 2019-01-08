@@ -312,6 +312,8 @@ export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
 # why?
 %define	__cc	gcc
 %define	__cxx	g++
+# --disable-lto for x86 below is a workaround for a build failure
+# http://file-store.openmandriva.org/api/v1/file_stores/8b662f6d7f68c13bcedf09f940c6aa82a587e474.log?show=true
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
@@ -327,7 +329,7 @@ if ! ./configure \
 	--enable-version3 \
 	--enable-nonfree \
 	--enable-ffplay \
-%ifarch %{ix86} x86_64
+%ifarch %{ix86} %{x86_64}
 	--disable-lto \
 %else
 	--enable-lto \
