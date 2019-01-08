@@ -78,6 +78,7 @@ BuildRequires:	gsm-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	ladspa-devel
 BuildRequires:	libgme-devel
+BuildRequires:	devel(libgomp)
 BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(fontconfig)
