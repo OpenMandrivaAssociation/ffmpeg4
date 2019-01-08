@@ -421,7 +421,7 @@ if ! ./configure \
 	--disable-decklink \
 %endif
 	; then
-	cat config.log
+	cat ffbuild/config.log
 	exit 1
 fi
 
