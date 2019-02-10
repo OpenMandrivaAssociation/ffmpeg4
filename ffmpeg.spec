@@ -56,7 +56,7 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	4.1
+Version:	4.1.1
 Release:	1
 %if %{build_plf}
 License:	GPLv3+
@@ -313,14 +313,12 @@ export LDFLAGS="%{ldflags}"
 export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
 %endif
 
-# why?
-%define	__cc	gcc
-%define	__cxx	g++
 # --disable-lto for x86 below is a workaround for a build failure
 # http://file-store.openmandriva.org/api/v1/file_stores/8b662f6d7f68c13bcedf09f940c6aa82a587e474.log?show=true
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
+	--ranlib=%{__ranlib} \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_libdir} \
