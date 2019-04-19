@@ -51,7 +51,7 @@
 %bcond_without	swscaler
 
 # (tpg) use OpenMP
-%global optflags %{optflags} -fopenmp -fno-integrated-as
+%global optflags %{optflags} -fopenmp
 %global ldflags %{ldflags} -fopenmp
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
@@ -313,6 +313,9 @@ export LDFLAGS="%{ldflags}"
 export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
 %endif
 
+# (tpg) 2019-04-19 disable LTO
+# BUILDSTDERR: /usr/bin/ld: fatal error: LLVM gold plugin: inline assembly requires more registers than available at line 2149161784
+# BUILDSTDERR: clang-8: error: linker command failed with exit code 1 (use -v to see invocation)
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
@@ -329,11 +332,10 @@ if ! ./configure \
 	--enable-version3 \
 	--enable-nonfree \
 	--enable-ffplay \
-%ifarch %{ix86}
+%ifarch %{ix86} %{x86_64}
 	--disable-lto \
 %else
 	--enable-lto \
-	--extra-cflags=-fno-integrated-as
 %endif
 	--enable-pthreads \
 	--enable-libtheora \
