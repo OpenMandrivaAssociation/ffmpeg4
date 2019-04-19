@@ -37,7 +37,7 @@
 
 # OpenCL can speed up things and offload work to the GPU, but as of 2014/12/21
 # (Mesa 10.4.0, Xorg 1.6.3, Intel driver 2.99.917), it causes crashes on startup
-%bcond_with	opencl
+%bcond_without	opencl
 
 %bcond_without	swscaler
 %bcond_with	faac
@@ -47,17 +47,17 @@
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
 # 4. PROFIT
-%bcond_with	opencv
+%bcond_without	opencv
 %bcond_without	swscaler
 
 # (tpg) use OpenMP
-%global optflags %{optflags} -fopenmp
+%global optflags %{optflags} -fopenmp -fno-integrated-as
 %global ldflags %{ldflags} -fopenmp
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.1.3
-Release:	2
+Release:	3
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -75,12 +75,12 @@ Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch5:		ffmpeg-3.5.0-force_dl.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
-BuildRequires:	bzip2-devel
+BuildRequires:	pkgconfig(bzip2)
 BuildRequires:	flite-devel
 BuildRequires:	gsm-devel
-BuildRequires:	jpeg-devel
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	ladspa-devel
-BuildRequires:	libgme-devel
+BuildRequires:	pkgconfig(libgme)
 BuildRequires:	gomp-devel
 BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
@@ -146,7 +146,7 @@ BuildRequires:	faac-devel
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 %endif
 %if %{with opencl}
-BuildRequires:	opencl-devel
+BuildRequires:	pkgconfig(OpenCL)
 %endif
 
 %description
