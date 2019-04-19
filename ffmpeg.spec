@@ -333,6 +333,7 @@ if ! ./configure \
 	--disable-lto \
 %else
 	--enable-lto \
+	--extra-cflags=-fno-integrated-as
 %endif
 	--enable-pthreads \
 	--enable-libtheora \
