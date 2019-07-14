@@ -51,12 +51,14 @@
 %bcond_without	swscaler
 
 # (tpg) use OpenMP
-%global optflags %{optflags} -fopenmp
-%global ldflags %{ldflags} -fopenmp
+# Also avoid lld for now
+# https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=219089
+%global optflags %{optflags} -Ofast -fopenmp -fuse-ld=gold
+%global ldflags %{ldflags} -Ofast -fopenmp -fuse-ld=gold
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	4.1.2
+Version:	4.1.4
 Release:	1
 %if %{build_plf}
 License:	GPLv3+
