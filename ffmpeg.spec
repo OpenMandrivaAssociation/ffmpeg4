@@ -37,7 +37,7 @@
 
 # OpenCL can speed up things and offload work to the GPU, but as of 2014/12/21
 # (Mesa 10.4.0, Xorg 1.6.3, Intel driver 2.99.917), it causes crashes on startup
-%bcond_with	opencl
+%bcond_without	opencl
 
 %bcond_without	swscaler
 %bcond_with	faac
@@ -47,7 +47,7 @@
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
 # 4. PROFIT
-%bcond_with	opencv
+%bcond_without	opencv
 %bcond_without	swscaler
 
 # (tpg) use OpenMP
@@ -77,12 +77,12 @@ Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch5:		ffmpeg-3.5.0-force_dl.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
-BuildRequires:	bzip2-devel
+BuildRequires:	pkgconfig(bzip2)
 BuildRequires:	flite-devel
 BuildRequires:	gsm-devel
-BuildRequires:	jpeg-devel
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	ladspa-devel
-BuildRequires:	libgme-devel
+BuildRequires:	pkgconfig(libgme)
 BuildRequires:	gomp-devel
 BuildRequires:	pkgconfig(caca)
 BuildRequires:	pkgconfig(celt)
@@ -148,7 +148,7 @@ BuildRequires:	faac-devel
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 %endif
 %if %{with opencl}
-BuildRequires:	opencl-devel
+BuildRequires:	pkgconfig(OpenCL)
 %endif
 
 %description
@@ -315,8 +315,9 @@ export LDFLAGS="%{ldflags}"
 export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
 %endif
 
-# --disable-lto for x86 below is a workaround for a build failure
-# http://file-store.openmandriva.org/api/v1/file_stores/8b662f6d7f68c13bcedf09f940c6aa82a587e474.log?show=true
+# (tpg) 2019-04-19 disable LTO
+# BUILDSTDERR: /usr/bin/ld: fatal error: LLVM gold plugin: inline assembly requires more registers than available at line 2149161784
+# BUILDSTDERR: clang-8: error: linker command failed with exit code 1 (use -v to see invocation)
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
