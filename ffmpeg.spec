@@ -144,7 +144,7 @@ BuildRequires:	xvid-devel
 %if %{with faac}
 BuildRequires:	faac-devel
 %endif
-%ifnarch %{armx}
+%ifnarch %{armx} %{riscv}
 BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 %endif
 %if %{with opencl}
