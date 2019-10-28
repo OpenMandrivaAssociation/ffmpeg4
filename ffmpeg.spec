@@ -59,7 +59,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.2.1
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -90,6 +90,7 @@ BuildRequires:	pkgconfig(fontconfig)
 %if !%{with dlopen} || "%{disttag}" == "mdk"
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
+BuildRequires:	pkgconfig(dav1d)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gl)
@@ -334,6 +335,7 @@ if ! ./configure \
 	--enable-version3 \
 	--enable-nonfree \
 	--enable-ffplay \
+	--enable-libdav1d
 %ifarch %{ix86} %{x86_64}
 	--disable-lto \
 %else
