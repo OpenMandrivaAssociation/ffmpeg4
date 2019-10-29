@@ -90,7 +90,9 @@ BuildRequires:	pkgconfig(fontconfig)
 %if !%{with dlopen} || "%{disttag}" == "mdk"
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
+BuildRequires:	pkgconfig(aom)
 BuildRequires:	pkgconfig(dav1d)
+BuildRequires:	pkgconfig(ffnvcodec)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gl)
@@ -334,8 +336,10 @@ if ! ./configure \
 	--enable-gpl \
 	--enable-version3 \
 	--enable-nonfree \
+	--enable-nvenc \
 	--enable-ffplay \
-	--enable-libdav1d
+	--enable-libdav1d \
+	--enable-libaom \
 %ifarch %{ix86} %{x86_64}
 	--disable-lto \
 %else
