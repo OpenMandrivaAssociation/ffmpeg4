@@ -335,7 +335,9 @@ if ! ./configure \
 	--enable-gpl \
 	--enable-version3 \
 	--enable-nonfree \
+%ifnarch %{armx} %{arm} %{riscv}
 	--enable-nvenc \
+%endif
 	--enable-ffplay \
 	--enable-libdav1d \
 %ifarch %{ix86} %{x86_64}
