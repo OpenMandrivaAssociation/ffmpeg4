@@ -35,9 +35,11 @@
 %bcond_without dlopen
 %endif
 
-# OpenCL can speed up things and offload work to the GPU, but as of 2014/12/21
-# (Mesa 10.4.0, Xorg 1.6.3, Intel driver 2.99.917), it causes crashes on startup
+%ifarch %{riscv}
+%bcond_with	opencl
+%else
 %bcond_without	opencl
+%endif
 
 %bcond_without	swscaler
 %bcond_with	faac
@@ -47,7 +49,11 @@
 # 2. rebuild opencv with new ffmpeg
 # 3. rebuild ffmpeg again
 # 4. PROFIT
+%ifarch %{riscv}
+%bcond_with	opencv
+%else
 %bcond_without	opencv
+%endif
 %bcond_without	swscaler
 
 # (tpg) use OpenMP
@@ -82,7 +88,9 @@ BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	ladspa-devel
 BuildRequires:	pkgconfig(libgme)
 BuildRequires:	gomp-devel
+%ifnarch %{riscv}
 BuildRequires:	pkgconfig(caca)
+%endif
 BuildRequires:	pkgconfig(celt)
 BuildRequires:	pkgconfig(fontconfig)
 %if !%{with dlopen} || "%{disttag}" == "mdk"
@@ -96,7 +104,9 @@ BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libass)
 BuildRequires:	pkgconfig(libavc1394)
+%ifnarch %{riscv}
 BuildRequires:	pkgconfig(libbluray)
+%endif
 BuildRequires:	pkgconfig(libbs2b)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libdc1394-2)
@@ -112,7 +122,9 @@ BuildRequires:	pkgconfig(libva)
 BuildRequires:	pkgconfig(libv4l2)
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libzmq)
+%ifnarch %{riscv}
 BuildRequires:	pkgconfig(openal)
+%endif
 %if %{with opencv}
 BuildRequires:	pkgconfig(opencv)
 BuildRequires:	pkgconfig(frei0r)
@@ -127,12 +139,16 @@ BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vdpau)
+%ifnarch %{riscv}
 BuildRequires:	pkgconfig(vidstab)
-BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vpx)
+%endif
+BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(xavs)
+%ifnarch %{riscv}
 BuildRequires:	pkgconfig(zvbi-0.2)
+%endif
 BuildRequires:	lame-devel
 %if %{build_plf} || "%{disttag}" == "mdk"
 BuildRequires:	x264-devel >= 0.148
@@ -347,7 +363,9 @@ if ! ./configure \
 	--enable-libtheora \
 	--enable-libvorbis \
 	--disable-encoder=vorbis \
+%ifnarch %{riscv}
 	--enable-libvpx \
+%endif
 	--enable-runtime-cpudetect \
 	--enable-libdc1394 \
 	--enable-librtmp \
@@ -367,10 +385,14 @@ if ! ./configure \
 	--enable-libcdio \
 	--enable-libpulse \
 	--enable-libv4l2 \
+%ifnarch %{riscv}
 	--enable-openal \
+%endif
 	--enable-opengl \
 	--enable-libzmq \
+%ifnarch %{riscv}
 	--enable-libzvbi \
+%endif
 	--enable-libwavpack \
 	--enable-libssh \
 	--enable-libsoxr \
@@ -379,8 +401,11 @@ if ! ./configure \
 	--enable-libilbc \
 	--enable-libiec61883 \
 	--enable-libgme \
+%ifnarch %{riscv}
 	--enable-libcaca \
 	--enable-libbluray \
+	--enable-libvidstab \
+%endif
 	--enable-ladspa \
 	--enable-libwebp \
 	--enable-avisynth \
@@ -388,7 +413,6 @@ if ! ./configure \
 %if 0
 	--enable-libshine \
 %endif
-	--enable-libvidstab \
 	--enable-libflite \
 	--enable-libxcb \
 	--enable-libxcb-shm \
