@@ -323,6 +323,9 @@ find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
 # use headers from current packages in restricted repo
 
 %build
+%ifarch %{ix86}
+%global ldflags %{ldflags} -Wl,-z,notext
+%endif
 export CFLAGS="%{optflags} -fPIC -I/usr/include/openjpeg-2.2"
 export LDFLAGS="%{ldflags}"
 
