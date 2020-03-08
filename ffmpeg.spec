@@ -43,16 +43,19 @@
 
 %bcond_without	swscaler
 %bcond_with	faac
-# bootstrap
-# rebuild ffmpeg after MESA api upgrade
-# 1. rebuild ffmpeg with disabled opencv
-# 2. rebuild opencv with new ffmpeg
-# 3. rebuild ffmpeg again
-# 4. PROFIT
-%ifarch %{riscv}
+
+%bcond_without	bootstrap
+
+# OpenCV, Soxr and PulseAudio use ffmpeg - can't link to them
+# while bootstrapping...
+%if %{with bootstrap}
 %bcond_with	opencv
+%bcond_with	soxr
+%bcond_with	pulse
 %else
 %bcond_without	opencv
+%bcond_without	soxr
+%bcond_without	pulse
 %endif
 %bcond_without	swscaler
 
@@ -115,7 +118,9 @@ BuildRequires:	pkgconfig(libilbc)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libopenjp2)
 BuildRequires:	pkgconfig(libpng)
+%if %{with pulse}
 BuildRequires:	pkgconfig(libpulse)
+%endif
 BuildRequires:	pkgconfig(librtmp)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(libva)
@@ -135,7 +140,9 @@ BuildRequires:	pkgconfig(sdl2)
 %if 0
 BuildRequires:	pkgconfig(shine)
 %endif
+%if %{with soxr}
 BuildRequires:	pkgconfig(soxr)
+%endif
 BuildRequires:	pkgconfig(theora)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vdpau)
@@ -386,7 +393,9 @@ if ! ./configure \
 	--enable-libass \
 	--enable-gnutls \
 	--enable-libcdio \
+%if %{with pulse}
 	--enable-libpulse \
+%endif
 	--enable-libv4l2 \
 %ifnarch %{riscv}
 	--enable-openal \
@@ -398,7 +407,9 @@ if ! ./configure \
 %endif
 	--enable-libwavpack \
 	--enable-libssh \
+%if %{with soxr}
 	--enable-libsoxr \
+%endif
 	--enable-libtwolame \
 	--enable-libopus \
 	--enable-libilbc \
