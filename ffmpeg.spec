@@ -66,7 +66,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.2.2
-Release:	4
+Release:	5
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -82,6 +82,13 @@ Patch1:		ffmpeg-4.2-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 Patch5:		ffmpeg-3.5.0-force_dl.patch
+# Add RAV1e support
+Patch6:		https://github.com/FFmpeg/FFmpeg/commit/d8bf24459b694338de4ceb2a2e6d4d2949d6658d.patch
+Patch7:		https://github.com/FFmpeg/FFmpeg/commit/3a84081cbd982ce1bd9456eca5b1b03cd495e0fe.patch
+Patch8:		https://github.com/FFmpeg/FFmpeg/commit/1354c39c78e5ca1e8bfaf9b65ed021f672f0729f.patch
+Patch9:		https://github.com/FFmpeg/FFmpeg/commit/846e26b8c93a313d9f0c1f7d4a2965b357482abf.patch
+Patch10:	https://github.com/FFmpeg/FFmpeg/commit/e47a95463116b17a6e96ef87e1341b5544747982.patch
+Patch11:	https://github.com/FFmpeg/FFmpeg/commit/c11b3253a4e6142ce7341dd4a1aaef075ad81c97.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	pkgconfig(bzip2)
@@ -100,6 +107,8 @@ BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
 BuildRequires:	pkgconfig(dav1d)
+BuildRequires:	pkgconfig(rav1e)
+BuildRequires:	pkgconfig(aom)
 BuildRequires:	pkgconfig(ffnvcodec)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls)
@@ -324,6 +333,12 @@ This package contains the static libraries for %{name}.
 %endif
 %patch3 -p1 -b .flto_inline_asm~
 %patch5 -p1 -b .force_dl
+%patch6 -p1 -b .p6~
+%patch7 -p1 -b .p7~
+%patch8 -p1 -b .p8~
+%patch9 -p1 -b .p9~
+%patch10 -p1 -b .p10~
+%patch11 -p1 -b .p11~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
@@ -364,6 +379,8 @@ if ! ./configure \
 %endif
 	--enable-ffplay \
 	--enable-libdav1d \
+	--enable-librav1e \
+	--enable-libaom \
 %ifarch %{ix86} %{x86_64}
 	--disable-lto \
 %else
