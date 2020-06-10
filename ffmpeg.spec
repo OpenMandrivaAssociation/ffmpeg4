@@ -1,3 +1,8 @@
+# ffmpeg is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%endif
+
 %define major		58
 %define ppmajor 	55
 %define avumajor 	56
@@ -13,12 +18,22 @@
 %define libpostproc	%mklibname postproc %{ppmajor}
 %define libswresample	%mklibname swresample %{swrmajor}
 %define libswscale	%mklibname swscale %{swsmajor}
+%define lib32avcodec	%mklib32name avcodec %{major}
+%define	lib32avdevice	%mklib32name avdevice %{major}
+%define lib32avfilter	%mklib32name avfilter %{filtermajor}
+%define lib32avformat	%mklib32name avformat %{major}
+%define lib32avutil	%mklib32name avutil %{avumajor}
+%define lib32postproc	%mklib32name postproc %{ppmajor}
+%define lib32swresample	%mklib32name swresample %{swrmajor}
+%define lib32swscale	%mklib32name swscale %{swsmajor}
 # Workaround for incorrect naming in previous version.
 # Can be dropped on next soname bump.
 %define oldlibswscale	%mklibname swscaler %{swsmajor}
 %define	libavresample	%mklibname avresample %{avrmajor}
 %define devname		%mklibname %{name} -d
 %define statname	%mklibname %{name} -s -d
+%define dev32name	%mklib32name %{name} -d
+%define stat32name	%mklib32name %{name} -s -d
 
 #####################
 # Hardcode PLF build
@@ -66,7 +81,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.2.3
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -325,6 +340,109 @@ Provides:	%{name}-static-devel = %{EVRD}
 %description -n	%{statname}
 This package contains the static libraries for %{name}.
 
+%if %{with compat32}
+%package -n	%{lib32avcodec}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+%if %{with faac}
+Suggests:	libfaac.so.0
+%endif
+Suggests:	libx264.so.157
+Suggests:	libx265.so.176
+Suggests:	libopencore-amrnb.so.0
+Suggests:	libopencore-amrwb.so.0
+Suggests:	libmp3lame.so.0
+Suggests:	libxvidcore.so.4
+Suggests:	libfdk-aac.so.2
+
+%description -n	%{lib32avcodec}
+This package contains a shared library for %{name}.
+
+%package -n	%{lib32avdevice}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32avdevice}
+This package contains a shared library for %{name}.
+
+%package -n	%{lib32avfilter}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n	%{lib32avfilter}
+This package contains a shared library for %{name}.
+
+%package -n	%{lib32avformat}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32avformat}
+This package contains a shared library for %{name}.
+
+%package -n	%{lib32avutil}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32avutil}
+This package contains a shared library for %{name}.
+
+%package -n	%{lib32postproc}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n	%{lib32postproc}
+This package contains a shared library for %{name}.
+
+%package -n	%{lib32swresample}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32swresample}
+This package contains a shared library for %{name}.
+
+%if %{with swscaler}
+%package -n	%{lib32swscale}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32swscale}
+This package contains a shared library for %{name}.
+%endif
+
+%package -n	%{lib32avresample}
+Summary:	Shared library part of ffmpeg (32-bit)
+Group:		System/Libraries
+
+%description -n %{lib32avresample}
+This package contains a shared library for %{name}.
+
+%package -n	%{dev32name}
+Summary:	Header files for the ffmpeg codec library (32-bit)
+Group:		Development/C
+Requires:	%{devname} = %{EVRD}
+Requires:	%{lib32avcodec} = %{EVRD}
+Requires:	%{lib32avdevice} = %{EVRD}
+Requires:	%{lib32avfilter} = %{EVRD}
+Requires:	%{lib32avformat} = %{EVRD}
+Requires:	%{lib32avutil} = %{EVRD}
+Requires:	%{lib32postproc} = %{EVRD}
+Requires:	%{lib32swresample} = %{EVRD}
+%if %{with swscaler}
+Requires:	%{lib32swscale} = %{EVRD}
+%endif
+
+%description -n	%{dev32name}
+This package contains the development files for %{name}.
+
+%package -n	%{stat32name}
+Summary:	Static library for the ffmpeg codec library (32-bit)
+Group:		Development/C
+Requires:	%{dev32name} = %{EVRD}
+
+%description -n	%{stat32name}
+This package contains the static libraries for %{name}.
+%endif
+
 %prep
 %setup -q -a 1
 %patch2 -p1 -b .timeh~
@@ -356,9 +474,138 @@ export LDFLAGS="%{ldflags}"
 export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
 %endif
 
+%if %{with compat32}
+mkdir build32
+cp -a $(ls -1 |grep -v build32) build32/
+cd build32
+if ! ./configure \
+	--cc="gcc -m32" \
+	--cxx="g++ -m32" \
+	--ranlib=%{__ranlib} \
+	--prefix=%{_prefix} \
+	--enable-shared \
+	--libdir=%{_prefix}/lib \
+	--shlibdir=%{_prefix}/lib \
+	--incdir=%{_includedir} \
+	--disable-stripping \
+	--enable-avresample \
+	--enable-postproc \
+	--enable-gpl \
+	--enable-version3 \
+	--enable-nonfree \
+%ifnarch %{armx} %{arm} %{riscv}
+	--enable-nvenc \
+%endif
+	--enable-ffplay \
+	--enable-libdav1d \
+	--enable-librav1e \
+	--enable-libaom \
+	--disable-lto \
+	--enable-pthreads \
+	--enable-libtheora \
+	--enable-libvorbis \
+	--disable-encoder=vorbis \
+%ifnarch %{riscv}
+	--enable-libvpx \
+%endif
+	--enable-runtime-cpudetect \
+	--enable-libdc1394 \
+	--enable-librtmp \
+	--enable-libspeex \
+	--enable-libfreetype \
+	--enable-libgsm \
+	--enable-libcelt \
+%if %{with opencv}
+	--enable-libopencv \
+	--enable-frei0r \
+%endif
+	--enable-libopenjpeg \
+	--enable-libxavs \
+	--enable-libmodplug \
+	--enable-libass \
+	--enable-gnutls \
+	--enable-libcdio \
+%if %{with pulse}
+	--enable-libpulse \
+%endif
+	--enable-libv4l2 \
+%ifnarch %{riscv}
+	--enable-openal \
+%endif
+	--enable-opengl \
+	--enable-libzmq \
+%ifnarch %{riscv}
+	--enable-libzvbi \
+%endif
+	--enable-libwavpack \
+	--enable-libssh \
+%if %{with soxr}
+	--enable-libsoxr \
+%endif
+	--enable-libtwolame \
+	--enable-libopus \
+	--enable-libilbc \
+	--enable-libiec61883 \
+	--enable-libgme \
+%ifnarch %{riscv}
+	--enable-libcaca \
+	--enable-libbluray \
+	--enable-libvidstab \
+%endif
+	--enable-ladspa \
+	--enable-libwebp \
+	--enable-avisynth \
+	--enable-fontconfig \
+	--enable-libflite \
+	--enable-libxcb \
+	--enable-libxcb-shm \
+	--enable-libxcb-xfixes \
+	--enable-libxcb-shape \
+	--enable-libbs2b \
+	--enable-libmp3lame \
+%if %{build_plf}
+	--enable-libfdk-aac \
+	--enable-libopencore-amrnb \
+	--enable-libopencore-amrwb \
+	--enable-version3 \
+	--enable-libx264 \
+	--enable-libx265 \
+	--enable-libvo-amrwbenc \
+	--enable-libxvid \
+%else
+%if %{with dlopen}
+	--enable-libfdk-aac-dlopen \
+	--enable-libopencore-amrnb-dlopen \
+	--enable-libopencore-amrwb-dlopen \
+	--enable-libx264-dlopen \
+	--enable-libx265-dlopen \
+	--enable-libxvid-dlopen \
+%if %{with faac}
+	--enable-libfaac-dlopen \
+%endif
+%endif
+%endif
+%if %{with faac} && !%{with dlopen}
+	--enable-nonfree \
+	--enable-libfaac \
+%endif
+%if %{with opencl}
+	--enable-opencl \
+%else
+	--disable-opencl \
+%endif
+	; then
+	cat ffbuild/config.log
+	exit 1
+fi
+%make_build
+cd ..
+%endif
+
 # (tpg) 2019-04-19 disable LTO
 # BUILDSTDERR: /usr/bin/ld: fatal error: LLVM gold plugin: inline assembly requires more registers than available at line 2149161784
 # BUILDSTDERR: clang-8: error: linker command failed with exit code 1 (use -v to see invocation)
+# (bero) 2020-06-10 Verified to still happen with clang 10.0.1
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
@@ -492,10 +739,15 @@ if ! ./configure \
 	exit 1
 fi
 
-%make V=1
+%make_build V=1
 
 %install
-%makeinstall_std SRC_PATH=`pwd`
+%if %{with compat32}
+cd build32
+%make_install SRC_PATH=`pwd`
+cd ..
+%endif
+%make_install SRC_PATH=`pwd`
 
 %files
 %{_bindir}/*
@@ -577,3 +829,59 @@ fi
 
 %files -n %{statname}
 %{_libdir}/*.a
+
+%if %{with compat32}
+%files -n %{lib32avcodec}
+%{_prefix}/lib/libavcodec.so.%{major}*
+
+%files -n %{lib32avdevice}
+%{_prefix}/lib/libavdevice.so.%{major}*
+
+%files -n %{lib32avfilter}
+%{_prefix}/lib/libavfilter.so.%{filtermajor}*
+
+%files -n %{lib32avformat}
+%{_prefix}/lib/libavformat.so.%{major}*
+
+%files -n %{lib32avutil}
+%{_prefix}/lib/libavutil.so.%{avumajor}*
+
+%files -n %{lib32postproc}
+%{_prefix}/lib/libpostproc.so.%{ppmajor}*
+
+%files -n %{lib32swresample}
+%{_prefix}/lib/libswresample.so.%{swrmajor}*
+
+%if %{with swscaler}
+%files -n %{lib32swscale}
+%{_prefix}/lib/libswscale.so.%{swsmajor}*
+%endif
+
+%files -n %{lib32avresample}
+%{_prefix}/lib/libavresample.so.%{avrmajor}*
+
+%files -n %{dev32name}
+%{_prefix}/lib/libavcodec.so
+%{_prefix}/lib/libavdevice.so
+%{_prefix}/lib/libavformat.so
+%{_prefix}/lib/libavresample.so
+%{_prefix}/lib/libavutil.so
+%{_prefix}/lib/libpostproc.so
+%{_prefix}/lib/libavfilter.so
+%{_prefix}/lib/libswresample.so
+%if %{with swscaler}
+%{_prefix}/lib/libswscale.so
+%{_prefix}/lib/pkgconfig/libswscale.pc
+%endif
+%{_prefix}/lib/pkgconfig/libavcodec.pc
+%{_prefix}/lib/pkgconfig/libavdevice.pc
+%{_prefix}/lib/pkgconfig/libavformat.pc
+%{_prefix}/lib/pkgconfig/libavresample.pc
+%{_prefix}/lib/pkgconfig/libavutil.pc
+%{_prefix}/lib/pkgconfig/libpostproc.pc
+%{_prefix}/lib/pkgconfig/libavfilter.pc
+%{_prefix}/lib/pkgconfig/libswresample.pc
+
+%files -n %{stat32name}
+%{_prefix}/lib/*.a
+%endif
