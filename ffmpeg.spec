@@ -123,7 +123,9 @@ BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
 BuildRequires:	pkgconfig(dav1d)
+%ifnarch %{ix86}
 BuildRequires:	pkgconfig(rav1e)
+%endif
 BuildRequires:	pkgconfig(aom)
 BuildRequires:	pkgconfig(ffnvcodec)
 BuildRequires:	pkgconfig(freetype2)
@@ -637,7 +639,9 @@ if ! ./configure \
 %endif
 	--enable-ffplay \
 	--enable-libdav1d \
+%ifnarch %{ix86}
 	--enable-librav1e \
+%endif
 	--enable-libaom \
 %ifarch %{ix86} %{x86_64}
 	--disable-lto \
