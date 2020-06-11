@@ -213,6 +213,16 @@ BuildRequires:	devel(libspeex)
 BuildRequires:	devel(libgnutls)
 BuildRequires:	devel(libaom)
 BuildRequires:	devel(libv4l2)
+BuildRequires:	devel(libfreetype)
+BuildRequires:	devel(libX11)
+BuildRequires:	devel(libX11-xcb)
+BuildRequires:	devel(libXdmcp)
+BuildRequires:	devel(libXss)
+BuildRequires:	devel(libgsm)
+BuildRequires:	devel(libGL)
+BuildRequires:	devel(libdrm)
+BuildRequires:	devel(libxcb)
+BuildRequires:	devel(libXau)
 %endif
 
 %description
