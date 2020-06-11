@@ -14,6 +14,7 @@
 %define	libavdevice	%mklibname avdevice %{major}
 %define libavfilter	%mklibname avfilter %{filtermajor}
 %define libavformat	%mklibname avformat %{major}
+%define	libavresample	%mklibname avresample %{avrmajor}
 %define libavutil	%mklibname avutil %{avumajor}
 %define libpostproc	%mklibname postproc %{ppmajor}
 %define libswresample	%mklibname swresample %{swrmajor}
@@ -22,6 +23,7 @@
 %define	lib32avdevice	%mklib32name avdevice %{major}
 %define lib32avfilter	%mklib32name avfilter %{filtermajor}
 %define lib32avformat	%mklib32name avformat %{major}
+%define	lib32avresample	%mklib32name avresample %{avrmajor}
 %define lib32avutil	%mklib32name avutil %{avumajor}
 %define lib32postproc	%mklib32name postproc %{ppmajor}
 %define lib32swresample	%mklib32name swresample %{swrmajor}
@@ -29,7 +31,6 @@
 # Workaround for incorrect naming in previous version.
 # Can be dropped on next soname bump.
 %define oldlibswscale	%mklibname swscaler %{swsmajor}
-%define	libavresample	%mklibname avresample %{avrmajor}
 %define devname		%mklibname %{name} -d
 %define statname	%mklibname %{name} -s -d
 %define dev32name	%mklib32name %{name} -d
@@ -196,6 +197,20 @@ BuildRequires:	crystalhd-devel >= 0-0.20121105.1
 %endif
 %if %{with opencl}
 BuildRequires:	pkgconfig(OpenCL)
+%endif
+%if %{with compat32}
+BuildRequires:	devel(libbz2)
+BuildRequires:	devel(libjpeg)
+BuildRequires:	devel(libgomp)
+BuildRequires:	devel(libfontconfig)
+BuildRequires:	devel(libopenal)
+BuildRequires:	devel(libogg)
+BuildRequires:	devel(libvorbis)
+BuildRequires:	devel(libopus)
+BuildRequires:	devel(libspeex)
+BuildRequires:	devel(libgnutls)
+BuildRequires:	devel(libaom)
+BuildRequires:	devel(libv4l2)
 %endif
 
 %description
@@ -478,7 +493,14 @@ export CFLAGS="${CFLAGS} -mmmx -msse -msse2 -msse3"
 mkdir build32
 cp -a $(ls -1 |grep -v build32) build32/
 cd build32
-if ! ./configure \
+# FIXME omitting some not very common 3rd party codecs
+# and outputs for now. Enable them (and build 32bit
+# versions of the corresponding libs) if something
+# in wine breaks...
+# We're also disabling some libraries for important
+# codecs (but ones that have an internal implementation
+# too -- such as lame/toolame).
+if ! CFLAGS="$(echo $CFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer" LDFLAGS="$(echo $LDFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer" ./configure \
 	--cc="gcc -m32" \
 	--cxx="g++ -m32" \
 	--ranlib=%{__ranlib} \
@@ -497,34 +519,30 @@ if ! ./configure \
 	--enable-nvenc \
 %endif
 	--enable-ffplay \
-	--enable-libdav1d \
-	--enable-librav1e \
+	--disable-libdav1d \
+	--disable-librav1e \
 	--enable-libaom \
-	--disable-lto \
+	--enable-lto \
 	--enable-pthreads \
-	--enable-libtheora \
+	--disable-libtheora \
 	--enable-libvorbis \
 	--disable-encoder=vorbis \
-%ifnarch %{riscv}
-	--enable-libvpx \
-%endif
+	--disable-libvpx \
 	--enable-runtime-cpudetect \
-	--enable-libdc1394 \
-	--enable-librtmp \
+	--disable-libdc1394 \
+	--disable-librtmp \
 	--enable-libspeex \
 	--enable-libfreetype \
 	--enable-libgsm \
-	--enable-libcelt \
-%if %{with opencv}
-	--enable-libopencv \
-	--enable-frei0r \
-%endif
-	--enable-libopenjpeg \
-	--enable-libxavs \
-	--enable-libmodplug \
-	--enable-libass \
+	--disable-libcelt \
+	--disable-libopencv \
+	--disable-frei0r \
+	--disable-libopenjpeg \
+	--disable-libxavs \
+	--disable-libmodplug \
+	--disable-libass \
 	--enable-gnutls \
-	--enable-libcdio \
+	--disable-libcdio \
 %if %{with pulse}
 	--enable-libpulse \
 %endif
@@ -533,36 +551,31 @@ if ! ./configure \
 	--enable-openal \
 %endif
 	--enable-opengl \
-	--enable-libzmq \
-%ifnarch %{riscv}
-	--enable-libzvbi \
-%endif
-	--enable-libwavpack \
-	--enable-libssh \
+	--disable-libzmq \
+	--disable-libzvbi \
+	--disable-libwavpack \
+	--disable-libssh \
 %if %{with soxr}
 	--enable-libsoxr \
 %endif
-	--enable-libtwolame \
+	--disable-libtwolame \
 	--enable-libopus \
-	--enable-libilbc \
-	--enable-libiec61883 \
-	--enable-libgme \
-%ifnarch %{riscv}
-	--enable-libcaca \
-	--enable-libbluray \
-	--enable-libvidstab \
-%endif
-	--enable-ladspa \
-	--enable-libwebp \
+	--disable-libilbc \
+	--disable-libiec61883 \
+	--disable-libgme \
+	--disable-libbluray \
+	--disable-libcaca \
+	--disable-libvidstab \
+	--disable-ladspa \
+	--disable-libwebp \
 	--enable-avisynth \
 	--enable-fontconfig \
-	--enable-libflite \
 	--enable-libxcb \
 	--enable-libxcb-shm \
 	--enable-libxcb-xfixes \
 	--enable-libxcb-shape \
-	--enable-libbs2b \
-	--enable-libmp3lame \
+	--disable-libbs2b \
+	--disable-libmp3lame \
 %if %{build_plf}
 	--enable-libfdk-aac \
 	--enable-libopencore-amrnb \
@@ -589,11 +602,9 @@ if ! ./configure \
 	--enable-nonfree \
 	--enable-libfaac \
 %endif
-%if %{with opencl}
-	--enable-opencl \
-%else
 	--disable-opencl \
-%endif
+	--disable-asm \
+	--disable-x86asm \
 	; then
 	cat ffbuild/config.log
 	exit 1
