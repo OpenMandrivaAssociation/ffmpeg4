@@ -79,10 +79,13 @@
 %global optflags %{optflags} -Ofast -fopenmp
 %global ldflags %{ldflags} -Ofast -fopenmp
 
+%define x264_major 159
+%define x265_major 192
+
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.2.3
-Release:	3
+Release:	4
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -92,6 +95,7 @@ Group:		Video
 Url:		http://ffmpeg.org/
 Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
 Source1:	restricted-multimedia-headers.tar.xz
+Source2:	restricted-defines.macros
 # Creates Source1
 Source10:	package-restricted-headers.sh
 Patch1:		ffmpeg-4.2-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
@@ -264,8 +268,8 @@ Suggests:	%{dlopen_req xvidcore}
 %if %{with faac}
 Suggests:	libfaac.so.0%{_arch_tag_suffix}
 %endif
-Suggests:	libx264.so.157%{_arch_tag_suffix}
-Suggests:	libx265.so.176%{_arch_tag_suffix}
+Suggests:	libx264.so.%{x264_major}%{_arch_tag_suffix}
+Suggests:	libx265.so.%{x265_major}%{_arch_tag_suffix}
 Suggests:	libopencore-amrnb.so.0%{_arch_tag_suffix}
 Suggests:	libopencore-amrwb.so.0%{_arch_tag_suffix}
 Suggests:	libmp3lame.so.0%{_arch_tag_suffix}
@@ -374,8 +378,8 @@ Group:		System/Libraries
 %if %{with faac}
 Suggests:	libfaac.so.0
 %endif
-Suggests:	libx264.so.157
-Suggests:	libx265.so.176
+Suggests:	libx264.so.%{x264_major}
+Suggests:	libx265.so.%{x265_major}
 Suggests:	libopencore-amrnb.so.0
 Suggests:	libopencore-amrwb.so.0
 Suggests:	libmp3lame.so.0
