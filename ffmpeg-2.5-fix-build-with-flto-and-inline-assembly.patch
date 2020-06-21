@@ -1,6 +1,7 @@
---- ffmpeg-3.5.0/libavcodec/cabac.c.flto_inline_asm~	2017-12-28 01:23:00.544230448 +0100
-+++ ffmpeg-3.5.0/libavcodec/cabac.c	2017-12-28 01:24:11.227565539 +0100
-@@ -32,7 +32,7 @@
+diff -up ffmpeg-4.3/libavcodec/cabac.c.flto_inline_asm~ ffmpeg-4.3/libavcodec/cabac.c
+--- ffmpeg-4.3/libavcodec/cabac.c.flto_inline_asm~	2020-06-15 20:54:24.000000000 +0200
++++ ffmpeg-4.3/libavcodec/cabac.c	2020-06-21 02:01:43.471722832 +0200
+@@ -31,7 +31,7 @@
  #include "cabac.h"
  #include "cabac_functions.h"
  
@@ -9,8 +10,9 @@
      9,8,7,7,6,6,6,6,5,5,5,5,5,5,5,5,
      4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
      3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
---- ffmpeg-3.5.0/libavcodec/x86/lpc.c.flto_inline_asm~	2017-12-27 19:38:13.000000000 +0100
-+++ ffmpeg-3.5.0/libavcodec/x86/lpc.c	2017-12-28 01:23:00.544230448 +0100
+diff -up ffmpeg-4.3/libavcodec/x86/lpc.c.flto_inline_asm~ ffmpeg-4.3/libavcodec/x86/lpc.c
+--- ffmpeg-4.3/libavcodec/x86/lpc.c.flto_inline_asm~	2020-05-21 17:55:31.000000000 +0200
++++ ffmpeg-4.3/libavcodec/x86/lpc.c	2020-06-21 02:01:43.471722832 +0200
 @@ -26,8 +26,8 @@
  #include "libavutil/x86/cpu.h"
  #include "libavcodec/lpc.h"
@@ -22,8 +24,9 @@
  
  #if HAVE_SSE2_INLINE
  
---- ffmpeg-3.5.0/libavutil/mem.h.flto_inline_asm~	2017-12-28 01:23:00.544230448 +0100
-+++ ffmpeg-3.5.0/libavutil/mem.h	2017-12-28 01:26:01.723977757 +0100
+diff -up ffmpeg-4.3/libavutil/mem.h.flto_inline_asm~ ffmpeg-4.3/libavutil/mem.h
+--- ffmpeg-4.3/libavutil/mem.h.flto_inline_asm~	2020-05-21 17:55:31.000000000 +0200
++++ ffmpeg-4.3/libavutil/mem.h	2020-06-21 02:01:43.471722832 +0200
 @@ -104,14 +104,16 @@
      #define DECLARE_ALIGNED(n,t,v)      t __attribute__ ((aligned (n))) v
      #define DECLARE_ASM_ALIGNED(n,t,v)  t __attribute__ ((aligned (n))) v
@@ -50,8 +53,9 @@
  #endif
  
  /**
---- ffmpeg-3.5.0/libpostproc/postprocess.c.flto_inline_asm~	2017-12-27 19:38:13.000000000 +0100
-+++ ffmpeg-3.5.0/libpostproc/postprocess.c	2017-12-28 01:23:00.545230739 +0100
+diff -up ffmpeg-4.3/libpostproc/postprocess.c.flto_inline_asm~ ffmpeg-4.3/libpostproc/postprocess.c
+--- ffmpeg-4.3/libpostproc/postprocess.c.flto_inline_asm~	2020-06-15 20:54:24.000000000 +0200
++++ ffmpeg-4.3/libpostproc/postprocess.c	2020-06-21 02:01:43.471722832 +0200
 @@ -118,17 +118,17 @@ const char *postproc_license(void)
  //#define NUM_BLOCKS_AT_ONCE 16 //not used yet
  
@@ -78,8 +82,9 @@
  
  
  static const struct PPFilter filters[]=
---- ffmpeg-3.5.0/libswscale/x86/rgb2rgb.c.flto_inline_asm~	2017-12-27 19:38:13.000000000 +0100
-+++ ffmpeg-3.5.0/libswscale/x86/rgb2rgb.c	2017-12-28 01:23:00.545230739 +0100
+diff -up ffmpeg-4.3/libswscale/x86/rgb2rgb.c.flto_inline_asm~ ffmpeg-4.3/libswscale/x86/rgb2rgb.c
+--- ffmpeg-4.3/libswscale/x86/rgb2rgb.c.flto_inline_asm~	2020-05-21 17:55:31.000000000 +0200
++++ ffmpeg-4.3/libswscale/x86/rgb2rgb.c	2020-06-21 02:01:43.471722832 +0200
 @@ -36,7 +36,7 @@
  
  #if HAVE_INLINE_ASM
@@ -119,9 +124,10 @@
  
  DECLARE_ALIGNED(8, extern const uint64_t, ff_bgr2YOffset);
  DECLARE_ALIGNED(8, extern const uint64_t, ff_w1111);
---- ffmpeg-3.5.0/libswscale/x86/swscale.c.flto_inline_asm~	2017-12-27 19:38:13.000000000 +0100
-+++ ffmpeg-3.5.0/libswscale/x86/swscale.c	2017-12-28 01:27:12.536414005 +0100
-@@ -33,8 +33,8 @@
+diff -up ffmpeg-4.3/libswscale/x86/swscale.c.flto_inline_asm~ ffmpeg-4.3/libswscale/x86/swscale.c
+--- ffmpeg-4.3/libswscale/x86/swscale.c.flto_inline_asm~	2020-06-15 20:54:24.000000000 +0200
++++ ffmpeg-4.3/libswscale/x86/swscale.c	2020-06-21 02:01:43.471722832 +0200
+@@ -41,8 +41,8 @@ const DECLARE_ALIGNED(8, uint64_t, ff_di
  
  #define DITHER1XBPP
  
@@ -153,8 +159,9 @@
  
  
  //MMX versions
---- ffmpeg-3.5.0/libswscale/x86/yuv2rgb.c.flto_inline_asm~	2017-12-27 19:38:13.000000000 +0100
-+++ ffmpeg-3.5.0/libswscale/x86/yuv2rgb.c	2017-12-28 01:23:00.545230739 +0100
+diff -up ffmpeg-4.3/libswscale/x86/yuv2rgb.c.flto_inline_asm~ ffmpeg-4.3/libswscale/x86/yuv2rgb.c
+--- ffmpeg-4.3/libswscale/x86/yuv2rgb.c.flto_inline_asm~	2020-06-21 02:01:43.471722832 +0200
++++ ffmpeg-4.3/libswscale/x86/yuv2rgb.c	2020-06-21 02:03:04.922671766 +0200
 @@ -42,12 +42,12 @@
  #define DITHER1XBPP // only for MMX
  
@@ -172,23 +179,5 @@
 +DECLARE_ASM_CONST_VISIBLE(8, uint64_t, pb_07) = 0x0707070707070707ULL;
  
  //MMX versions
- #if HAVE_MMX_INLINE && HAVE_6REGS
---- ffmpeg-3.5.0/libswscale/x86/yuv2rgb_template.c.flto_inline_asm~	2017-12-27 19:38:13.000000000 +0100
-+++ ffmpeg-3.5.0/libswscale/x86/yuv2rgb_template.c	2017-12-28 01:23:00.545230739 +0100
-@@ -271,11 +271,11 @@ static inline int RENAME(yuv420_rgb16)(S
-     RGB_PACK24_B
- 
- #if COMPILE_TEMPLATE_MMXEXT
--DECLARE_ASM_CONST(8, int16_t, mask1101[4]) = {-1,-1, 0,-1};
--DECLARE_ASM_CONST(8, int16_t, mask0010[4]) = { 0, 0,-1, 0};
--DECLARE_ASM_CONST(8, int16_t, mask0110[4]) = { 0,-1,-1, 0};
--DECLARE_ASM_CONST(8, int16_t, mask1001[4]) = {-1, 0, 0,-1};
--DECLARE_ASM_CONST(8, int16_t, mask0100[4]) = { 0,-1, 0, 0};
-+DECLARE_ASM_CONST_VISIBLE(8, int16_t, mask1101[4]) = {-1,-1, 0,-1};
-+DECLARE_ASM_CONST_VISIBLE(8, int16_t, mask0010[4]) = { 0, 0,-1, 0};
-+DECLARE_ASM_CONST_VISIBLE(8, int16_t, mask0110[4]) = { 0,-1,-1, 0};
-+DECLARE_ASM_CONST_VISIBLE(8, int16_t, mask1001[4]) = {-1, 0, 0,-1};
-+DECLARE_ASM_CONST_VISIBLE(8, int16_t, mask0100[4]) = { 0,-1, 0, 0};
- #undef RGB_PACK24_B
- #define RGB_PACK24_B\
-     "pshufw    $0xc6,  %%mm2, %%mm1 \n"\
+ #if HAVE_MMX
+diff -up ffmpeg-4.3/libswscale/x86/yuv2rgb_template.c.flto_inline_asm~ ffmpeg-4.3/libswscale/x86/yuv2rgb_template.c
