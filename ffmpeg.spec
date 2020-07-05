@@ -120,10 +120,12 @@ BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
 BuildRequires:	pkgconfig(dav1d)
-%ifnarch %{ix86}
+%ifnarch %{ix86} %{riscv}
 BuildRequires:	pkgconfig(rav1e)
 %endif
+%ifnarch %{riscv}
 BuildRequires:	pkgconfig(aom)
+%endif
 BuildRequires:	pkgconfig(ffnvcodec)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gnutls)
