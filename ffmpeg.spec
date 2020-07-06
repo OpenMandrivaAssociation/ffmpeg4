@@ -120,7 +120,7 @@ BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
 BuildRequires:	pkgconfig(dav1d)
-%ifnarch %{ix86} %{riscv}
+%ifnarch %{ix86} %{riscv} %aarch64
 BuildRequires:	pkgconfig(rav1e)
 %endif
 %ifnarch %{riscv}
