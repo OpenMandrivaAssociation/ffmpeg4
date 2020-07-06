@@ -648,7 +648,7 @@ if ! ./configure \
 %endif
 	--enable-ffplay \
 	--enable-libdav1d \
-%ifnarch %{ix86}
+%ifnarch %{ix86} %aarch64
 	--enable-librav1e \
 %endif
 	--enable-libaom \
