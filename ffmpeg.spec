@@ -79,13 +79,13 @@
 %global optflags %{optflags} -Ofast -fopenmp
 %global ldflags %{ldflags} -Ofast -fopenmp
 
-%define x264_major 159
+%define x264_major 161
 %define x265_major 192
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.3.1
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
