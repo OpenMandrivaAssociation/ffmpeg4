@@ -80,12 +80,12 @@
 %global ldflags %{ldflags} -Ofast -fopenmp
 
 %define x264_major 161
-%define x265_major 192
+%define x265_major 199
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	4.3.2
-Release:	2
+Version:	4.4
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -101,7 +101,6 @@ Source10:	package-restricted-headers.sh
 Patch1:		ffmpeg-4.3-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
-Patch5:		ffmpeg-3.5.0-force_dl.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	pkgconfig(bzip2)
@@ -480,7 +479,6 @@ This package contains the static libraries for %{name}.
 %patch1 -p1 -b .dlopen~
 %endif
 %patch3 -p1 -b .flto_inline_asm~
-%patch5 -p1 -b .force_dl
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
@@ -565,7 +563,6 @@ if ! CFLAGS="$(echo $CFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer
 	--enable-opengl \
 	--disable-libzmq \
 	--disable-libzvbi \
-	--disable-libwavpack \
 	--disable-libssh \
 %if %{with soxr}
 	--enable-libsoxr \
@@ -693,7 +690,6 @@ if ! ./configure \
 %ifnarch %{riscv}
 	--enable-libzvbi \
 %endif
-	--enable-libwavpack \
 	--enable-libssh \
 %if %{with soxr}
 	--enable-libsoxr \
