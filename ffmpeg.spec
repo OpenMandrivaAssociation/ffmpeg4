@@ -3,38 +3,38 @@
 %bcond_without compat32
 %endif
 
-%define major		58
-%define ppmajor 	55
-%define avumajor 	56
-%define swsmajor 	5
-%define filtermajor 	7
-%define swrmajor 	3
-%define	avrmajor	4
-%define libavcodec	%mklibname avcodec %{major}
-%define	libavdevice	%mklibname avdevice %{major}
-%define libavfilter	%mklibname avfilter %{filtermajor}
-%define libavformat	%mklibname avformat %{major}
-%define	libavresample	%mklibname avresample %{avrmajor}
-%define libavutil	%mklibname avutil %{avumajor}
-%define libpostproc	%mklibname postproc %{ppmajor}
-%define libswresample	%mklibname swresample %{swrmajor}
-%define libswscale	%mklibname swscale %{swsmajor}
-%define lib32avcodec	%mklib32name avcodec %{major}
-%define	lib32avdevice	%mklib32name avdevice %{major}
-%define lib32avfilter	%mklib32name avfilter %{filtermajor}
-%define lib32avformat	%mklib32name avformat %{major}
-%define	lib32avresample	%mklib32name avresample %{avrmajor}
-%define lib32avutil	%mklib32name avutil %{avumajor}
-%define lib32postproc	%mklib32name postproc %{ppmajor}
-%define lib32swresample	%mklib32name swresample %{swrmajor}
-%define lib32swscale	%mklib32name swscale %{swsmajor}
+%define major 58
+%define ppmajor 55
+%define avumajor 56
+%define swsmajor 5
+%define filtermajor 7
+%define swrmajor 3
+%define avrmajor 4
+%define libavcodec %mklibname avcodec %{major}
+%define libavdevice %mklibname avdevice %{major}
+%define libavfilter %mklibname avfilter %{filtermajor}
+%define libavformat %mklibname avformat %{major}
+%define libavresample %mklibname avresample %{avrmajor}
+%define libavutil %mklibname avutil %{avumajor}
+%define libpostproc %mklibname postproc %{ppmajor}
+%define libswresample %mklibname swresample %{swrmajor}
+%define libswscale %mklibname swscale %{swsmajor}
+%define lib32avcodec %mklib32name avcodec %{major}
+%define lib32avdevice %mklib32name avdevice %{major}
+%define lib32avfilter %mklib32name avfilter %{filtermajor}
+%define lib32avformat %mklib32name avformat %{major}
+%define lib32avresample %mklib32name avresample %{avrmajor}
+%define lib32avutil %mklib32name avutil %{avumajor}
+%define lib32postproc %mklib32name postproc %{ppmajor}
+%define lib32swresample %mklib32name swresample %{swrmajor}
+%define lib32swscale %mklib32name swscale %{swsmajor}
 # Workaround for incorrect naming in previous version.
 # Can be dropped on next soname bump.
-%define oldlibswscale	%mklibname swscaler %{swsmajor}
-%define devname		%mklibname %{name} -d
-%define statname	%mklibname %{name} -s -d
-%define dev32name	%mklib32name %{name} -d
-%define stat32name	%mklib32name %{name} -s -d
+%define oldlibswscale %mklibname swscaler %{swsmajor}
+%define devname %mklibname %{name} -d
+%define statname %mklibname %{name} -s -d
+%define dev32name %mklib32name %{name} -d
+%define stat32name %mklib32name %{name} -s -d
 
 #####################
 # Hardcode PLF build
@@ -52,32 +52,32 @@
 %endif
 
 %ifarch %{riscv}
-%bcond_with	opencl
+%bcond_with opencl
 %else
-%bcond_without	opencl
+%bcond_without opencl
 %endif
 
-%bcond_without	swscaler
-%bcond_with	faac
+%bcond_without swscaler
+%bcond_with faac
 
-%bcond_without	bootstrap
+%bcond_without bootstrap
 
 # OpenCV, Soxr and PulseAudio use ffmpeg - can't link to them
 # while bootstrapping...
 %if %{with bootstrap}
-%bcond_with	opencv
-%bcond_with	soxr
-%bcond_with	pulse
+%bcond_with opencv
+%bcond_with soxr
+%bcond_with pulse
 %else
-%bcond_without	opencv
-%bcond_without	soxr
-%bcond_without	pulse
+%bcond_without opencv
+%bcond_without soxr
+%bcond_without pulse
 %endif
-%bcond_without	swscaler
+%bcond_without swscaler
 
 # (tpg) use OpenMP
-%global optflags %{optflags} -Ofast -fopenmp
-%global ldflags %{ldflags} -Ofast -fopenmp
+%global optflags %{optflags} -O3 -fopenmp
+%global ldflags %{ldflags} -O3 -fopenmp
 
 %define x264_major 161
 %define x265_major 199
@@ -85,7 +85,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.4
-Release:	1
+Release:	2
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -119,7 +119,7 @@ BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	pkgconfig(fdk-aac)
 %endif
 BuildRequires:	pkgconfig(dav1d)
-%ifnarch %{ix86} %{riscv} %aarch64
+%ifnarch %{ix86} %{riscv} aarch64
 BuildRequires:	pkgconfig(rav1e)
 %endif
 %ifnarch %{riscv}
@@ -248,7 +248,7 @@ Conflicts:	%{name} < 3.0.2-2
 %description doc
 Documentation for %{name}.
 
-%package -n	%{libavcodec}
+%package -n %{libavcodec}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 %if %{with dlopen}
@@ -277,10 +277,10 @@ Suggests:	libfdk-aac.so.2%{_arch_tag_suffix}
 %endif
 Obsoletes:	%{_lib}ffmpeg54 < 1.1-3
 
-%description -n	%{libavcodec}
+%description -n %{libavcodec}
 This package contains a shared library for %{name}.
 
-%package -n	%{libavdevice}
+%package -n %{libavdevice}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 Conflicts:	%{_lib}avformats54 < 1.1-3
@@ -288,14 +288,14 @@ Conflicts:	%{_lib}avformats54 < 1.1-3
 %description -n %{libavdevice}
 This package contains a shared library for %{name}.
 
-%package -n	%{libavfilter}
+%package -n %{libavfilter}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 
-%description -n	%{libavfilter}
+%description -n %{libavfilter}
 This package contains a shared library for %{name}.
 
-%package -n	%{libavformat}
+%package -n %{libavformat}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 Obsoletes:	%{_lib}avformats54 < 1.1-3
@@ -303,7 +303,7 @@ Obsoletes:	%{_lib}avformats54 < 1.1-3
 %description -n %{libavformat}
 This package contains a shared library for %{name}.
 
-%package -n	%{libavutil}
+%package -n %{libavutil}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 Obsoletes:	%{mklibname avutil 51} < 1.1
@@ -311,14 +311,14 @@ Obsoletes:	%{mklibname avutil 51} < 1.1
 %description -n %{libavutil}
 This package contains a shared library for %{name}.
 
-%package -n	%{libpostproc}
+%package -n %{libpostproc}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 
-%description -n	%{libpostproc}
+%description -n %{libpostproc}
 This package contains a shared library for %{name}.
 
-%package -n	%{libswresample}
+%package -n %{libswresample}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 
@@ -326,7 +326,7 @@ Group:		System/Libraries
 This package contains a shared library for %{name}.
 
 %if %{with swscaler}
-%package -n	%{libswscale}
+%package -n %{libswscale}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 %rename %{oldlibswscale}
@@ -335,14 +335,14 @@ Group:		System/Libraries
 This package contains a shared library for %{name}.
 %endif
 
-%package -n	%{libavresample}
+%package -n %{libavresample}
 Summary:	Shared library part of ffmpeg
 Group:		System/Libraries
 
 %description -n %{libavresample}
 This package contains a shared library for %{name}.
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Header files for the ffmpeg codec library
 Group:		Development/C
 Requires:	%{libavcodec} = %{EVRD}
@@ -357,20 +357,20 @@ Requires:	%{libswscale} = %{EVRD}
 %endif
 Provides:	%{name}-devel = %{EVRD}
 
-%description -n	%{devname}
+%description -n %{devname}
 This package contains the development files for %{name}.
 
-%package -n	%{statname}
+%package -n %{statname}
 Summary:	Static library for the ffmpeg codec library
 Group:		Development/C
 Requires:	%{devname} = %{EVRD}
 Provides:	%{name}-static-devel = %{EVRD}
 
-%description -n	%{statname}
+%description -n %{statname}
 This package contains the static libraries for %{name}.
 
 %if %{with compat32}
-%package -n	%{lib32avcodec}
+%package -n %{lib32avcodec}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 %if %{with faac}
@@ -384,45 +384,45 @@ Suggests:	libmp3lame.so.0
 Suggests:	libxvidcore.so.4
 Suggests:	libfdk-aac.so.2
 
-%description -n	%{lib32avcodec}
+%description -n %{lib32avcodec}
 This package contains a shared library for %{name}.
 
-%package -n	%{lib32avdevice}
+%package -n %{lib32avdevice}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
 %description -n %{lib32avdevice}
 This package contains a shared library for %{name}.
 
-%package -n	%{lib32avfilter}
+%package -n %{lib32avfilter}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
-%description -n	%{lib32avfilter}
+%description -n %{lib32avfilter}
 This package contains a shared library for %{name}.
 
-%package -n	%{lib32avformat}
+%package -n %{lib32avformat}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
 %description -n %{lib32avformat}
 This package contains a shared library for %{name}.
 
-%package -n	%{lib32avutil}
+%package -n %{lib32avutil}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
 %description -n %{lib32avutil}
 This package contains a shared library for %{name}.
 
-%package -n	%{lib32postproc}
+%package -n %{lib32postproc}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
-%description -n	%{lib32postproc}
+%description -n %{lib32postproc}
 This package contains a shared library for %{name}.
 
-%package -n	%{lib32swresample}
+%package -n %{lib32swresample}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
@@ -430,7 +430,7 @@ Group:		System/Libraries
 This package contains a shared library for %{name}.
 
 %if %{with swscaler}
-%package -n	%{lib32swscale}
+%package -n %{lib32swscale}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
@@ -438,14 +438,14 @@ Group:		System/Libraries
 This package contains a shared library for %{name}.
 %endif
 
-%package -n	%{lib32avresample}
+%package -n %{lib32avresample}
 Summary:	Shared library part of ffmpeg (32-bit)
 Group:		System/Libraries
 
 %description -n %{lib32avresample}
 This package contains a shared library for %{name}.
 
-%package -n	%{dev32name}
+%package -n %{dev32name}
 Summary:	Header files for the ffmpeg codec library (32-bit)
 Group:		Development/C
 Requires:	%{devname} = %{EVRD}
@@ -460,15 +460,15 @@ Requires:	%{lib32swresample} = %{EVRD}
 Requires:	%{lib32swscale} = %{EVRD}
 %endif
 
-%description -n	%{dev32name}
+%description -n %{dev32name}
 This package contains the development files for %{name}.
 
-%package -n	%{stat32name}
+%package -n %{stat32name}
 Summary:	Static library for the ffmpeg codec library (32-bit)
 Group:		Development/C
 Requires:	%{dev32name} = %{EVRD}
 
-%description -n	%{stat32name}
+%description -n %{stat32name}
 This package contains the static libraries for %{name}.
 %endif
 
@@ -645,11 +645,11 @@ if ! ./configure \
 %endif
 	--enable-ffplay \
 	--enable-libdav1d \
-%ifnarch %{ix86} %aarch64
+%ifnarch %{ix86} aarch64
 	--enable-librav1e \
 %endif
 	--enable-libaom \
-%ifarch %{ix86} %{x86_64}
+%ifarch %{ix86}
 	--disable-lto \
 %else
 	--enable-lto \
@@ -763,10 +763,10 @@ fi
 %install
 %if %{with compat32}
 cd build32
-%make_install SRC_PATH=`pwd`
+%make_install SRC_PATH=$(pwd)
 cd ..
 %endif
-%make_install SRC_PATH=`pwd`
+%make_install SRC_PATH=$(pwd)
 
 %files
 %{_bindir}/*
