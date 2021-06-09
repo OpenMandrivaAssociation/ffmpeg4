@@ -79,13 +79,16 @@
 %global optflags %{optflags} -O3 -fopenmp
 %global ldflags %{ldflags} -O3 -fopenmp
 
+# (tpg) BIG FAT WARNING !!!
+# ALWAYS RUN package-restricted-headers.sh
+# AND UPLOAD output file as SOURCE1
 %define x264_major 161
 %define x265_major 199
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.4
-Release:	2
+Release:	3
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -621,10 +624,6 @@ fi
 cd ..
 %endif
 
-# (tpg) 2019-04-19 disable LTO
-# BUILDSTDERR: /usr/bin/ld: fatal error: LLVM gold plugin: inline assembly requires more registers than available at line 2149161784
-# BUILDSTDERR: clang-8: error: linker command failed with exit code 1 (use -v to see invocation)
-# (bero) 2020-06-10 Verified to still happen with clang 10.0.1
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
