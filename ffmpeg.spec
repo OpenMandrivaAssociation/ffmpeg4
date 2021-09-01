@@ -88,7 +88,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.4
-Release:	3
+Release:	4
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -104,6 +104,9 @@ Source10:	package-restricted-headers.sh
 Patch1:		ffmpeg-4.3-dlopen-faac-mp3lame-opencore-x264-x265-xvid.patch
 Patch2:		ffmpeg-1.0.1-time.h.patch
 Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
+# https://ffmpeg-devel.ffmpeg.narkive.com/qPHDqDaR/patch-1-5-avformat-adding-accessors-for-externally-used-avstream-fields-which-are-after-the-public#post8
+# Generally useless but harmless, but seems to be needed by some versions of Opera, so let's keep it here for now
+Patch4:		ffmpeg-4.4-add-accessors-for-AVStream.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	pkgconfig(bzip2)
