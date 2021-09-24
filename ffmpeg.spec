@@ -88,7 +88,7 @@
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
 Version:	4.4
-Release:	4
+Release:	5
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -485,6 +485,7 @@ This package contains the static libraries for %{name}.
 %patch1 -p1 -b .dlopen~
 %endif
 %patch3 -p1 -b .flto_inline_asm~
+%patch4 -p1 -b .accessor~
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
