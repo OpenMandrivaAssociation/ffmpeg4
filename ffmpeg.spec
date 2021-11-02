@@ -87,8 +87,8 @@
 
 Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
 Name:		ffmpeg
-Version:	4.4
-Release:	5
+Version:	4.4.1
+Release:	1
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -158,6 +158,11 @@ BuildRequires:	pkgconfig(libva)
 BuildRequires:	pkgconfig(libv4l2)
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libzmq)
+%ifarch x86_64
+# intel-mediasdk -- for now, useless on anything but x86_64
+# (yes, even znver1 -- AMD CPUs don't have builtin Intel GPUs)
+BuildRequires:	pkgconfig(libmfx)
+%endif
 %ifnarch %{riscv}
 BuildRequires:	pkgconfig(openal)
 %endif
@@ -671,6 +676,9 @@ if ! ./configure \
 	--enable-libfreetype \
 	--enable-libgsm \
 	--enable-libcelt \
+%ifarch x86_64
+	--enable-libmfx \
+%endif
 %if %{with opencv}
 	--enable-libopencv \
 	--enable-frei0r \
