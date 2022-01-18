@@ -85,10 +85,10 @@
 %define x264_major 161
 %define x265_major 199
 
-Summary:	Hyper fast MPEG1/MPEG4/H263/H264/H265/RV and AC3/MPEG audio encoder
-Name:		ffmpeg
+Summary:	Old version of the ffmpeg codec library
+Name:		ffmpeg4
 Version:	4.4.1
-Release:	4
+Release:	5
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -96,7 +96,7 @@ License:	GPLv2+
 %endif
 Group:		Video
 Url:		http://ffmpeg.org/
-Source0:	http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
+Source0:	http://ffmpeg.org/releases/ffmpeg-%{version}.tar.xz
 Source1:	restricted-multimedia-headers.tar.xz
 Source2:	restricted-defines.macros
 # Creates Source1
@@ -246,21 +246,15 @@ It can grab from a standard Video4Linux video source and convert it into
 several file formats based on DCT/motion compensation encoding. Sound is
 compressed in MPEG audio layer 2 or using an AC3 compatible stream.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %if %{build_plf}
 This package is in Restricted as it violates several patents.
 %endif
 
-%package doc
-Summary:	Documentation for %{name}
-Group:		Development/Other
-BuildArch:	noarch
-Conflicts:	%{name} < 3.0.2-2
-
-%description doc
-Documentation for %{name}.
-
 %package -n %{libavcodec}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg 4.x (OLD VERSION)
 Group:		System/Libraries
 %if %{with dlopen}
 %if "%{disttag}" == "mdk"
@@ -291,70 +285,97 @@ Obsoletes:	%{_lib}ffmpeg54 < 1.1-3
 %description -n %{libavcodec}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{libavdevice}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 Conflicts:	%{_lib}avformats54 < 1.1-3
 
 %description -n %{libavdevice}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{libavfilter}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{libavfilter}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{libavformat}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 Obsoletes:	%{_lib}avformats54 < 1.1-3
 
 %description -n %{libavformat}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{libavutil}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 Obsoletes:	%{mklibname avutil 51} < 1.1
 
 %description -n %{libavutil}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{libpostproc}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{libpostproc}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{libswresample}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{libswresample}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %if %{with swscaler}
 %package -n %{libswscale}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 %rename %{oldlibswscale}
 
 %description -n %{libswscale}
 This package contains a shared library for %{name}.
+
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
 %endif
 
 %package -n %{libavresample}
-Summary:	Shared library part of ffmpeg
+Summary:	Shared library part of ffmpeg (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{libavresample}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{devname}
-Summary:	Header files for the ffmpeg codec library
+Summary:	Header files for an old version of the ffmpeg codec library
 Group:		Development/C
 Requires:	%{libavcodec} = %{EVRD}
 Requires:	%{libavdevice} = %{EVRD}
@@ -371,8 +392,11 @@ Provides:	%{name}-devel = %{EVRD}
 %description -n %{devname}
 This package contains the development files for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{statname}
-Summary:	Static library for the ffmpeg codec library
+Summary:	Static library for an old version of the ffmpeg codec library
 Group:		Development/C
 Requires:	%{devname} = %{EVRD}
 Provides:	%{name}-static-devel = %{EVRD}
@@ -380,9 +404,12 @@ Provides:	%{name}-static-devel = %{EVRD}
 %description -n %{statname}
 This package contains the static libraries for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %if %{with compat32}
 %package -n %{lib32avcodec}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 %if %{with faac}
 Suggests:	libfaac.so.0
@@ -398,66 +425,93 @@ Suggests:	libfdk-aac.so.2
 %description -n %{lib32avcodec}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{lib32avdevice}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32avdevice}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{lib32avfilter}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32avfilter}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{lib32avformat}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32avformat}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{lib32avutil}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32avutil}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{lib32postproc}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32postproc}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{lib32swresample}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32swresample}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %if %{with swscaler}
 %package -n %{lib32swscale}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32swscale}
 This package contains a shared library for %{name}.
+
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
 %endif
 
 %package -n %{lib32avresample}
-Summary:	Shared library part of ffmpeg (32-bit)
+Summary:	Shared library part of ffmpeg (32-bit) (OLD VERSION)
 Group:		System/Libraries
 
 %description -n %{lib32avresample}
 This package contains a shared library for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{dev32name}
-Summary:	Header files for the ffmpeg codec library (32-bit)
+Summary:	Header files for the ffmpeg codec library (32-bit) (OLD VERSION)
 Group:		Development/C
 Requires:	%{devname} = %{EVRD}
 Requires:	%{lib32avcodec} = %{EVRD}
@@ -474,17 +528,23 @@ Requires:	%{lib32swscale} = %{EVRD}
 %description -n %{dev32name}
 This package contains the development files for %{name}.
 
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
+
 %package -n %{stat32name}
-Summary:	Static library for the ffmpeg codec library (32-bit)
+Summary:	Static library for the ffmpeg codec library (32-bit) (OLD VERSION)
 Group:		Development/C
 Requires:	%{dev32name} = %{EVRD}
 
 %description -n %{stat32name}
 This package contains the static libraries for %{name}.
+
+THIS IS AN OLD VERSION, provided for compatibility with legacy applications
+only. New applications should use ffmpeg instead.
 %endif
 
 %prep
-%setup -q -a 1
+%setup -q -n ffmpeg-%{version} -a 1
 %patch2 -p1 -b .timeh~
 %if %{with dlopen}
 %patch1 -p1 -b .dlopen~
@@ -778,16 +838,24 @@ cd build32
 cd ..
 %endif
 %make_install SRC_PATH=$(pwd)
+# Don't Provides: pkgconfig(libavcodec) and friends
+# That's up to ffmpeg 5.x
+for i in %{buildroot}%{_libdir}/pkgconfig/*.pc; do
+	sed -i -e 's,libswscale >,libswscale-4 >,g;s,libavcodec >,libavcodec-4 >,g;s,libavformat >,libavformat-4 >,g;s,libavresample >,libavresample-4 >,g;s,libavutil >,libavutil-4 >,g;s,libpostproc >,libpostproc-4 >,g;s,libavfilter >,libavfilter-4 >,g;s,libswresample >,libswresample-4 >,g' ${i}
+	mv ${i} ${i/.pc/-4.pc}
+done
+%if %{with compat32}
+for i in %{buildroot}%{_prefix}/lib/pkgconfig/*.pc; do
+	sed -i -e 's,libswscale >,libswscale-4 >,g;s,libavcodec >,libavcodec-4 >,g;s,libavformat >,libavformat-4 >,g;s,libavresample >,libavresample-4 >,g;s,libavutil >,libavutil-4 >,g;s,libpostproc >,libpostproc-4 >,g;s,libavfilter >,libavfilter-4 >,g;s,libswresample >,libswresample-4 >,g' ${i}
+	mv ${i} ${i/.pc/-4.pc}
+done
+%endif
 
-%files
-%{_bindir}/*
-%{_mandir}/man1/*
-%{_datadir}/ffmpeg
-%exclude %{_datadir}/ffmpeg/examples
-
-%files doc
-%doc doc/*.html doc/*.txt
-%{_docdir}/ffmpeg/*.html
+# No executables, docs or examples for compat packages
+rm -rf %{buildroot}%{_bindir} \
+	%{buildroot}%{_mandir} \
+	%{buildroot}%{_datadir}/ffmpeg \
+	%{buildroot}%{_docdir}
 
 %files -n %{libavcodec}
 %{_libdir}/libavcodec.so.%{major}*
@@ -838,24 +906,16 @@ cd ..
 %if %{with swscaler}
 %{_libdir}/libswscale.so
 %{_includedir}/libswscale
-%{_libdir}/pkgconfig/libswscale.pc
+%{_libdir}/pkgconfig/libswscale-4.pc
 %endif
-%{_libdir}/pkgconfig/libavcodec.pc
-%{_libdir}/pkgconfig/libavdevice.pc
-%{_libdir}/pkgconfig/libavformat.pc
-%{_libdir}/pkgconfig/libavresample.pc
-%{_libdir}/pkgconfig/libavutil.pc
-%{_libdir}/pkgconfig/libpostproc.pc
-%{_libdir}/pkgconfig/libavfilter.pc
-%{_libdir}/pkgconfig/libswresample.pc
-%doc %{_mandir}/man3/libavcodec.3*
-%doc %{_mandir}/man3/libavdevice.3*
-%doc %{_mandir}/man3/libavfilter.3*
-%doc %{_mandir}/man3/libavformat.3*
-%doc %{_mandir}/man3/libavutil.3*
-%doc %{_mandir}/man3/libswresample.3*
-%doc %{_mandir}/man3/libswscale.3*
-%{_datadir}/ffmpeg/examples
+%{_libdir}/pkgconfig/libavcodec-4.pc
+%{_libdir}/pkgconfig/libavdevice-4.pc
+%{_libdir}/pkgconfig/libavformat-4.pc
+%{_libdir}/pkgconfig/libavresample-4.pc
+%{_libdir}/pkgconfig/libavutil-4.pc
+%{_libdir}/pkgconfig/libpostproc-4.pc
+%{_libdir}/pkgconfig/libavfilter-4.pc
+%{_libdir}/pkgconfig/libswresample-4.pc
 
 %files -n %{statname}
 %{_libdir}/*.a
@@ -901,16 +961,16 @@ cd ..
 %{_prefix}/lib/libswresample.so
 %if %{with swscaler}
 %{_prefix}/lib/libswscale.so
-%{_prefix}/lib/pkgconfig/libswscale.pc
+%{_prefix}/lib/pkgconfig/libswscale-4.pc
 %endif
-%{_prefix}/lib/pkgconfig/libavcodec.pc
-%{_prefix}/lib/pkgconfig/libavdevice.pc
-%{_prefix}/lib/pkgconfig/libavformat.pc
-%{_prefix}/lib/pkgconfig/libavresample.pc
-%{_prefix}/lib/pkgconfig/libavutil.pc
-%{_prefix}/lib/pkgconfig/libpostproc.pc
-%{_prefix}/lib/pkgconfig/libavfilter.pc
-%{_prefix}/lib/pkgconfig/libswresample.pc
+%{_prefix}/lib/pkgconfig/libavcodec-4.pc
+%{_prefix}/lib/pkgconfig/libavdevice-4.pc
+%{_prefix}/lib/pkgconfig/libavformat-4.pc
+%{_prefix}/lib/pkgconfig/libavresample-4.pc
+%{_prefix}/lib/pkgconfig/libavutil-4.pc
+%{_prefix}/lib/pkgconfig/libpostproc-4.pc
+%{_prefix}/lib/pkgconfig/libavfilter-4.pc
+%{_prefix}/lib/pkgconfig/libswresample-4.pc
 
 %files -n %{stat32name}
 %{_prefix}/lib/*.a
