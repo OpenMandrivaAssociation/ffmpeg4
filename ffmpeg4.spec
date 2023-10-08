@@ -88,7 +88,7 @@
 Summary:	Old version of the ffmpeg codec library
 Name:		ffmpeg4
 Version:	4.4.1
-Release:	6
+Release:	7
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -585,7 +585,7 @@ cd build32
 if ! CFLAGS="$(echo $CFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer" LDFLAGS="$(echo $LDFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer" ./configure \
 	--cc="gcc -m32" \
 	--cxx="g++ -m32" \
-	--ranlib=%{__ranlib} \
+	--ranlib=%{_bindir}/llvm-ranlib \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_prefix}/lib \
@@ -696,7 +696,7 @@ cd ..
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
-	--ranlib=%{__ranlib} \
+	--ranlib=%{_bindir}/llvm-ranlib \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_libdir} \
