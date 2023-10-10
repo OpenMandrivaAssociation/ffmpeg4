@@ -88,7 +88,7 @@
 Summary:	Old version of the ffmpeg codec library
 Name:		ffmpeg4
 Version:	4.4.1
-Release:	6
+Release:	7
 %if %{build_plf}
 License:	GPLv3+
 %else
@@ -107,6 +107,7 @@ Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 # https://ffmpeg-devel.ffmpeg.narkive.com/qPHDqDaR/patch-1-5-avformat-adding-accessors-for-externally-used-avstream-fields-which-are-after-the-public#post8
 # Generally useless but harmless, but seems to be needed by some versions of Opera, so let's keep it here for now
 Patch4:		ffmpeg-4.4-add-accessors-for-AVStream.patch
+Patch5:		ffmpeg-ffnvcodec-headers-12.1.14.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	pkgconfig(bzip2)
@@ -551,6 +552,7 @@ only. New applications should use ffmpeg instead.
 %endif
 %patch3 -p1 -b .flto_inline_asm~
 %patch4 -p1 -b .accessor~
+%patch5 -p1
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
@@ -585,7 +587,7 @@ cd build32
 if ! CFLAGS="$(echo $CFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer" LDFLAGS="$(echo $LDFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer" ./configure \
 	--cc="gcc -m32" \
 	--cxx="g++ -m32" \
-	--ranlib=%{__ranlib} \
+	--ranlib=%{_bindir}/llvm-ranlib \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_prefix}/lib \
@@ -696,7 +698,7 @@ cd ..
 if ! ./configure \
 	--cc=%{__cc} \
 	--cxx=%{__cxx} \
-	--ranlib=%{__ranlib} \
+	--ranlib=%{_bindir}/llvm-ranlib \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--libdir=%{_libdir} \
