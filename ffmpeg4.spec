@@ -107,6 +107,7 @@ Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 # https://ffmpeg-devel.ffmpeg.narkive.com/qPHDqDaR/patch-1-5-avformat-adding-accessors-for-externally-used-avstream-fields-which-are-after-the-public#post8
 # Generally useless but harmless, but seems to be needed by some versions of Opera, so let's keep it here for now
 Patch4:		ffmpeg-4.4-add-accessors-for-AVStream.patch
+Patch5:		ffmpeg-ffnvcodec-headers-12.1.14.patch
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	pkgconfig(bzip2)
