@@ -1,7 +1,7 @@
-diff -up ffmpeg-6.0/configure.omv~ ffmpeg-6.0/configure
---- ffmpeg-6.0/configure.omv~	2023-10-07 19:56:48.781730833 +0200
-+++ ffmpeg-6.0/configure	2023-10-07 19:56:58.449837851 +0200
-@@ -7063,7 +7063,7 @@ enabled nvenc &&
+diff -uraN ffmpeg-4.4.1/configure omv-ffmpeg-4.4.1/configure
+--- ffmpeg-4.4.1/configure	2021-10-24 22:47:11.000000000 +0200
++++ omv-ffmpeg-4.4.1/configure	2023-10-10 19:19:15.021703996 +0200
+@@ -6775,7 +6775,7 @@
      test_cc -I$source_path <<EOF || disable nvenc
  #include <ffnvcodec/nvEncodeAPI.h>
  NV_ENCODE_API_FUNCTION_LIST flist;
@@ -10,17 +10,10 @@ diff -up ffmpeg-6.0/configure.omv~ ffmpeg-6.0/configure
  int main(void) { return 0; }
  EOF
  
-commit d2b46c1ef768bc31ba9180f6d469d5b8be677500
-Author: Timo Rothenpieler <timo@rothenpieler.org>
-Date:   Thu Jun 1 23:46:46 2023 +0200
-
-    avcodec/nvenc: stop using deprecated rc modes with SDK 12.1
-
-diff --git a/libavcodec/nvenc.c b/libavcodec/nvenc.c
-index c1798ce564..50371d6336 100644
---- a/libavcodec/nvenc.c
-+++ b/libavcodec/nvenc.c
-@@ -44,9 +44,14 @@
+diff -uraN ffmpeg-4.4.1/libavcodec/nvenc.c omv-ffmpeg-4.4.1/libavcodec/nvenc.c
+--- ffmpeg-4.4.1/libavcodec/nvenc.c	2021-10-24 22:47:11.000000000 +0200
++++ omv-ffmpeg-4.4.1/libavcodec/nvenc.c	2023-10-10 19:25:42.553597169 +0200
+@@ -39,9 +39,14 @@
  #define CHECK_CU(x) FF_CUDA_CHECK_DL(avctx, dl_fn->cuda_dl, x)
  
  #define NVENC_CAP 0x30
@@ -35,7 +28,7 @@ index c1798ce564..50371d6336 100644
  
  const enum AVPixelFormat ff_nvenc_pix_fmts[] = {
      AV_PIX_FMT_YUV420P,
-@@ -926,6 +931,7 @@ static void nvenc_override_rate_control(AVCodecContext *avctx)
+@@ -825,6 +830,7 @@
      case NV_ENC_PARAMS_RC_CONSTQP:
          set_constqp(avctx);
          return;
@@ -43,7 +36,7 @@ index c1798ce564..50371d6336 100644
      case NV_ENC_PARAMS_RC_VBR_MINQP:
          if (avctx->qmin < 0) {
              av_log(avctx, AV_LOG_WARNING,
-@@ -936,12 +942,15 @@ static void nvenc_override_rate_control(AVCodecContext *avctx)
+@@ -835,12 +841,15 @@
          }
          /* fall through */
      case NV_ENC_PARAMS_RC_VBR_HQ:
@@ -59,7 +52,7 @@ index c1798ce564..50371d6336 100644
          break;
      }
  
-@@ -1211,12 +1220,14 @@ static av_cold int nvenc_setup_h264_config(AVCodecContext *avctx)
+@@ -1073,12 +1082,14 @@
  
      h264->outputPictureTimingSEI = 1;
  
@@ -74,12 +67,11 @@ index c1798ce564..50371d6336 100644
  
      if (ctx->flags & NVENC_LOSSLESS) {
          h264->qpPrimeYZeroTransformBypassFlag = 1;
-diff --git a/libavcodec/nvenc.h b/libavcodec/nvenc.h
-index 411c83aa94..97aad80cd0 100644
---- a/libavcodec/nvenc.h
-+++ b/libavcodec/nvenc.h
-@@ -77,6 +77,11 @@ typedef void ID3D11Device;
- #define NVENC_HAVE_SINGLE_SLICE_INTRA_REFRESH
+diff -uraN ffmpeg-4.4.1/libavcodec/nvenc.h omv-ffmpeg-4.4.1/libavcodec/nvenc.h
+--- ffmpeg-4.4.1/libavcodec/nvenc.h	2021-10-24 22:47:11.000000000 +0200
++++ omv-ffmpeg-4.4.1/libavcodec/nvenc.h	2023-10-10 19:26:41.318635244 +0200
+@@ -70,6 +70,12 @@
+ #define NVENC_HAVE_H264_LVL6
  #endif
  
 +// SDK 12.1 compile time feature checks
@@ -87,14 +79,14 @@ index 411c83aa94..97aad80cd0 100644
 +#define NVENC_NO_DEPRECATED_RC
 +#endif
 +
++
  typedef struct NvencSurface
  {
      NV_ENC_INPUT_PTR input_surface;
-diff --git a/libavcodec/nvenc_h264.c b/libavcodec/nvenc_h264.c
-index 5dc2961c3b..698615855b 100644
---- a/libavcodec/nvenc_h264.c
-+++ b/libavcodec/nvenc_h264.c
-@@ -100,6 +100,7 @@ static const AVOption options[] = {
+diff -uraN ffmpeg-4.4.1/libavcodec/nvenc_h264.c omv-ffmpeg-4.4.1/libavcodec/nvenc_h264.c
+--- ffmpeg-4.4.1/libavcodec/nvenc_h264.c	2021-10-24 22:47:07.000000000 +0200
++++ omv-ffmpeg-4.4.1/libavcodec/nvenc_h264.c	2023-10-10 19:29:02.387122205 +0200
+@@ -100,6 +100,7 @@
      { "constqp",      "Constant QP mode",                   0,                    AV_OPT_TYPE_CONST, { .i64 = NV_ENC_PARAMS_RC_CONSTQP },                   0, 0, VE, "rc" },
      { "vbr",          "Variable bitrate mode",              0,                    AV_OPT_TYPE_CONST, { .i64 = NV_ENC_PARAMS_RC_VBR },                       0, 0, VE, "rc" },
      { "cbr",          "Constant bitrate mode",              0,                    AV_OPT_TYPE_CONST, { .i64 = NV_ENC_PARAMS_RC_CBR },                       0, 0, VE, "rc" },
@@ -102,7 +94,7 @@ index 5dc2961c3b..698615855b 100644
      { "vbr_minqp",    "Variable bitrate mode with MinQP (deprecated)", 0,         AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_VBR_MINQP) },            0, 0, VE, "rc" },
      { "ll_2pass_quality", "Multi-pass optimized for image quality (deprecated)",
                                                              0,                    AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_2_PASS_QUALITY) },       0, 0, VE, "rc" },
-@@ -109,6 +110,17 @@ static const AVOption options[] = {
+@@ -109,6 +110,17 @@
      { "cbr_ld_hq",    "Constant bitrate low delay high quality mode", 0,          AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_CBR_LOWDELAY_HQ) },      0, 0, VE, "rc" },
      { "cbr_hq",       "Constant bitrate high quality mode", 0,                    AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_CBR_HQ) },               0, 0, VE, "rc" },
      { "vbr_hq",       "Variable bitrate high quality mode", 0,                    AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_VBR_HQ) },               0, 0, VE, "rc" },
@@ -120,11 +112,10 @@ index 5dc2961c3b..698615855b 100644
      { "rc-lookahead", "Number of frames to look ahead for rate-control",
                                                              OFFSET(rc_lookahead), AV_OPT_TYPE_INT,   { .i64 = 0 }, 0, INT_MAX, VE },
      { "surfaces",     "Number of concurrent surfaces",      OFFSET(nb_surfaces),  AV_OPT_TYPE_INT,   { .i64 = 0 }, 0, MAX_REGISTERED_FRAMES, VE },
-diff --git a/libavcodec/nvenc_hevc.c b/libavcodec/nvenc_hevc.c
-index 1362a927c8..d99077f170 100644
---- a/libavcodec/nvenc_hevc.c
-+++ b/libavcodec/nvenc_hevc.c
-@@ -89,6 +89,7 @@ static const AVOption options[] = {
+diff -uraN ffmpeg-4.4.1/libavcodec/nvenc_hevc.c omv-ffmpeg-4.4.1/libavcodec/nvenc_hevc.c
+--- ffmpeg-4.4.1/libavcodec/nvenc_hevc.c	2021-10-24 22:47:11.000000000 +0200
++++ omv-ffmpeg-4.4.1/libavcodec/nvenc_hevc.c	2023-10-10 19:30:30.351188973 +0200
+@@ -89,6 +89,7 @@
      { "constqp",      "Constant QP mode",                   0,                    AV_OPT_TYPE_CONST, { .i64 = NV_ENC_PARAMS_RC_CONSTQP },                   0, 0, VE, "rc" },
      { "vbr",          "Variable bitrate mode",              0,                    AV_OPT_TYPE_CONST, { .i64 = NV_ENC_PARAMS_RC_VBR },                       0, 0, VE, "rc" },
      { "cbr",          "Constant bitrate mode",              0,                    AV_OPT_TYPE_CONST, { .i64 = NV_ENC_PARAMS_RC_CBR },                       0, 0, VE, "rc" },
@@ -132,7 +123,7 @@ index 1362a927c8..d99077f170 100644
      { "vbr_minqp",    "Variable bitrate mode with MinQP (deprecated)", 0,         AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_VBR_MINQP) },            0, 0, VE, "rc" },
      { "ll_2pass_quality", "Multi-pass optimized for image quality (deprecated)",
                                                              0,                    AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_2_PASS_QUALITY) },       0, 0, VE, "rc" },
-@@ -98,6 +99,17 @@ static const AVOption options[] = {
+@@ -98,6 +99,17 @@
      { "cbr_ld_hq",    "Constant bitrate low delay high quality mode", 0,          AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_CBR_LOWDELAY_HQ) },      0, 0, VE, "rc" },
      { "cbr_hq",       "Constant bitrate high quality mode", 0,                    AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_CBR_HQ) },               0, 0, VE, "rc" },
      { "vbr_hq",       "Variable bitrate high quality mode", 0,                    AV_OPT_TYPE_CONST, { .i64 = RCD(NV_ENC_PARAMS_RC_VBR_HQ) },               0, 0, VE, "rc" },
