@@ -552,6 +552,7 @@ only. New applications should use ffmpeg instead.
 %endif
 %patch3 -p1 -b .flto_inline_asm~
 %patch4 -p1 -b .accessor~
+%patch5 -p1
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
