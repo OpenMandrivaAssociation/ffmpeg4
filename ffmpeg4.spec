@@ -82,8 +82,8 @@
 # (tpg) BIG FAT WARNING !!!
 # ALWAYS RUN package-restricted-headers.sh
 # AND UPLOAD output file as SOURCE1
-%define x264_major 161
-%define x265_major 199
+%define x264_major 164
+%define x265_major 209
 
 Summary:	Old version of the ffmpeg codec library
 Name:		ffmpeg4
@@ -546,13 +546,13 @@ only. New applications should use ffmpeg instead.
 
 %prep
 %setup -q -n ffmpeg-%{version} -a 1
-%patch2 -p1 -b .timeh~
+%patch 2 -p1 -b .timeh~
 %if %{with dlopen}
-%patch1 -p1 -b .dlopen~
+%patch 1 -p1 -b .dlopen~
 %endif
-%patch3 -p1 -b .flto_inline_asm~
-%patch4 -p1 -b .accessor~
-%patch5 -p1
+%patch 3 -p1 -b .flto_inline_asm~
+%patch 4 -p1 -b .accessor~
+%patch 5 -p1
 
 # The debuginfo generator doesn't like non-world readable files
 find . -name "*.c" -o -name "*.h" -o -name "*.asm" |xargs chmod 0644
