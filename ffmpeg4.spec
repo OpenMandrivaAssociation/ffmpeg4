@@ -599,9 +599,7 @@ if ! CFLAGS="$(echo $CFLAGS |sed -e 's,-m64,,g;s,-mx32,,g') -fomit-frame-pointer
 	--enable-gpl \
 	--enable-version3 \
 	--enable-nonfree \
-%ifnarch %{armx} %{arm} %{riscv}
-	--enable-nvenc \
-%endif
+	--disable-nvenc \
 	--enable-ffplay \
 	--disable-libdav1d \
 	--disable-librav1e \
@@ -710,9 +708,7 @@ if ! ./configure \
 	--enable-gpl \
 	--enable-version3 \
 	--enable-nonfree \
-%ifnarch %{armx} %{arm} %{riscv}
-	--enable-nvenc \
-%endif
+	--disable-nvenc \
 	--enable-ffplay \
 	--enable-libdav1d \
 %ifnarch %{ix86} aarch64
