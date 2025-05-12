@@ -88,7 +88,7 @@
 Summary:	Old version of the ffmpeg codec library
 Name:		ffmpeg4
 Version:	4.4.1
-Release:	10
+Release:	11
 %if %{build_plf}
 License:	GPLv3+
 %else
