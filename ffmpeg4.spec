@@ -108,6 +108,7 @@ Patch3:		ffmpeg-2.5-fix-build-with-flto-and-inline-assembly.patch
 # Generally useless but harmless, but seems to be needed by some versions of Opera, so let's keep it here for now
 Patch4:		ffmpeg-4.4-add-accessors-for-AVStream.patch
 Patch5:		ffmpeg-ffnvcodec-headers-12.1.14.patch
+BuildRequires:	make
 BuildRequires:	texi2html
 BuildRequires:	yasm
 BuildRequires:	pkgconfig(bzip2)
